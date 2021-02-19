@@ -6,10 +6,31 @@
 
 h1
 {
-
+    font-weight: bolder;
+    text-align: center;
 }
 
-.Chapter {
+a
+{
+    text-decoration: none;
+    color: green;
+}
+
+a:hover 
+{
+    color: red;
+}
+
+a:visited 
+{
+    color: yellow;
+}
+
+
+
+.Chapter 
+{
     font-weight: bolder;
     color: cornflowerblue;
 }
+

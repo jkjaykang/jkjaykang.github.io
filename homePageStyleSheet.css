@@ -4,32 +4,38 @@
     font-family: 'Rubik', serif
 }
 
-h1
-{
+h1 {
+    /*height: 70px;
     font-weight: bolder;
+    padding: 10px;
+    background-color: rgb(255,255,255);
     text-align: center;
+    border: 2px solid powderblue;*/
 }
 
-a
+
+a:link
 {
     text-decoration: none;
-    color: green;
+    color: dimgray;
 }
 
 a:hover 
 {
     color: red;
+    font-size: 18px;
 }
 
 a:visited 
 {
-    color: yellow;
+    color: cadetblue;
 }
 
 
-
-.Chapter 
-{
+.Chapter {
+    width: 20%;
+    background-color: rgb(255,255,255);
+    border: 2px solid powderblue;
     font-weight: bolder;
     color: cornflowerblue;
 }

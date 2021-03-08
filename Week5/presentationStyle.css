@@ -1,0 +1,104 @@
+﻿body {
+    background-color: black;
+    font-family: 'Space Mono', monospace;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1{
+    color: white;
+    background-color: gray;
+}
+
+h2{
+    color: white;
+}
+
+p{
+    color: white;
+}
+
+a{
+    color: white;
+}
+
+.Header{
+    border: 0.5em;
+    border-style: solid;
+    border-color: dimgray;
+    background-color: slategrey;
+}
+
+.Paragraph {
+    border: 0.5em;
+    border-style: solid;
+    border-color: dimgray;
+    background-color: slategrey;
+}
+
+#Homepage-Header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    background-color: midnightblue;
+    font-size: 3em;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.item-Header{
+    grid-area: header;
+}
+
+.item-Content1 {
+    grid-area: content1;
+    font-size: 3.8em;
+    background-color: gray;
+}
+
+.item-Content2 {
+    grid-area: content2;
+    background-color: lightslategrey;
+    font-size: 3.8em;
+    text-align: left;
+    
+}
+
+.item-Content3 {
+    grid-area: content3;
+    font-size: 3.8em;
+    background-color: dimgrey;
+}
+
+.item-Content4 {
+    grid-area: content4;
+}
+
+.item-Content5 {
+    grid-area: content5;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: 15% 1fr 1fr 1fr;
+    grid-template-areas:
+        "header header"
+        "content4 content1"
+        "content4 content2" 
+        "content4 content3";
+}

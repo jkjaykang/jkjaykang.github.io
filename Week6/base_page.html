@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <title>Midterm Project</title>
+    <script src="script.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <!--<img src="/images/header.png" />-->
+        </div>
+        <div class="screen">
+            <div class="display">
+                <img src="/images/screen.gif" />
+            </div>
+            <div class="speech">
+                <p id="description">
+                    You and your party are resting at a bonfire. The dungeon is dark and cold.
+                </p>
+                <button class="continue_btn" onclick="">next</button>
+            </div>
+        </div>
+
+        
+
+        <div class="party">
+            <div class="member1">
+                <!--<input type="image" src="/images/party.png" name="saveForm" class="btTxt submit" id="saveForm" />-->
+                <img src="/images/gif/party_portrait_1.gif" />
+            </div>
+
+            <div class="member2">
+                <!--<button class="transition_btn" onclick="change_page_p1()">Click me</button>-->
+                <img src="/images/gif/party_portrait_2.gif" />
+            </div>
+
+            <div class="member3">
+                <img src="/images/gif/party_portrait_3.gif" />
+            </div>
+
+            <div class="talk1">
+                <input class="talk_btn" type="button" value="Talk to member1"
+                       onclick="window.location.href = 'party1_page.html'" />
+                <!--<button class="talk_btn" onclick="">Talk to member1</button>-->
+            </div>
+
+            <div class="talk2">
+                <button class="talk_btn" onclick="">Talk to member2</button>
+            </div>
+
+            <div class="talk3">
+                <button class="talk_btn" onclick="">Talk to member3</button>
+            </div>
+
+        </div>
+
+        <div class="player_info">
+            <div class="portrait">
+                <img src="/images/portrait.png" />
+            </div>
+
+            <div class="healthbar">
+                <img src="/images/health.gif" />
+            </div>
+
+            <div class="musicbox">
+                <audio id="background_music">
+                    <source src="/music/music.mp3" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
+                <button class="music_btn" onclick="toggleMusic()">Play/Stop Music</button>
+            </div>
+        </div>
+
+        
+
+        <div class="bottom_tab">
+           
+            <div class="inventory1">
+                <img class="action1" src="/images/item1.png" onclick="change_text();" onmouseover="this.src='/images/item1_a.png'"
+                     onmouseout="this.src='/images/item1.png'" />
+            </div>
+            <div class="inventory2">
+                <img class="action2" src="/images/item2.png" onclick="change_text2()" onmouseover="this.src='/images/item2_a.png'"
+                     onmouseout="this.src='/images/item2.png'" />
+            </div>
+            <div class="inventory3">
+            </div>
+            <div class="inventory4">
+            </div>
+            <div class="inventory5">
+            </div>
+            <div class="inventory6">
+            </div>
+            <div class="inventory7">
+            </div>
+            <div class="inventory8">
+            </div>
+            <div class="inventory9">
+            </div>
+            <div class="inventory10">
+            </div>
+
+            <div class="map">
+                <img src="/images/map.png" />
+            </div>
+        </div>
+
+
+        
+
+    </div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,279 @@
+﻿body {
+    font-family: 'DotGothic16', sans-serif;
+    background-image: url("/images/background.png");
+}
+
+img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.display {
+    grid-area: ds;
+    border-style: solid;
+
+    display: flex;
+}
+
+.speech {
+    grid-area: sp;
+    
+    border-top: 0.5em solid saddlebrown;
+    background-image: url("/images/backboard.png");
+    display: flex;
+}
+
+.continue_btn {
+    position: relative;
+    
+    margin-left:auto;
+    margin-top: auto;
+
+    cursor: pointer;
+    font-family: inherit;
+    
+}
+
+.screen {
+    grid-area: sc;
+    border-style: solid;
+    border-color: saddlebrown;
+    border-width: 0.5em;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3fr 1fr;
+
+    grid-template-areas:
+        "ds"
+        "sp";
+}
+
+#description {
+    font-size: 1.5em;
+    padding-left: 0.7em;
+}
+
+.party {
+    grid-area: p;
+    
+
+    display:grid;
+    grid-template-columns: 1fr 2.2fr;
+    grid-template-rows: 1fr 1fr 1fr 0.3fr;
+
+    grid-template-areas:
+        "m1 t1"
+        "m2 t2"
+        "m3 t3"
+        ". .";
+    
+}
+
+.member1 {
+    grid-area: m1;
+    border-style: solid;
+
+    display:flex;
+}
+
+.member1 img{
+    object-fit: cover;
+    width:100%;
+}
+
+.talk_btn {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 2em;
+    padding: 1em;
+}
+
+.member2 {
+    grid-area: m2;
+    border-style: solid;
+
+    display: flex;
+}
+
+.member2 img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.member3 {
+    grid-area: m3;
+    border-style: solid;
+
+    display: flex;
+}
+
+.member3 img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.talk1 {
+    grid-area: t1;
+
+    border-style: solid;
+    background-image: url("/images/backboard.png");
+}
+
+.talk2 {
+    grid-area: t2;
+    border-style: solid;
+    background-image: url("/images/backboard.png");
+}
+
+.talk3 {
+    grid-area: t3;
+    border-style: solid;
+    background-image: url("/images/backboard.png");
+}
+
+.player_info{
+    grid-area: pi;
+
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1.5fr 1fr;
+    
+    grid-template-areas:
+        "pr"
+        "hp"
+        "mb"
+}
+
+.portrait {
+    grid-area: pr;
+    border-style: solid;
+
+    background-image: url("/images/portrait.png");
+    
+    display:flex;
+}
+
+.healthbar {
+    grid-area: hp;
+    border-style: solid;
+
+    display:flex;
+}
+
+.musicbox {
+    grid-area: mb;
+    border-style: solid;
+
+    background-image: url("/images/backboard.png");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.musicbox .music_btn{
+    position: relative;
+    
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+
+    font-family: inherit;
+    font-size: 1.5em;
+}
+
+.inventory1 {
+    grid-area: i1;
+    border-style: solid;
+
+    display:flex;
+}
+
+.inventory1 img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.inventory2 {
+    grid-area: i2;
+    border-style: solid;
+
+    display: flex;
+}
+
+.inventory3 {
+    grid-area: i3;
+    border-style: solid;
+}
+.inventory4 {
+    grid-area: i4;
+    border-style: solid;
+}
+.inventory5 {
+    grid-area: i5;
+    border-style: solid;
+}
+.inventory6 {
+    grid-area: i6;
+    border-style: solid;
+}
+.inventory7 {
+    grid-area: i7;
+    border-style: solid;
+}
+.inventory8 {
+    grid-area: i8;
+    border-style: solid;
+}
+
+.map {
+    grid-area: mp;
+    border-style: solid;
+    justify-self: stretch;
+
+    display: flex;
+}
+
+.bottom_tab {
+    grid-area: b;
+    border-style: solid;
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "i1 i2 i3 i4 mp"
+        "i5 i6 i7 i8 mp";
+
+    background-image: url("/images/backboard.png");
+}
+
+.action1:hover{
+    cursor: pointer;
+}
+
+.title{
+    grid-area: t;
+    border-style: solid;
+}
+.container {
+    display: grid;
+
+    grid-template-columns: 0.5fr 2fr 5.5fr 0.5fr 4.6fr 0.5fr;
+    grid-template-rows: 0.2fr 2fr 0.85fr 0.2fr;
+
+    grid-template-areas:
+        ". t t t t ."
+        ". pi sc . p ."
+        ". pi sc . b ."
+        ". . . . . .";
+
+    /*width: 100vw;*/
+    height: 90vh;
+    justify-content: center;
+}
+
+

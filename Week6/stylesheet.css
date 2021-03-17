@@ -1,6 +1,6 @@
 ﻿body {
     font-family: 'DotGothic16', sans-serif;
-    background-image: url("/images/background.png");
+    background-image: url("images/background.png");
 }
 
 img {
@@ -19,7 +19,7 @@ img {
     grid-area: sp;
     
     border-top: 0.5em solid saddlebrown;
-    background-image: url("/images/backboard.png");
+    background-image: url("images/backboard.png");
     display: flex;
 }
 
@@ -120,19 +120,19 @@ img {
     grid-area: t1;
 
     border-style: solid;
-    background-image: url("/images/backboard.png");
+    background-image: url("images/backboard.png");
 }
 
 .talk2 {
     grid-area: t2;
     border-style: solid;
-    background-image: url("/images/backboard.png");
+    background-image: url("images/backboard.png");
 }
 
 .talk3 {
     grid-area: t3;
     border-style: solid;
-    background-image: url("/images/backboard.png");
+    background-image: url("images/backboard.png");
 }
 
 .player_info{
@@ -152,7 +152,7 @@ img {
     grid-area: pr;
     border-style: solid;
 
-    background-image: url("/images/portrait.png");
+    background-image: url("images/portrait.png");
     
     display:flex;
 }
@@ -168,7 +168,7 @@ img {
     grid-area: mb;
     border-style: solid;
 
-    background-image: url("/images/backboard.png");
+    background-image: url("images/backboard.png");
     display: flex;
     align-items: center;
     justify-content: center;
@@ -248,7 +248,7 @@ img {
         "i1 i2 i3 i4 mp"
         "i5 i6 i7 i8 mp";
 
-    background-image: url("/images/backboard.png");
+    background-image: url("images/backboard.png");
 }
 
 .action1:hover{

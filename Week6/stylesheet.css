@@ -10,8 +10,7 @@ img {
 
 .display {
     grid-area: ds;
-    border-style: solid;
-
+   
     display: flex;
 }
 
@@ -37,16 +36,12 @@ img {
 .screen {
     grid-area: sc;
     border-style: solid;
-    border-color: saddlebrown;
+    border-color: #804000;
     border-width: 0.5em;
-
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 3fr 1fr;
-
-    grid-template-areas:
-        "ds"
-        "sp";
+    grid-template-areas: "ds" "sp";
 }
 
 #description {
@@ -66,13 +61,18 @@ img {
         "m1 t1"
         "m2 t2"
         "m3 t3"
-        ". .";
+        "r .";
     
+}
+
+.return{
+    grid-area: r;
 }
 
 .member1 {
     grid-area: m1;
     border-style: solid;
+
 
     display:flex;
 }
@@ -207,10 +207,14 @@ img {
 .inventory3 {
     grid-area: i3;
     border-style: solid;
+
+    display: flex;
 }
 .inventory4 {
     grid-area: i4;
     border-style: solid;
+
+    display: flex;
 }
 .inventory5 {
     grid-area: i5;
@@ -237,28 +241,60 @@ img {
     display: flex;
 }
 
+.action_tab {
+    grid-area: ac;
+    border-style: solid;
+    justify-self: stretch;
+
+    display: flex;
+}
+
+.action_tab p {
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    text-align: center;
+}
+
+.tooltip{
+    grid-area: to;
+
+    display: flex;
+}
+
+#tooltip_desc{
+    opacity: 0;
+}
 .bottom_tab {
     grid-area: b;
     border-style: solid;
     
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 0.2fr 1fr 1fr 1fr 1fr 2fr;
+    grid-template-rows: 0.1fr 1fr 1fr;
     grid-template-areas:
-        "i1 i2 i3 i4 mp"
-        "i5 i6 i7 i8 mp";
+        "to to to to to to"
+        "ac i1 i2 i3 i4 mp"
+        "ac i5 i6 i7 i8 mp";
 
     background-image: url("images/backboard.png");
 }
 
-.action1:hover{
+.observe:hover{
     cursor: pointer;
 }
 
-.title{
-    grid-area: t;
-    border-style: solid;
+.action2:hover {
+    cursor: pointer;
 }
+
+.title {
+    grid-area: t;
+    /*border-style: solid;*/
+    
+    display: flex;
+}
+
+
 .container {
     display: grid;
 

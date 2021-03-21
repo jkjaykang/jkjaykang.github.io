@@ -22,7 +22,7 @@
                 <p id="description">
                     You and your party are resting at a bonfire. The dungeon is dark and cold.
                 </p>
-                <button class="continue_btn" onclick="">next</button>
+                <button class="continue_btn" onclick="advance_text(current_dialogue, dia_num)">next</button>
             </div>
         </div>
 
@@ -50,18 +50,25 @@
             </div>
 
             <div class="talk2">
-                <button class="talk_btn" onclick="">Talk to member2</button>
+                <input class="talk_btn" type="button" value="Talk to Thritis"
+                       onclick="window.location.href = 'party2_page.html'" />
             </div>
 
             <div class="talk3">
-                <button class="talk_btn" onclick="">Talk to member3</button>
+                <input class="talk_btn" type="button" value="Talk to Izzy"
+                       onclick="window.location.href = 'party3_page.html'" />
+            </div>
+
+            <div class="return">
+                <input type="button" value="return"
+                       onclick="window.location.href = 'base_page.html'" />
             </div>
 
         </div>
 
         <div class="player_info">
             <div class="portrait">
-                <img src="images/portrait.png" />
+                <img src="images/portrait.gif" />
             </div>
 
             <div class="healthbar">
@@ -82,12 +89,13 @@
         <div class="bottom_tab">
            
             <div class="inventory1">
-                <img class="action1" src="images/item1.png" onclick="change_text();" onmouseover="this.src='images/item1_a.png'"
-                     onmouseout="this.src='images/item1.png'" />
+                <img class="observe" src="images/item1.png" onclick="change_topic(dialogue1);" onmouseover="this.src = 'images/item1_a.png';update_tooltip('observe')"
+                     onmouseout="this.src = 'images/item1.png';update_tooltip('description')" />
+                
             </div>
             <div class="inventory2">
-                <img class="action2" src="images/item2.png" onclick="change_text2()" onmouseover="this.src='images/item2_a.png'"
-                     onmouseout="this.src='images/item2.png'" />
+                <img class="action2" src="images/item2.png" onclick="change_topic(dialogue2)" onmouseover="this.src = 'images/item2_a.png';update_tooltip('talk')"
+                     onmouseout="this.src = 'images/item2.png';update_tooltip('description')" />
             </div>
             <div class="inventory3">
             </div>
@@ -109,6 +117,14 @@
             <div class="map">
                 <img src="images/map.png" />
             </div>
+
+            <div class="tooltip">
+                <p id="tooltip_desc">description</p>
+            </div>
+
+            <div class="action_tab">
+                <p>Actions</p>
+            </div>
         </div>
 
 
@@ -116,7 +132,14 @@
 
     </div>
 
+    <script>
+        const dialogue1 = new Dialogue(2, ["It's a bonfire, lit with suprisngly little amount of magic given the party. (1/1)"]);
+        const dialogue2 = new Dialogue(3, ["You agree that converations are better with other peopel. Good job! You tell yourself. (1/1)"]);
+        var current_dialogue = null;
+        var dia_num = [0];
 
+    </script>
 
 </body>
+
 </html>

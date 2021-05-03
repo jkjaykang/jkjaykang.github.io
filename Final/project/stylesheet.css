@@ -1,0 +1,121 @@
+﻿body
+{
+    min-height: 100vh;
+    margin: 0;
+
+    background: url("images/mascot/banner.png");
+    background-color: #FDFFD9;
+
+    font-family: 'Freckle Face', cursive;
+
+    display: grid;
+
+    grid-template-columns: 0.25fr 0.7fr 0.7fr 0.25fr;
+    grid-template-rows: auto auto 2fr auto auto;
+
+    grid-template-areas:   
+        ". h h ."
+        ". . . ."
+        ". fm qc ."
+        ". . . ."
+        ". f f .";
+}
+
+header{
+    grid-area: h;
+
+    min-height: 50px;
+    /*is this needed? test out further*/
+    max-height: 10vh;
+    background-color: #FFF9AA;
+
+    display: flex;
+
+    /*justify-content centers horizontally*/
+    /*align-items center vertically*/
+    justify-content:center;
+    align-items:center;
+
+    font-size: 4vw;
+    color: #00539CFF;
+}
+
+footer {
+    grid-area: f;
+
+    min-height: 50px;
+    max-height: 10vh;
+    background-color: #FFF9AA;
+
+    display: flex;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size: 2.5vw;
+}
+
+.banner1{
+    grid-area: b;
+    background: url("images/mascot/banner.png");
+    background-color: #FFF9AA;
+}
+
+.banner2 {
+    grid-area: b2;
+    background: url("images/mascot/banner.png");
+    background-color: #FFF9AA;
+}
+
+.foodMascotContainer {
+    grid-area: fm;
+
+    background-color:white;
+    
+
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+
+    /*Aligns items in the flex container to the center*/
+    display: flex;
+    justify-content: center;
+}
+
+.questionContainer {
+    grid-area: qc;
+
+    background-color:white;
+
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /*Which direction to stack the items in container: rows or columsn*/
+    flex-direction: column;
+}
+
+.questionContainer p{
+    font-size: 2vw;
+}
+
+.questionContainer button{
+    margin: 1vw;
+
+    border:none;
+    background-color: #BAC600;
+
+    /*Using vw makes it responsive!*/
+    padding: 0.5vw 1vw;
+    text-align:center;
+    font-size: 2vw;
+
+}
+
+.questionContainer button:hover{
+    /*background-color:aqua;*/
+    cursor: pointer;
+    
+}

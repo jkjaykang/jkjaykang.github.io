@@ -4,74 +4,120 @@
 
 console.log("Script loaded")
 
-$(document).ready(function () {
-    
+var animationBusy = false;
+var questionIndex = 0;
+var questionArr = ["How cheap do you want the food?",
+    "How heavy do you want the food to be?", "Are you feeling something spicy?", "How much meat do you want on your food?",
+    "What type of cuisine?"];
 
-    $('#question1').hover(function () {
-        $("#question1").stop().animate({ backgroundColor: '#9DB300', padding: "0.75vw 1.25vw"  });
-    }, function () {
-        $("#question1").stop().animate({ backgroundColor: '#BAC600', padding: "0.5vw 1vw" });
-    });
-    $('#question2').hover(function () {
-        $("#question2").stop().animate({ backgroundColor: '#9DB300', padding: "0.75vw 1.25vw" });
-    }, function () {
-        $("#question2").stop().animate({ backgroundColor: '#BAC600', padding: "0.5vw 1vw" });
-    });
-    $('#question3').hover(function () {
-        $("#question3").stop().animate({ backgroundColor: '#9DB300', padding: "0.75vw 1.25vw" });
-    }, function () {
-        $("#question3").stop().animate({ backgroundColor: '#BAC600', padding: "0.5vw 1vw" });
-    });
-    $('#question4').hover(function () {
-        $("#question4").stop().animate({ backgroundColor: '#9DB300', padding: "0.75vw 1.25vw" });
-    }, function () {
-        $("#question4").stop().animate({ backgroundColor: '#BAC600', padding: "0.5vw 1vw" });
-    });
-    $('#question5').hover(function () {
-        $("#question5").stop().animate({ backgroundColor: '#9DB300', padding: "0.75vw 1.25vw"  });
-    }, function () {
-        $("#question5").stop().animate({ backgroundColor: '#BAC600', padding: "0.5vw 1vw" });
-    });
+var answer1Arr = ["Very cheap", "Very heavy", "Very spicy", "Meat mountain", "Chinese"];
+var answer2Arr = ["Cheap", "Heavy", "Little spicy", "Some meat", "Indian"];
+var answer3Arr = ["No importance", "No importance", "No importance", "No importance", "No importance"];
+var answer4Arr = ["Expensive", "Light", "Not spicy", "Little meat", "Middle eastern"];
+var answer5Arr = ["Very expensive", "Very light", "Very not spicy", "Vegetarian", "Pacific"];
 
-    $("#question1").click(function () {
-        console.log("Button Clicked");
-        newQuestion('#question1', '#question2', '#question3', '#question4', '#question5');
-        //When a button is clicked, the button fades, new text displayed.
-        //$('#question1').animate({ opacity: 0.0 }, 1000, function () {
-        //    $('#question1').text("The question has changed");
-        //    $('#question1').animate({ opacity: 1.0 }, 100);
-        //});
-    });
+var QUESTION_NUMBER = 5;
+
+
+$("#answer1").click(function () {
+    console.log("Button Clicked");
+    newQuestion('#answer1', '#answer2', '#answer3', '#answer4', '#answer5');     
+});
+$("#answer2").click(function () {
+    console.log("Button Clicked");
+    newQuestion('#answer2', '#answer1', '#answer3', '#answer4', '#answer5');
+});
+$("#answer3").click(function () {
+    console.log("Button Clicked");
+    newQuestion('#answer3', '#answer2', '#answer1', '#answer4', '#answer5');
+});
+$("#answer4").click(function () {
+    console.log("Button Clicked");
+    newQuestion('#answer4', '#answer2', '#answer3', '#answer1', '#answer5');
+});
+$("#answer5").click(function () {
+    console.log("Button Clicked");
+    newQuestion('#answer5', '#answer2', '#answer3', '#answer4', '#answer1');
 });
 
-function newQuestion(chosenquestion, unchosen1, unchosen2, unchosen3, unchosen4) {
-    $(chosenquestion).stop().animate({ opacity: 0.0 }, 1000, function () {
-        $(chosenquestion).text("The question has changed");
-        $(chosenquestion).css({ "background-color": '#fff' });
-        $(chosenquestion).stop().animate({ opacity: 1.0 }, 100);
-        $(unchosen1).text("The question has changed");
-        $(unchosen2).text("The question has changed");
-        $(unchosen3).text("The question has changed");
-        $(unchosen4).text("The question has changed");
+//Hover animations
+$('#answer1').hover(function () {
+    $('#answer1').stop(true).animate({ padding: "0.75vw 1.25vw", opacity: 1.0 });
+}, function () {
+        $('#answer1').stop(true).animate({ padding: "0.5vw 1vw", opacity: 1.0 });
+});
+$('#answer2').hover(function () {
+    $("#answer2").stop(true).animate({ padding: "0.75vw 1.25vw", opacity: 1.0 });
+}, function () {
+        $('#answer2').stop(true).animate({ padding: "0.5vw 1vw", opacity: 1.0 });
+});
+$('#answer3').hover(function () {
+    $("#answer3").stop(true).animate({ padding: "0.75vw 1.25vw", opacity: 1.0 });
+}, function () {
+        $('#answer3').stop(true).animate({ padding: "0.5vw 1vw", opacity: 1.0 });
+});
+$('#answer4').hover(function () {
+    $("#answer4").stop(true).animate({ padding: "0.75vw 1.25vw", opacity: 1.0 });
+}, function () {
+        $('#answer4').stop(true).animate({ padding: "0.5vw 1vw", opacity: 1.0 });
+});
+$('#answer5').hover(function () {
+    $("#answer5").stop(true).animate({ padding: "0.75vw 1.25vw", opacity: 1.0 });
+}, function () {
+    $('#answer5').stop(true).animate({ padding: "0.5vw 1vw", opacity: 1.0 });
+});
+
+
+function newQuestion(chosenanswer, unchosen1, unchosen2, unchosen3, unchosen4) {
+
+    $('#answer1').stop(true).fadeTo(500, 0, function() {
+        $('#answer1').text(answer1Arr[questionIndex]);
+        $('#answer1').stop(true).fadeTo(100, 1);
     });
 
-    $(unchosen1).stop().animate({ opacity: 0.0 }, 1000, function () {
-        $(unchosen1).text("The question has changed");
-        $(unchosen1).stop().animate({ opacity: 1.0 }, 100);
+    $('#answer2').stop(true).fadeTo(500, 0, function () {
+        $('#answer2').text(answer2Arr[questionIndex]);
+        $('#answer2').stop(true).fadeTo(100, 1);
     });
 
-    $(unchosen2).stop().animate({ opacity: 0.0 }, 1000, function () {
-        $(unchosen2).text("The question has changed");
-        $(unchosen2).stop().animate({ opacity: 1.0 }, 100);
+    $('#answer3').stop(true).fadeTo(500, 0, function () {
+        $('#answer3').text(answer3Arr[questionIndex]);
+        $('#answer3').stop(true).fadeTo(100, 1);
     });
 
-    $(unchosen3).stop().animate({ opacity: 0.0 }, 1000, function () {
-        $(unchosen3).text("The question has changed");
-        $(unchosen3).stop().animate({ opacity: 1.0 }, 100);
+    $('#answer4').stop(true).fadeTo(500, 0, function () {
+        $('#answer4').text(answer4Arr[questionIndex]);
+        $('#answer4').stop(true).fadeTo(100, 1);
     });
 
-    $(unchosen4).stop().animate({ opacity: 0.0 }, 1000, function () {
-        $(unchosen4).text("The question has changed");
-        $(unchosen4).stop().animate({ opacity: 1.0 }, 100);
+    $('#answer5').stop(true).fadeTo(500, 0, function () {
+        $('#answer5').text(answer5Arr[questionIndex]);
+        $('#answer5').stop(true).fadeTo(100, 1);
     });
+
+    if (questionIndex < QUESTION_NUMBER-1) {
+        questionIndex += 1;
+    }
+    else {
+        questionIndex = 0;
+    }
+
+    console.log(questionIndex);
+    $('#question').stop(true).fadeTo(500, 0, function () {
+        $('#question').text(questionArr[questionIndex]);
+        $('#question').stop(true).fadeTo(100, 1);
+    });
+
+}
+
+function showResult() {
+
+}
+
+function hoverIn() {
+    $('#question1').stop(true).animate({ padding: "0.75vw 1.25vw" });
+}
+
+function hoverOut() {
+    $('#question1').stop(true).animate({ padding: "0.5vw 1vw" });
 }

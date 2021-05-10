@@ -10,32 +10,46 @@
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Freckle+Face&family=Open+Sans&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <header>Food Selector</header>
+
+    <nav class="navbar">
+        <a href="null" class="logo">
+            <img src="images/logo.png" />
+        </a>
+        <ul class="nav_links">
+            <li class="nav_items"><a href="null">Settings</a></li>
+            <li class="nav_items"><a href="null">Wheel</a></li>
+        </ul>
+    </nav>
+
+
+
+
 
     <div class="foodMascotContainer">
-        <img src="images/mascot/test.png" />
+        <img src="images/mascot/mascot_2.gif" />
     </div>
-
-    <div class="banner1"></div>
-    <div class="banner2"></div>
 
     <div class="questionContainer">
         <div>
-            <p>
-                What kind of food are you feeling today?
+            <p id="question">
+                How cheap do you want the food?
             </p>
         </div>
 
-        <div><button id="question1">Question 1</button></div>
-        <div><button id="question2">Question 2</button></div>
-        <div><button id="question3">Question 3</button></div>
-        <div><button id="question4">Question 4</button></div>
-        <div><button id="question5">Question 5</button></div>
+        <div><button id="answer1">Very Cheap!</button></div>
+        <div><button id="answer2">Cheap!</button></div>
+        <div><button id="answer3">Don't Care!</button></div>
+        <div><button id="answer4">Expensive!</button></div>
+        <div><button id="answer5">Very Expensive!</button></div>
     </div>
 
-    <footer>made my Jay Kang</footer>
+    <!--<footer>made by Jay Kang</footer>-->
 </body>
 </html>

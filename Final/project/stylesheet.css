@@ -3,41 +3,98 @@
     min-height: 100vh;
     margin: 0;
 
-    background: url("images/mascot/banner.png");
-    background-color: #FDFFD9;
+    background: url("images/banner2.png");
+    /*background-color: #FDFFD9;*/
+    background-color: white;
 
-    font-family: 'Freckle Face', cursive;
+    /*font-family: 'Freckle Face', cursive;*/
+    /*font-family: 'Open Sans', sans-serif;*/
+    font-family: 'Pangolin', cursive;
 
     display: grid;
 
-    grid-template-columns: 0.25fr 0.7fr 0.7fr 0.25fr;
-    grid-template-rows: auto auto 2fr auto auto;
+    grid-template-columns: 0.25fr 0.8fr 1fr 0.25fr;
+    grid-template-rows: auto 2fr auto;
 
     grid-template-areas:   
-        ". h h ."
-        ". . . ."
+        "h h h h"
         ". fm qc ."
-        ". . . ."
-        ". f f .";
+        "f f f f";
 }
 
-header{
+/*header{
     grid-area: h;
 
-    min-height: 50px;
+    min-height: 50px;*/
     /*is this needed? test out further*/
-    max-height: 10vh;
-    background-color: #FFF9AA;
+    /*max-height: 10vh;*/
+    /*background-color: #FFF9AA;*/
+    /*background-color: black;
 
-    display: flex;
+    display: flex;*/
 
     /*justify-content centers horizontally*/
     /*align-items center vertically*/
-    justify-content:center;
+    /*justify-content:center;
     align-items:center;
 
-    font-size: 4vw;
-    color: #00539CFF;
+    font-size: 4vw;*/
+    /*color: #00539CFF;*/
+    /*color: white;
+}*/
+
+.navbar {
+    grid-area: h;
+
+    display:flex;
+    /*Flex items are spaced at each end of website*/
+    justify-content: space-between;
+
+    margin: 0;
+
+    /*Centers vertically*/
+    align-items: stretch;
+
+    background-color: black;
+}
+
+.nav_links {
+    display: flex;
+    list-style: none;
+    align-items:center;
+}
+
+.logo {
+    margin-left: 1vw;
+}
+
+.logo img{
+    max-width:100%;
+}
+
+li {
+    
+}
+
+li a{
+    color: white;
+
+    align-items: flex-end;
+
+    padding: 3vw;
+    /*No underline for links*/
+    text-decoration: none;
+
+}
+
+li a:hover{
+    background-color:white;
+    color:black;
+}
+
+li a:visited{
+    color:white;
+    text-decoration: none;
 }
 
 footer {
@@ -45,7 +102,8 @@ footer {
 
     min-height: 50px;
     max-height: 10vh;
-    background-color: #FFF9AA;
+    /*background-color: #FFF9AA;*/
+    background-color: black;
 
     display: flex;
 
@@ -53,19 +111,9 @@ footer {
     align-items:center;
 
     font-size: 2.5vw;
+    color: white;
 }
 
-.banner1{
-    grid-area: b;
-    background: url("images/mascot/banner.png");
-    background-color: #FFF9AA;
-}
-
-.banner2 {
-    grid-area: b2;
-    background: url("images/mascot/banner.png");
-    background-color: #FFF9AA;
-}
 
 .foodMascotContainer {
     grid-area: fm;
@@ -73,21 +121,27 @@ footer {
     background-color:white;
     
 
-    margin-top: 1vw;
-    margin-bottom: 1vw;
-
     /*Aligns items in the flex container to the center*/
     display: flex;
     justify-content: center;
+    align-items: center;
+
+    
+}
+
+.foodMascotContainer img{
+    /*width: 60%;
+    height: 60%;*/
+    /*object-fit: cover;*/
+    max-width: 90%;
+    height: auto;
+    
 }
 
 .questionContainer {
     grid-area: qc;
 
     background-color:white;
-
-    margin-top: 1vw;
-    margin-bottom: 1vw;
 
     display: flex;
     justify-content: center;
@@ -98,19 +152,26 @@ footer {
 }
 
 .questionContainer p{
-    font-size: 2vw;
+    font-size: 2.5vw;
+    text-align: center;
 }
 
 .questionContainer button{
     margin: 1vw;
 
     border:none;
-    background-color: #BAC600;
+    /*background-color: #BAC600;*/
+    background-color:white;
+    border: solid;
 
     /*Using vw makes it responsive!*/
     padding: 0.5vw 1vw;
     text-align:center;
     font-size: 2vw;
+
+    font-family: 'Pangolin', cursive;
+
+    width:15vw;
 
 }
 

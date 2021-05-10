@@ -10,11 +10,11 @@ var questionArr = ["How cheap do you want the food?",
     "How heavy do you want the food to be?", "Are you feeling something spicy?", "How much meat do you want on your food?",
     "What type of cuisine?"];
 
-var answer1Arr = ["Very cheap", "Very heavy", "Very spicy", "Meat mountain", "Chinese"];
-var answer2Arr = ["Cheap", "Heavy", "Little spicy", "Some meat", "Indian"];
-var answer3Arr = ["No importance", "No importance", "No importance", "No importance", "No importance"];
-var answer4Arr = ["Expensive", "Light", "Not spicy", "Little meat", "Middle eastern"];
-var answer5Arr = ["Very expensive", "Very light", "Very not spicy", "Vegetarian", "Pacific"];
+var answer1Arr = ["Very cheap", "Very heavy", "Very spicy", "Meat mountain", "???"];
+var answer2Arr = ["Cheap", "Heavy", "Little spicy", "Some meat", "???"];
+var answer3Arr = ["No importance", "No importance", "No importance", "No importance", "???"];
+var answer4Arr = ["Expensive", "Light", "Not spicy", "Little meat", "???"];
+var answer5Arr = ["Very expensive", "Very light", "Very not spicy", "Vegetarian", "???"];
 
 var QUESTION_NUMBER = 5;
 

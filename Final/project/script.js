@@ -152,11 +152,11 @@ $("#answer5").click(function () {
 });
 
 $('#choice1').click(function () {
-    window.location.href = 'Foodselector.html';
+    window.location.href = 'FoodSelector.html';
     return false;
 });
 $('#choice2').click(function () {
-    window.location.href = 'Foodselector_wheel.html';
+    window.location.href = 'FoodSelector_wheel.html';
     return false;
 });
 

@@ -7,6 +7,17 @@
     font-family: 'Pangolin', cursive;
 }
 
+.container_start{
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 0.25fr 0.8fr 1fr 0.25fr;
+    grid-template-rows: auto 2fr auto;
+    grid-template-areas: 
+        "h h h h" 
+        ". op op ." 
+        "f f f f";
+}
+
 .container {
     /*background-color: #FDFFD9;*/
     /*font-family: 'Freckle Face', cursive;*/
@@ -210,4 +221,42 @@ footer {
 
     justify-content: center;
     align-content: flex-end;
+}
+
+/*start page styling*/
+.option_container{
+    grid-area: op;
+
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.option_container button {
+    margin: 1vw;
+    border: none;
+    /*background-color: #BAC600;*/
+    background-color: white;
+    border: solid;
+    /*Using vw makes it responsive!*/
+    padding: 0.5vw 1vw;
+    text-align: center;
+    font-size: 2vw;
+    font-family: 'Pangolin', cursive;
+    width: 15vw;
+}
+
+.option_container button:hover {
+    /*background-color:aqua;*/
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#intro_text{
+    font-size: 2em;
 }

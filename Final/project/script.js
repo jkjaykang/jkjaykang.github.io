@@ -151,6 +151,15 @@ $("#answer5").click(function () {
     questionIndex += 1;
 });
 
+$('#choice1').click(function () {
+    window.location.href = 'Foodselector.html';
+    return false;
+});
+$('#choice2').click(function () {
+    window.location.href = 'Foodselector_wheel.html';
+    return false;
+});
+
 //Hover animations
 $('#answer1').hover(function () {
     $('#answer1').stop(true).animate({ padding: "0.75vw 1.25vw", opacity: 1.0 });
@@ -176,6 +185,16 @@ $('#answer5').hover(function () {
     $("#answer5").stop(true).animate({ padding: "0.75vw 1.25vw", opacity: 1.0 });
 }, function () {
     $('#answer5').stop(true).animate({ padding: "0.5vw 1vw", opacity: 1.0 });
+});
+$('#choice1').hover(function () {
+    $("#choice1").stop(true).animate({ padding: "0.75vw 1.25vw", opacity: 1.0 });
+}, function () {
+    $('#choice1').stop(true).animate({ padding: "0.5vw 1vw", opacity: 1.0 });
+});
+$('#choice2').hover(function () {
+    $("#choice2").stop(true).animate({ padding: "0.75vw 1.25vw", opacity: 1.0 });
+}, function () {
+    $('#choice2').stop(true).animate({ padding: "0.5vw 1vw", opacity: 1.0 });
 });
 
 

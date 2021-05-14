@@ -14,46 +14,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+    <script src="jQueryRotate.js"></script>
     <script src="script.js" defer></script>
     <link rel="icon" href="images/favicon.png" />
 </head>
 <body>
-    <div class="container">
+    <div class="container_wheel">
         <nav class="navbar">
             <a href="null" class="logo">
                 <img src="images/logo.png" />
             </a>
             <ul class="nav_links">
                 <!--<li class="nav_items"><a href="FoodSelector_main.html">Home</a></li>-->
-                <li class="nav_items"><a href="FoodSelector_wheel.html">Wheel</a></li>
+                <li class="nav_items"><a href="FoodSelector.html">Quiz</a></li>
             </ul>
         </nav>
 
-        <div class="foodMascotContainer">
-            <img src="images/mascot/mascot_2.gif" />
+
+        <div class="roulette">
+            <div class="wheel" onclick="roul.start()"> 
+                <img id="turntable" src="images/wheel.png" />
+            </div>
+            <div class="wheel_pointer">
+                <img src="images/pointer.png" />
+            </div>
         </div>
 
-        <div class="questionContainer">
-            <div>
-                <p id="question">
-                    How cheap do you want the food?
-                </p>
-            </div>
-
-            <div id="answerDisplay"> 
-                <img id="answerFood" src="images/burger.png" /> 
-                Try spinning the wheel if you want something else!
-            </div>
-
-            <div><button id="answer1">Very Cheap!</button></div>
-            <div><button id="answer2">Cheap!</button></div>
-            <div><button id="answer3">Don't Care!</button></div>
-            <div><button id="answer4">Expensive!</button></div>
-            <div><button id="answer5">Very Expensive!</button></div>
-        </div>
-
+        <footer>
+            <p id="footerText">
+                Click to spin the wheel!
+            </p>
+        </footer>
 
     </div>
-    
 </body>
 </html>

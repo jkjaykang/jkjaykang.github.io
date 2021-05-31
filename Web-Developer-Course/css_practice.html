@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>CSS practice</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style type="text/css">
+        h1{
+            color: pink;
+        }
+
+        .red{
+            color: blue;
+        }
+
+        .green{
+            color: green;
+            text-decoration: underline;
+        }
+
+        #first_section{
+            color: blue;
+            background-color: pink;
+            width: 200px;
+            /*float: left;*/
+            /*position absolute and fixed takes it out of the flow of page*/
+            /*fixed moves with the page, like a menu bar, absolute does not*/
+            margin: 20px 50px 100px 100px;
+            margin-left: 300px;
+            z-index: 1;
+        }
+
+        #second_section {
+            background-color: antiquewhite;
+            width: 200px;
+            
+            
+            z-index: 2;
+            opacity: 0.5;
+
+            margin-top: 50px;
+            margin-left: 20px;
+
+            padding: 10px 20px;
+        }
+
+        body{
+            margin: 0;
+            padding: 0;
+        }
+
+        p{
+            padding: 0;
+            margin: 0;
+        }
+
+       /*.clear_float{
+           clear: both;
+       }*/
+    </style>
+</head>
+<body>
+    <h1>CSS is neat</h1>
+    <div id="first_section">
+        <p>I want to make cool websites</p>
+        <p>Boo, make a <span>separate file</span></p>
+    </div>
+    
+    <div id="second_section">
+        <p>Yes, yes</p>
+        <p>I'm sure you will be fine! Probably.</p>
+    </div>
+
+    <div class="clear_float">
+        <p>Not floated</p>
+    </div>
+    
+
+</body>
+</html>

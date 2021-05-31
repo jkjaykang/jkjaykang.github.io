@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>javascript_practice</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+        .circle{
+            height: 5em;
+            width: 5em;
+            float: left;
+            margin: 1em;
+            border-radius: 2.5em;
+        }
+
+        #circle1{
+            background-color: red;
+        }
+        #circle2 {
+            background-color: blue;
+        }
+        #circle3 {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <input id="input" type="text" />
+
+    <button id="submitButton">Submit text</button>
+
+    <p id="text">NOT AUTHORIZED!</p>
+
+    <div id="tweetDiv">
+
+    </div>
+
+    <script type="text/javascript">
+        var tweetString = "";
+        var tweets = ["yo", "wait", "huh"];
+
+        for (var i = 0; i < tweets.length; i++) {
+            tweetString = tweetString + "<p>" + tweets[i] + "</p>";
+        }
+
+        document.getElementById("tweetDiv").innerHTML = tweetString;
+
+
+        document.getElementById("submitButton").onclick = function () {
+            var x = document.getElementById("input").value;
+            var magicNumber = Math.floor(Math.random() * (6 - 0) + 0);
+
+            console.log(magicNumber);
+            if (x == magicNumber) {
+                alert("Correct!")
+            } else {
+                alert("Sorry, the correct number was " + magicNumber);
+            }
+
+        }
+
+        function alertMe() {
+            alert("Testing!");
+        }
+
+        alertMe();
+
+    </script>
+</body>
+</html>

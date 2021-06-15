@@ -1,0 +1,134 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>Character sheet</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        .container {
+            margin-top: 30vh;
+            width: 30vw;
+        }
+
+        #login_form {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container center toggle-form" id="signup_form">
+
+        <div id="error">
+            <!--<?php if ($error!="") {
+            echo '<div class="alert alert-danger" role="alert">'.$error.'</div>';
+            }?>-->
+        </div>
+
+        <div class="text-center">
+            <h1>Sign up System </h1>
+            <h3>This it so sign up</h3>
+        </div>
+
+        <form method="post">
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="example@gmail.com">
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="password">
+            </div>
+
+            <div class="mb-3">
+                <div class="form-check">
+                    <label for="stay_logged" class="form-check-label">Stay logged in</label>
+                    <input type="checkbox" name="stay_logged" class="form-check-input" id="stay_logged" value="1">
+                </div>
+            </div>
+
+            <input type="hidden" name="sign_up" value="1">
+
+            <div class="mb-3 text-center">
+                <input type="submit" name="submit" value="Sign up!">
+            </div>
+
+        </form>
+
+        <div class="text-center">
+            <button class="switch_btn">Log in instead?</button>
+        </div>
+
+
+    </div>
+
+    <div class="container center toggle-form" id="login_form">
+
+        <div id="error">
+            <!--<?php if ($error!="") {
+            echo '<div class="alert alert-danger" role="alert">'.$error.'</div>';
+            }?>-->
+        </div>
+
+        <div class="text-center">
+            <h1>Log in</h1>
+            <h3>This is to log in</h3>
+        </div>
+
+        <form method="post">
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="text" name="email" class="form-control" id="email" placeholder="example@gmail.com">
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="password">
+            </div>
+
+            <div class="mb-3">
+                <div class="form-check">
+                    <label for="stay_logged" class="form-check-label">Stay logged in</label>
+                    <input type="checkbox" name="stay_logged" class="form-check-input" id="stay_logged" value="1">
+                </div>
+            </div>
+
+            <input type="hidden" name="sign_up" value="0">
+
+            <div class="mb-3 text-center">
+                <input type="submit" name="submit" value="Log in!">
+            </div>
+
+
+        </form>
+        <div class="text-center">
+            <button class="switch_btn">Sign up Instead?</button>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        //$("form").submit(function (e){
+
+
+        //});
+        $(".switch_btn").click(function () {
+            $(".toggle-form").toggle();
+        });
+
+    </script>
+
+</body>
+</html>

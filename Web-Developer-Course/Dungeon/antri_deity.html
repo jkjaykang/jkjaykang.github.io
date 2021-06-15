@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>antri-deities</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--<link href="../jquery_ui/jquery-ui.css" rel="stylesheet">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+    </script>
+    <!--<script src="../jquery_ui/jquery-ui.js"></script>-->
+    <script src="antriScript.js"></script>
+    <link rel="stylesheet" type="text/css" href="antriStyle.css">
+</head>
+<body>
+    <!--navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand mx-3" href="#">Logo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item mx-3">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item dropdown mx-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="raceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Race
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Humans</a></li>
+                            <li><a class="dropdown-item" href="antri_elf.html">Elves</a></li>
+                            <li><a class="dropdown-item" href="#">Dwarves</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="creatureDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Creatures/Widlife
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="organizationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Organization
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="worldDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            World
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="dietyDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Deities
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col center m-3">
+                <div class="card" style="width: 16rem;">
+                    <img src="images/test_tarot.png" class="card-img-top1" alt="...">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary center" data-bs-toggle="modal" data-bs-target="#god_modal_1">Detail</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col center m-3">
+                <div class="card" style="width: 16rem;">
+                    <img src="images/test_tarot.png" class="card-img-top1" alt="...">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary center" data-bs-toggle="modal" data-bs-target="#god_modal_1">Detail</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col center m-3">
+                <div class="card" style="width: 16rem;">
+                    <img src="images/test_tarot.png" class="card-img-top1" alt="...">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary center" data-bs-toggle="modal" data-bs-target="#god_modal_1">Detail</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col center m-3">
+                <div class="card" style="width: 16rem;">
+                    <img src="images/test_tarot.png" class="card-img-top1" alt="...">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary center" data-bs-toggle="modal" data-bs-target="#god_modal_1">Detail</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col center m-3">
+                <div class="card" style="width: 16rem;">
+                    <img src="images/test_tarot.png" class="card-img-top1" alt="...">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary center" data-bs-toggle="modal" data-bs-target="#god_modal_1">Detail</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col center m-3">
+                <div class="card" style="width: 16rem;">
+                    <img src="images/test_tarot.png" class="card-img-top1" alt="...">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary center" data-bs-toggle="modal" data-bs-target="#god_modal_1">Detail</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col center m-3">
+                <div class="card" style="width: 16rem;">
+                    <img src="images/test_tarot.png" class="card-img-top1" alt="...">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary center" data-bs-toggle="modal" data-bs-target="#god_modal_1">Detail</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col center m-3">
+                <div class="card" style="width: 16rem;">
+                    <img src="images/test_tarot.png" class="card-img-top1" alt="...">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary center" data-bs-toggle="modal" data-bs-target="#god_modal_1">Detail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+    <!--Modals-->
+    <div class="modal fade" id="god_modal_1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Name</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/elf_crest.png" class="card-img-top" alt="...">
+                    <h1>"God of Elves, Forest, and really everything green."</h1>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+﻿body {
+    font-family: 'Mate SC', serif;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff8ec;
+}
+
+.navbar {
+    background-color: #e2cca8;
+}
+
+.navbar-home{
+    
+}
+
+.nav-link{
+    color: #7a4616;
+}
+
+.nav-link.show{
+    color: white;
+}
+
+.active{
+    color: #323a2b;
+}
+
+.nav-link:hover{
+    color: white;
+}
+
+
+/*Centers navbar links*/
+@media (min-width: 567px) {
+    .abs-center-x {
+        position: absolute;
+        top: 1.25vh;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.dropdown-menu {
+    background-color: #e2cca8;
+    
+}
+
+.dropdown-item {
+    color: #7a4616;
+}
+
+
+
+.jumbotron-home {
+    height: 70vh;
+    text-align: center;
+    /*background-image: url("images/antri_map.png");*/
+    /*background-size: cover;*/
+    background-color: #cedfd4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6.5vh;
+}
+
+.jumbotron-image{
+    max-height: 70vh;
+}
+
+.vertical-align{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#welcome_message{
+    margin-top: 30%;
+}
+
+.intro-header{
+    font-size: 5vh;
+}
+
+#body_illus{
+}
+
+
+/*antri creatures*/
+.carousel-container{
+    border: solid;
+}
+
+.carousel-inner img{
+    margin: auto;
+}
+
+
+/*antri deity*/
+.card{
+
+}
+
+.card:hover{
+    cursor: pointer;
+    transform: scale(1.025);
+    box-shadow: 0px 0px 10px rgba(189,170,140,0.8);
+}
+
+
+/*scroll up button*/
+#scroll_btn {
+    display: none;
+    position: fixed;
+    right: 27.5vw;
+    
+    bottom: 1vh;
+    
+    z-index: 99;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+#scroll_btn:hover{
+    
+}
+
+@media screen and (min-width: 576px){
+    #scroll_btn {
+        bottom: 5vh;
+        right: 2vw;
+    }
+}
+
+
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-home {
+    background-color: #e2cca8;
+    /*position: fixed;
+    left: 0;
+    bottom: 0;*/
+    width: 100%;
+    color: #7a4616;
+    margin-top: auto;
+}

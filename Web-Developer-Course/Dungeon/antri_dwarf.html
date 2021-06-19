@@ -21,14 +21,17 @@
 </head>
 <body>
     <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-home">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="navbar-brand ms-3" href="antri_home.html">
+                <img src="images/old_shield_item.png" alt="logo" width="40" height="40" />
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <!--<span class="navbar-toggler-icon"></span>-->
+                <img src="images/old_shield_item.png" alt="logo" width="30" height="30" />
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav abs-center-x">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="antri_home.html">Home</a>
                     </li>
@@ -37,46 +40,21 @@
                             Race
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="antri_human.html">Humans</a></li>
-                            <li><a class="dropdown-item active" href="#">Elves</a></li>
-                            <li><a class="dropdown-item" href="#">Dwarves</a></li>
+                            <li><a class="dropdown-item" href="antri_human.html">Human</a></li>
+                            <li><a class="dropdown-item" href="antri_elf.html">Elf</a></li>
+                            <li><a class="dropdown-item active" href="antri_dwarf.html">Dwarf</a></li>
+                            <li><a class="dropdown-item" href="antri_halfling.html">Halfling</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="antri_creatures.html">Wildlife</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="organizationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Organization
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="antri_map.html">World</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="worldDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            World
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dietyDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Deities
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="antri_deity.html">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="antri_deity.html">Deities</a>
                     </li>
                 </ul>
 
@@ -92,33 +70,36 @@
             </div>
         </div>
         <div class="row">
-            <div data-aos="fade-in" class="col-sm-5 text-center">
+            <div data-aos="zoom-in" class="col-sm-5 text-center">
                 <img class="img-fluid" id="body_illus" src="images/dwarf_gram.png" />
-                <p class="fw-bold">Vera, an elven mage</p>
+                <p class="fw-bold">Gram, dwarven lorekeeper</p>
             </div>
             <div data-aos="fade-left" class="col mt-5">
                 <h3 class="fst-italic">
-                    "Considering that they are made of solid stone, it's a suprise how much of a softy they are."
+                    "Men of stone, the dwarves are relics, perhaps the only entity unchanged after the Hemiad Explosion."
                 </h3>
-                <p class="fst-italic text-end">-Hall Rootgrass, adventurer</p>
+                <p class="fst-italic text-end">-Grimith Evelan, historian</p>
 
                 <p class="mt-3 ms-3">
-                    Elves are a fascinating race of people. Even putting aside their culture and history, they are a biological marvel.
-                    They were originally spirits handcrafted by the goddesss Herna, but after the great explosion, slowly began to resemble humans and their form. Currently,
-                    their outward apperance is almost indistinguisable from a human besides their signature pointed ears.
+                    Dwarves are the creation of god Hemiad, who is said to have forged each dwarf from a mountain. While the dwarves exposed to the Hemiad Explosion eventually
+                    became halflings, dwarves sheltered from the initial explosion maintained their form, the only entity to do so. In result, dwarves are vastly unique in their
+                    composition and biology from the other races. While they resemble the human form, dwarves are not made of flesh and blood, and are instead carved from stone.
+                    Thus a dwarf's appearance mostly depends on the rock they are "born" from. A dwarf's form does not change throughout their life, and are essentially "born"
+                    as a bearded man. While a dwarf does not age, they do degrade, and crumble away once old enough. Unlike other races, there can only be a set number of dwarves at a time, so a
+                    dwarf's final task is often to carve their successor.
+
                 </p>
                 <p class="mt-3 ms-3">
-                    The most famous trait of Elves (besides their ear) is longevity. Elves do not age like humans or halflings. Once reaching
-                    adulthood their physical appearance does not change. They are by no means immortal, as they are susceptible to wounds and diseases
-                    just like humans and halflings, but they do possess a much faster regenerative rate. Scholars believe this regenerative power to be the cause
-                    for elves inability to age. They also possess an incredible appetite, which started a common misconception that they are vegetarians, as most elves
-                    cannot simply afford a diet that consists of meat without emptying their savings by the end of the week.
+                    Despite their cold, hard exterior, dwarves are unthinkably compassoniate and kind. While they are not the best at expressing themselves, dwarves are often the first to lend a helping
+                    hand where they can, even at their own
+                    incovinience. Due to their nature, a dwarf may come off as condenscending or overprotective, as they will attempt to assist in even the simplest task.
+                    When not helping other people, dwarves tend to be talented scholars, and find joy in researching technology and recording history.
                 </p>
 
                 <p class="mt-3 ms-3">
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    Due to the events that transpired between them and Hemiad, dwarves are firm believers of second, third, or however many chances it takes. They are forgiving to a degree that
+                    other race view as unexplaniable, and will never truly hate a person, no matter their deeds. Even when betrayed, trampled, and abandoned, a dwarf will hold firm belief that
+                    anyone can change and realize their mistakes. Unfortunately, their nature is often taken advantage of to a varying degree.
                 </p>
             </div>
         </div>
@@ -126,60 +107,34 @@
         <div class="row">
             <div data-aos="fade-right" class="col mt-5">
                 <h3 class="fst-italic">
-                    "Elves mastery and knowledge of magic is vast, too vast."
+                    "They make rocks edible! (Crunch) And it tastes good!"
                 </h3>
-                <p class="fst-italic text-end">-Hall Rootgrass, adventurer</p>
+                <p class="fst-italic text-end">-Hall Lightroot, munching on rocks</p>
 
                 <p class="mt-3 ms-3">
-                    Elves are a fascinating race of people. Even putting aside their culture and history, they are a biological marvel.
-                    They were originally spirits handcrafted by the goddesss Herna, but after the great explosion, slowly began to resemble humans and their form. Currently,
-                    their outward apperance is almost indistinguisable from a human besides their signature pointed ears.
-                </p>
-                <p class="mt-3 ms-3">
-                    The most famous trait of Elves (besides their ear) is longevity. Elves do not age like humans or halflings. Once reaching
-                    adulthood their physical appearance does not change. They are by no means immortal, as they are susceptible to wounds and diseases
-                    just like humans and halflings, but they do possess a much faster regenerative rate. Scholars believe this regenerative power to be the cause
-                    for elves inability to age. They also possess an incredible appetite, which started a common misconception that they are vegetarians, as most elves
-                    cannot simply afford a diet that consists of meat without emptying their savings by the end of the week.
+                    The cuisine of the dwarves are fascinating as it is strange. Dwarves are master chefs, and some operate restaurants that attract patrons across the lands.
+                    While they prepare cuisine of all culture and race at miraculous quality, they also have the ability to make most inedible things edible. The most
+                    famous example of this is their ability to prepare stones and rocks as an edible substance, even to other races. While many non-dwarven chefs have attempted
+                    to recreate their unique cuisine, all have been met with failure and extreme stomach ache.
                 </p>
 
 
             </div>
-            <div data-aos="fade-in" class="col-sm-5 text-center">
-                <img class="img-fluid" src="images/elf_magic.png" />
-                <p class="fw-bold">test image, test caption</p>
+            <div data-aos="zoom-in-left" class="col-sm-5 text-center">
+                <img class="img-fluid" src="images/dwarf_food.png" />
+                <p class="fw-bold">A dwarven cuisine of boulder soup</p>
             </div>
         </div>
 
-        <div class="row">
-            <div data-aos="fade-in" class="col-sm-5 text-center">
-                <img class="img-fluid" src="images/elf_crest.png" />
-                <p class="fw-bold">test image, test caption</p>
-            </div>
 
-            <div data-aos="fade-left" class="col mt-5">
-                <h3 class="fst-italic">
-                    "People always look up to Elves for being master magicians and whatnot,
-                    but if you get to live that long, you <span class="fw-bold">have</span> to be a master at something"
-                </h3>
-                <p class="fst-italic text-end">-Hall Rootgrass, adventurer</p>
-
-                <p class="mt-3 ms-3">
-                    Elves are a fascinating race of people. Even putting aside their culture and history, they are a biological marvel.
-                    They were originally spirits handcrafted by the goddesss Herna, but after the great explosion, slowly began to resemble humans and their form. Currently,
-                    their outward apperance is almost indistinguisable from a human besides their signature pointed ears.
-                </p>
-                <p class="mt-3 ms-3">
-                    The most famous trait of Elves (besides their ear) is longevity. Elves do not age like humans or halflings. Once reaching
-                    adulthood their physical appearance does not change. They are by no means immortal, as they are susceptible to wounds and diseases
-                    just like humans and halflings, but they do possess a much faster regenerative rate. Scholars believe this regenerative power to be the cause
-                    for elves inability to age. They also possess an incredible appetite, which started a common misconception that they are vegetarians, as most elves
-                    cannot simply afford a diet that consists of meat without emptying their savings by the end of the week.
-                </p>
-            </div>
-        </div>
     </div>
 
+    <!--Footer-->
+    <footer class="footer-home text-center text-lg-start">
+        <div class="text-center p-3">
+            Contact me at: jkjaykang@gmail.com
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 

@@ -21,14 +21,17 @@
 </head>
 <body>
     <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-home">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="navbar-brand ms-3" href="antri_home.html">
+                <img src="images/old_shield_item.png" alt="logo" width="40" height="40" />
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <!--<span class="navbar-toggler-icon"></span>-->
+                <img src="images/old_shield_item.png" alt="logo" width="30" height="30" />
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav abs-center-x">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="antri_home.html">Home</a>
                     </li>
@@ -37,46 +40,21 @@
                             Race
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="antri_human.html">Humans</a></li>
-                            <li><a class="dropdown-item active" href="#">Elves</a></li>
-                            <li><a class="dropdown-item" href="#">Dwarves</a></li>
+                            <li><a class="dropdown-item" href="antri_human.html">Human</a></li>
+                            <li><a class="dropdown-item active" href="antri_elf.html">Elf</a></li>
+                            <li><a class="dropdown-item" href="antri_dwarf.html">Dwarf</a></li>
+                            <li><a class="dropdown-item" href="antri_halfling.html">Halfling</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="antri_creatures.html">Wildlife</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="organizationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Organization
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="antri_map.html">World</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="worldDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            World
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dietyDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Deities
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="antri_deity.html">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="antri_deity.html">Deities</a>
                     </li>
                 </ul>
 
@@ -87,39 +65,39 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8 mt-5">
-                <h1 class="intro-header ms-5">Elves</h1>
+                <h1 class="intro-header ms-5">Elf</h1>
                 <hr />
             </div>
         </div>
         <div class="row">
-            <div data-aos="fade-in" class="col-sm-5 text-center">
+            <div data-aos="zoom-in" class="col-sm-5 text-center">
                 <img class="img-fluid" id="body_illus" src="images/elf_vera.png" />
-                <p class="fw-bold">Vera, an elven mage</p>
+                <p class="fw-bold">Vera Daran, elven mage</p>
             </div>
             <div data-aos="fade-left" class="col mt-5">
                 <h3 class="fst-italic">
                     "People always look up to Elves for being master magicians and whatnot,
                     but if you get to live that long, you <span class="fw-bold">have</span> to be a master at something"
                 </h3>
-                <p class="fst-italic text-end">-Hall Rootgrass, adventurer</p>
+                <p class="fst-italic text-end">-Hall Lightroot, adventurer</p>
 
                 <p class="mt-3 ms-3">
-                   With long ears and long life, elves are one of the less common races in the world of Antri. Originally spirits created by (NAME), elves transformed into
-                   what they are today after the great explosion. Elves resemble the human physique (besides their ear), but tend to be lankier. Elves do not age after
-                   a certain age, unlike humans and halflings, but they are still as susceptible to diseases and wounds. They have a higher natural healing factors, however, which
-                   scholars believe to be the cause behind their halted aging.
-                </p>
-                <p class="mt-3 ms-3">
-                   Elves are easygoing people, often nonchalant to the problems and events around them. They mostly keep to themselves, focusing on their own goals, and often only make
-                   few extremly close friends. That is not to say they are bad at dealing with people, as many elves become professors at magic institutes and even diplomats. Most elves
-                   like taking things slow, and are even seen as lazy by other races. There are often conflicts between elves and non-elves, as elves are infamously bad with punctuality
-                   and time managment. However, thanks to their long lives (barring any misfortune), however, most elves tend to accomplish what they want to in life.
+                    Originally spirits created by goddess Avera to tend her forest, elves transformed into
+                    what they are today after choosing to stay behind on Antri during the Hemiad Explosion. Elves are similar to humans in size, but tend to be lankier. Instead of rounded ears
+                    of the other races, they possess pointed ears that distinguish them easily from humans. Elves do not age after a certain age, and in result do not die of old age, they are still susceptible
+                    to wounds and diseases, however.
                 </p>
 
                 <p class="mt-3 ms-3">
-                   Besides their long life and easy going attitude, elves are also known for their extreme appetite, which take many people by surprise. Given the chance they will 
-                   desecrate a banquet, and no sane establishment hosts an eating contest that allow elves. A common misconception is that elves are vegetable lovers, but elves only
-                   eat vegetables because they would bankrupt themselves if they satisfied their hunger only through meat.
+                    Elves are easygoing people, often nonchalant to the problems and events around them. They tend to take things slowly, often taking the "scenic route" when given the choice.
+                    Due to their relaxed nature, they are not easily angered and hardly holds grudges, thus elves are generally liked and welcomed by those around them. However, coupled with their
+                    easygoing nature and extremely long lifespan, elves have a very poor concept of time. They are hardly on time for a gathering, and deadlines are more often a suggestion than a requirement.
+                </p>
+
+                <p class="mt-3 ms-3">
+                    Besides their long life and easy going attitude, elves are also known for their extreme appetite, which take many people by surprise due to their skinny build. Given the chance they will
+                    desecrate a banquet, and no knowledgable establishment hosts an eating contest that allow elves. A common misconception is that elves are vegetable lovers, but elves only
+                    eat vegetables because they would bankrupt themselves if they satisfied their hunger only through meat.
                 </p>
             </div>
         </div>
@@ -127,63 +105,43 @@
         <div class="row">
             <div data-aos="fade-right" class="col mt-5">
                 <h3 class="fst-italic">
-                    "Elves mastery and knowledge of magic is vast, too vast."
+                    "We stand impressed at the elves' mastery of magic, we remain eternally grateful at their willingess to share it."
                 </h3>
-                <p class="fst-italic text-end">-Hall Rootgrass, adventurer</p>
+                <p class="fst-italic text-end">-Mago Silverline, human mage</p>
 
                 <p class="mt-3 ms-3">
-                    Elves are a fascinating race of people. Even putting aside their culture and history, they are a biological marvel.
-                    They were originally spirits handcrafted by the goddesss Herna, but after the great explosion, slowly began to resemble humans and their form. Currently,
-                    their outward apperance is almost indistinguisable from a human besides their signature pointed ears.
+                    Due to their origin as a spirit, elves are naturally gifted mages. They can easily grasp magical concepts that befuddle other races, and often discover several
+                    new spells and magical fields in their life. Elves tend to enjoy teaching others on magic, seeing magic as a tool that should be shared to improve the lives of
+                    those willing to learn it. Thus, it is common to see elven professors at magical universities, or an adventuring elf rambling about magical theories to passerbys.
                 </p>
                 <p class="mt-3 ms-3">
-                    The most famous trait of Elves (besides their ear) is longevity. Elves do not age like humans or halflings. Once reaching
-                    adulthood their physical appearance does not change. They are by no means immortal, as they are susceptible to wounds and diseases
-                    just like humans and halflings, but they do possess a much faster regenerative rate. Scholars believe this regenerative power to be the cause
-                    for elves inability to age. They also possess an incredible appetite, which started a common misconception that they are vegetarians, as most elves
-                    cannot simply afford a diet that consists of meat without emptying their savings by the end of the week.
+                    On the other hand, elves possess an attiude on magic that other races may consider irreponsible. They show little restraint in developing potentially destructive spells
+                    and studies, arguing that any spell is ultimately fashioned to be as destructive or harmless as the caster wills. (They also mutter that a non-elf wouldn't understand the formula anyways)
+                    However, after cases of unrestrained mages wreaking havoc
+                    with elven spells, elves reluctantly agreed that some spells should be restrained. In accordance, they formed covens that will track and interrogate mages that are developing
+                    or practicing spells that can be considered questionable.
                 </p>
 
 
             </div>
-            <div data-aos="fade-in" class="col-sm-5 text-center">
+            <div data-aos="zoom-in-left" class="col-sm-5 text-center">
                 <img class="img-fluid" src="images/elf_magic.png" />
-                <p class="fw-bold">test image, test caption</p>
+                <p class="fw-bold">Tools of a elven mage</p>
             </div>
         </div>
 
-        <div class="row">
-            <div data-aos="fade-in" class="col-sm-5 text-center">
-                <img class="img-fluid" src="images/elf_crest.png" />
-                <p class="fw-bold">test image, test caption</p>
-            </div>
-
-            <div data-aos="fade-left" class="col mt-5">
-                <h3 class="fst-italic">
-                    "People always look up to Elves for being master magicians and whatnot,
-                    but if you get to live that long, you <span class="fw-bold">have</span> to be a master at something"
-                </h3>
-                <p class="fst-italic text-end">-Hall Rootgrass, adventurer</p>
-
-                <p class="mt-3 ms-3">
-                    Elves are a fascinating race of people. Even putting aside their culture and history, they are a biological marvel.
-                    They were originally spirits handcrafted by the goddesss Herna, but after the great explosion, slowly began to resemble humans and their form. Currently,
-                    their outward apperance is almost indistinguisable from a human besides their signature pointed ears.
-                </p>
-                <p class="mt-3 ms-3">
-                    The most famous trait of Elves (besides their ear) is longevity. Elves do not age like humans or halflings. Once reaching
-                    adulthood their physical appearance does not change. They are by no means immortal, as they are susceptible to wounds and diseases
-                    just like humans and halflings, but they do possess a much faster regenerative rate. Scholars believe this regenerative power to be the cause
-                    for elves inability to age. They also possess an incredible appetite, which started a common misconception that they are vegetarians, as most elves
-                    cannot simply afford a diet that consists of meat without emptying their savings by the end of the week.
-                </p>
-            </div>
-        </div>
     </div>
+
+    <!--Footer-->
+    <footer class="footer-home text-center text-lg-start">
+        <div class="text-center p-3">
+            Contact me at: jkjaykang@gmail.com
+        </div>
+    </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    
+
     <!--Animate on Scroll initialization-->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>

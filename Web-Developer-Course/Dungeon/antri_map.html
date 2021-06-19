@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Portfolio</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="images/old_shield_item.png" />
+    <link href="jquery_ui/jquery-ui.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+    </script>
+    <script src="jquery_ui/jquery-ui.js"></script>
+    <script src="antriScript.js"></script>
+    <link rel="stylesheet" type="text/css" href="antriStyle.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Mate+SC&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!--navbar-->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-home">
+        <div class="container-fluid">
+            <a class="navbar-brand ms-3" href="antri_home.html">
+                <img src="images/old_shield_item.png" alt="logo" width="40" height="40" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <!--<span class="navbar-toggler-icon"></span>-->
+                <img src="images/old_shield_item.png" alt="logo" width="30" height="30" />
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav abs-center-x">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="antri_home.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="raceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Race
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="antri_human.html">Human</a></li>
+                            <li><a class="dropdown-item" href="antri_elf.html">Elf</a></li>
+                            <li><a class="dropdown-item" href="antri_dwarf.html">Dwarf</a></li>
+                            <li><a class="dropdown-item" href="antri_halfling.html">Halfling</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="antri_creatures.html">Wildlife</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="antri_map.html">World</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="antri_deity.html">Deities</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="container map-title text-center">
+        <h1>Map of Antri</h1>
+        <p>(Hover over landmarks for descriptions)</p>
+    </div>
+
+    <!--Map-->
+    <div class="container" id="map_container">
+        <img id="antri_map" src="images/antri_map2.png" alt="antri_map" />
+
+        <!-- Dim lit forest -->
+        <div id="mark1" class="marker" title="A forest that is a birthplace of monsters. Few dare to venture the forest, fewer come back."
+             data-bs-toggle="tooltip" data-bs-placement="left">
+            <p>m1</p>
+        </div>
+
+        <!-- Elven Capital -->
+        <div id="mark2" class="marker" title="Forest of Avera, which also serves as a capital of the elves. "
+             data-bs-toggle="tooltip" data-bs-placement="left">
+            <p>m2</p>
+        </div>
+
+        <!-- University -->
+        <div id="mark3" class="marker" title="A grand university that specializing in teaching magic. Most renowned mages lecture and research here."
+             data-bs-toggle="tooltip" data-bs-placement="left">
+            <p>m3</p>
+
+        </div>
+
+        <!-- Lighthouse -->
+        <div id="mark4" class="marker" title="Beacon of light powered by a spell, keeping the oceanic monsters away. A renowned vacation spot."
+             data-bs-toggle="tooltip" data-bs-placement="left">
+            <p>m4</p>
+
+        </div>
+
+        <!-- Island Forge -->
+        <div id="mark5" class="marker" title="An island where halfling masters forge and live. Bring earplugs to preserve your hearing."
+             data-bs-toggle="tooltip" data-bs-placement="left">
+            <p>m5</p>
+        </div>
+
+        <!-- Human Capital -->
+        <div id="mark6" class="marker" title="Largest human-established city. Often the gathering spot for diplomatic conferences."
+             data-bs-toggle="tooltip" data-bs-placement="left">
+            <p>m6</p>
+        </div>
+
+        <!-- Desert Capital -->
+        <div id="mark7" class="marker" title="A city surrounded by blistering hot desert. Home to the largest casino in the world."
+             data-bs-toggle="tooltip" data-bs-placement="left">
+            <p>m7</p>
+        </div>
+
+        <!-- Dwarven Church -->
+        <div id="mark8" class="marker" title="The dwarven church where the body of Hemiad resides. Heavily guarded by the strongest dwarves and halflings. Impenetrable."
+             data-bs-toggle="tooltip" data-bs-placement="left">
+            <p>m8</p>
+        </div>
+
+        <!-- Dwarven Prison -->
+        <div id="mark9" class="marker" title="Dwarven-run prison/rehabilitation center. Inescapable"
+             data-bs-toggle="tooltip" data-bs-placement="left">
+            <p>m9</p>
+        </div>
+
+        <!-- Culture Town -->
+        <div id="mark10" class="marker" title="A human city with countless theatres and entertainment. Hoasts a yearly cultural festival that celebrate culture of all races."
+             data-bs-toggle="tooltip" data-bs-placement="left">
+            <p>m10</p>
+        </div>
+    </div>
+
+    <!-- Description -->
+    <div class="container mt-3 mb-5" data-aos="fade-right">
+        <h1>History of Antri</h1>
+        <p>
+            Antri was initially inhabited by deities who used to sculpt and inhabit the world with its creation. While the dieties stayed out of each other's ways, Oros grew
+            jealous of Avera and Hemiad, who were able to bring forth wonderous creation, while he can only create twisted creatures. Suspecting that Avera was too wary of his schemes,
+            he targeted Hemiad as a target of his grudge. By convincing the dwarves that Hemiad considers them failed creations and plan to destroy them, the dwarves conspired to destroy
+            Hemiad. Realizing the trickery of Oros too late, Hemiad chose to be destroyed by his own creation than attack his own creation. The energy released from Hemiad's wounds shifted
+            and changed Antri, changing all existing creation, and bringing new life to existance, such as the humans.
+        </p>
+        <p>
+            Upon learning of what had happened, Deus ordered that all deities will no longer be able to roam Antri freely, and allowed only limited influence on the world. While some deities
+            voiced their complaints, Deus refused to undo its decision. Annoyed by Oros' defiance of its previous order of not attacking other deities, Deus planned to eradicate Oros from existance.
+            Oros, however, convinced Deus that he did not directly attack Hemiad, as it was the dwarves who carried out the act. Begrudgingly, Deus stopped his plans to destroy Oros, but imposed
+            severe rules that Oros must follow.  
+        </p>
+        <p>
+            Free from the hands of the deities that had roamed it before, Antri continued its development, not directly dicatated by any power. Kingdoms and dynasties were
+            established and torn down, the mountains became desert, and seas became valley. Even now, countless years after the Hemiad explosion, the world of Antri continues its course.
+        </p>
+    </div>
+
+    <!--Scroll to top-->
+    <!--<img id="scroll_btn" class="img-fluid" src="images/dagger_item.png" alt="scrollUp" />-->
+
+
+    <!--Footer-->
+    <footer class="footer-home text-center text-lg-start">
+        <div class="text-center p-3">
+            Contact me at: jkjaykang@gmail.com
+        </div>
+    </footer>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
+    <!--Animate on Scroll initialization-->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+</body>
+</html>

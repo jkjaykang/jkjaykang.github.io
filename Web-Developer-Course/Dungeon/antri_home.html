@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-lg fixed-top navbar-home">
         <div class="container-fluid">
             <a class="navbar-brand ms-3" href="antri_home.html">
-                <img src="images/old_shield_item.png" alt="logo" width="40" height="40"/>
+                <img src="images/old_shield_item.png" alt="logo" width="40" height="40" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <!--<span class="navbar-toggler-icon"></span>-->
@@ -32,7 +32,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav abs-center-x">
                     <li class="nav-item">
-                        <a class="nav-link active"  aria-current="page" href="antri_home.html">Home</a>
+                        <a class="nav-link active" aria-current="page" href="antri_home.html">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="raceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -49,14 +49,8 @@
                         <a class="nav-link" aria-current="page" href="antri_creatures.html">Wildlife</a>
                     </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="worldDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            World
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Map</a></li>
-                            <li><a class="dropdown-item" href="#">History</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="antri_map.html">World</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="antri_deity.html">Deities</a>
@@ -68,13 +62,16 @@
     </nav>
 
     <!--Welcome image-->
-    <div class="container-flexible jumbotron-home">
-        <div class="row vertical-align">
-            <div class="col text-center">
-                <img class="img-fluid jumbotron-image" src="images/antri_map.png" />
-                <!--<h1 id="welcome_message">Welcome to the world of antri!</h1>-->
+    <!--<div class="container-flexible jumbotron-home">
+        <div class="row container-flexible">
+            <div class="col">
+                <img class="jumbotron-image" src="images/welcome_banner.png" alt="antri_banner" />
             </div>
         </div>
+    </div>-->
+
+    <div class="container-flexible jumbotron-home">
+        <img class="jumbotron-image" src="images/welcome_banner.png" alt="antri_banner" />
     </div>
 
     <!--Website description-->
@@ -90,7 +87,7 @@
                 <p>
                     Besides this website I have made other various websites to practice different libraries
                     and tools, they also somehow ended up being fantasy-themed, so I guess there is consistency.
-                    If you are interested check out those websites which are listed below too. 
+                    If you are interested check out those websites which are listed below too.
                 </p>
                 <p>
                     Have a great day!
@@ -103,7 +100,7 @@
     <div class="container">
         <div class="row center">
             <div class="card m-5" style="width: 22rem;">
-                <img src="images/blacksmith_website.png" class="card-img-top img-fluid mt-2" alt="blacksmith_website">
+                <img id="blacksmith_card" src="images/blacksmith_website.png" class="card-img-top img-fluid mt-2" alt="blacksmith_website">
                 <div class="card-body">
                     <h5 class="card-title">Ita's Blacksmith</h5>
                     <p class="card-text">
@@ -113,7 +110,6 @@
                         the focus of this website was use of JQuery and JQuery-UI and its various tools
                         (draggable, droppable, tooltips, etc.)
                     </p>
-                    <a href="blacksmith_store.html" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
 
@@ -128,7 +124,6 @@
                         the focus of this website was use of JQuery and JQuery-UI and its various tools
                         (draggable, droppable, tooltips, etc.)
                     </p>
-                    <a href="blacksmith_store.html" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
@@ -145,7 +140,6 @@
                         the focus of this website was use of JQuery and JQuery-UI and its various tools
                         (draggable, droppable, tooltips, etc.)
                     </p>
-                    <a href="blacksmith_store.html" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
 
@@ -160,7 +154,6 @@
                         the focus of this website was use of JQuery and JQuery-UI and its various tools
                         (draggable, droppable, tooltips, etc.)
                     </p>
-                    <a href="blacksmith_store.html" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
@@ -168,9 +161,7 @@
     </div>
 
     <!--Scroll to top-->
-    <img id="scroll_btn" class="img-fluid" src="images/dagger_item.png" alt="scrollUp" />
-
-
+    <!--<img id="scroll_btn" class="img-fluid" src="images/dagger_item.png" alt="scrollUp" />-->
     <!--Footer-->
     <footer class="footer-home text-center text-lg-start">
         <div class="text-center p-3">
@@ -182,6 +173,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script type="text/javascript">
+        $("#blacksmith_card").click(function () {
+            window.location.href = "blacksmith_store.html";
+        });
     </script>
 
 </body>

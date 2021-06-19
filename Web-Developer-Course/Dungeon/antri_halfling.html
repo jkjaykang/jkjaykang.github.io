@@ -21,14 +21,17 @@
 </head>
 <body>
     <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-home">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="navbar-brand ms-3" href="antri_home.html">
+                <img src="images/old_shield_item.png" alt="logo" width="40" height="40" />
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <!--<span class="navbar-toggler-icon"></span>-->
+                <img src="images/old_shield_item.png" alt="logo" width="30" height="30" />
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav abs-center-x">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="antri_home.html">Home</a>
                     </li>
@@ -37,46 +40,21 @@
                             Race
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="antri_human.html">Humans</a></li>
-                            <li><a class="dropdown-item active" href="#">Elves</a></li>
-                            <li><a class="dropdown-item" href="#">Dwarves</a></li>
+                            <li><a class="dropdown-item" href="antri_human.html">Human</a></li>
+                            <li><a class="dropdown-item" href="antri_elf.html">Elf</a></li>
+                            <li><a class="dropdown-item" href="antri_dwarf.html">Dwarf</a></li>
+                            <li><a class="dropdown-item active" href="antri_halfling.html">Halfling</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="antri_creatures.html">Wildlife</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="organizationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Organization
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="antri_map.html">World</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="worldDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            World
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dietyDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Deities
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="antri_deity.html">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="antri_deity.html">Deities</a>
                     </li>
                 </ul>
 
@@ -92,9 +70,9 @@
             </div>
         </div>
         <div class="row">
-            <div data-aos="fade-in" class="col-sm-5 text-center">
+            <div data-aos="zoom-in" class="col-sm-5 text-center">
                 <img class="img-fluid" id="body_illus" src="images/halfling_ita.png" />
-                <p class="fw-bold">Vera, an elven mage</p>
+                <p class="fw-bold">Ita Chul, halfling blacksmith</p>
             </div>
             <div data-aos="fade-left" class="col mt-5">
                 <h3 class="fst-italic">
@@ -103,7 +81,8 @@
                 <p class="fst-italic text-end">-Passerby who envoked the wrath of a halfling</p>
 
                 <p class="mt-3 ms-3">
-                    Short and stout, and great at making teapots (and anything in general), halflings are one of the common races that are scattered throughout most settlement. Halflings, on average,
+                    Short and stout, and great at making teapots (and anything in general), halflings are one of the common races that are scattered throughout most settlement. Related to dwarves,
+                    halflings are descendents of dwarves who were exposed to the Hemiad Explosion. Halflings, on average,
                     tend to live a bit longer than humans, and often remain much healthier and lively than an older human. Despite their short stature which average between 4 to 4 and a half
                     feet, halflings are deceptively heavy and strong, and are easily able to match the strength of a human or an elf twice their size.
                 </p>
@@ -111,7 +90,7 @@
                     Halflings in general are extremly socialble and friendly, and even gullible. They will often fall for ridiculous lies and stories, to amusement of many
                     tricksters. While halflings tend to be a target of many friendly jokes and pranks, almost no one dares to antagonize a halfling. Halflings are prideful to a fault
                     and have a notoriously short fuse when insulted, in fact, most bar fights that can involve a halfling will involve one. Many who have been attacked by a halfling
-                    describe the experience as "being mauled by a compressed bear".
+                    describe the experience as "being mauled by a compact bear".
                 </p>
 
                 <p class="mt-3 ms-3">
@@ -125,58 +104,39 @@
         <div class="row">
             <div data-aos="fade-right" class="col mt-5">
                 <h3 class="fst-italic">
-                    "Elves mastery and knowledge of magic is vast, too vast."
+                    "They say while a human child plays with blocks, a halfling child plays with hammer and tongs. Great crafters, maybe not so great parents."
                 </h3>
-                <p class="fst-italic text-end">-Hall Rootgrass, adventurer</p>
+                <p class="fst-italic text-end">-Damain Lepa, "on halflings"</p>
 
                 <p class="mt-3 ms-3">
-                    Halflings are master crafters 
+                    Halflings are masters at making almost anything. Clothes weaved by a halfling are the comftiest, swords forged by a halfling cuts the best, and
+                    a clock crafted by a halfling is never wrong. Most halflings make their living as some sort of crafters, and often become mentors at guilds after
+                    gathering experience. Perfectonists due to the love for their craft and their prideful nature, it is often said that a halfling master scraps a hundred times
+                    before finishing a work.
                 </p>
                 <p class="mt-3 ms-3">
-                    The most famous trait of Elves (besides their ear) is longevity. Elves do not age like humans or halflings. Once reaching
-                    adulthood their physical appearance does not change. They are by no means immortal, as they are susceptible to wounds and diseases
-                    just like humans and halflings, but they do possess a much faster regenerative rate. Scholars believe this regenerative power to be the cause
-                    for elves inability to age. They also possess an incredible appetite, which started a common misconception that they are vegetarians, as most elves
-                    cannot simply afford a diet that consists of meat without emptying their savings by the end of the week.
+                    Due to their renown, figures such as kings and heroes will request a halfling master to craft something. More often than not, they are met with an apology
+                    or a flat refusal along the lines of "don't feel like it", but if they do accept a request, their work often goes down in history. Be it the sword that slew
+                    the great monster or the shield of a legendary king, it will often have a signature of a halfling engraved on it.
                 </p>
 
 
             </div>
-            <div data-aos="fade-in" class="col-sm-5 text-center">
-                <img class="img-fluid" src="images/elf_magic.png" />
-                <p class="fw-bold">test image, test caption</p>
+            <div data-aos="zoom-in-left" class="col-sm-5 text-center">
+                <img class="img-fluid" src="images/halfling_crafting.png" />
+                <p class="fw-bold">No anvil is safe from a halfling's relentless strikes</p>
             </div>
         </div>
 
-        <div class="row">
-            <div data-aos="fade-in" class="col-sm-5 text-center">
-                <img class="img-fluid" src="images/elf_crest.png" />
-                <p class="fw-bold">test image, test caption</p>
-            </div>
 
-            <div data-aos="fade-left" class="col mt-5">
-                <h3 class="fst-italic">
-                    "People always look up to Elves for being master magicians and whatnot,
-                    but if you get to live that long, you <span class="fw-bold">have</span> to be a master at something"
-                </h3>
-                <p class="fst-italic text-end">-Hall Rootgrass, adventurer</p>
-
-                <p class="mt-3 ms-3">
-                    Elves are a fascinating race of people. Even putting aside their culture and history, they are a biological marvel.
-                    They were originally spirits handcrafted by the goddesss Herna, but after the great explosion, slowly began to resemble humans and their form. Currently,
-                    their outward apperance is almost indistinguisable from a human besides their signature pointed ears.
-                </p>
-                <p class="mt-3 ms-3">
-                    The most famous trait of Elves (besides their ear) is longevity. Elves do not age like humans or halflings. Once reaching
-                    adulthood their physical appearance does not change. They are by no means immortal, as they are susceptible to wounds and diseases
-                    just like humans and halflings, but they do possess a much faster regenerative rate. Scholars believe this regenerative power to be the cause
-                    for elves inability to age. They also possess an incredible appetite, which started a common misconception that they are vegetarians, as most elves
-                    cannot simply afford a diet that consists of meat without emptying their savings by the end of the week.
-                </p>
-            </div>
-        </div>
     </div>
 
+    <!--Footer-->
+    <footer class="footer-home text-center text-lg-start">
+        <div class="text-center p-3">
+            Contact me at: jkjaykang@gmail.com
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 

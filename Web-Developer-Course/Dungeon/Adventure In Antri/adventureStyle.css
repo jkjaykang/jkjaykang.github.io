@@ -1,0 +1,1055 @@
+﻿@font-face {
+    font-family: goblin;
+    src: url("fonts/Goblin.otf");
+}
+
+body{
+    font-family: goblin, Arial;
+
+    margin: 0;
+    padding: 0;
+}
+
+button{
+    font-family: goblin, Arial;
+    border: none;
+    background-color: white;
+    font-size: 1.5vh;
+}
+
+button:hover{
+    background-color:lightgray;
+    cursor:pointer;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.ui-tooltip {
+    background-color: #F7F3E3;
+    box-shadow: 0 0 7px #2B2118;
+    border-radius: 0;
+    font: 1vh goblin;
+    color: black;
+}
+
+.tooltip-content {
+    font-size: 0.5vh;
+}
+
+.tooltip_attached{
+    cursor: pointer;
+}
+
+.tooltip_attached:hover{
+    color: gray;
+}
+
+/*title and footer*/
+#title_bar{
+    grid-area: tb;
+
+    text-align: center;
+    font-size: 3vh;
+
+    background-color: #3E2114;
+
+    height: 5vh;
+    width: 100vw;
+}
+
+#footer_bar{
+    grid-area: fb;
+
+    text-align: center;
+    font-size: 1.5vw;
+
+    background-color: #3E2114;
+
+    width: 100vw;
+
+}
+
+#footer_bar button{
+    font-size: 1vh;
+}
+
+
+
+
+/*Styling for containers*/
+.container{
+    
+}
+
+#whole_container{
+    background-color: #957964;
+
+    display: grid;
+
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: auto auto auto;
+
+    grid-template-areas:
+        "tb tb tb tb tb"
+        ". cc sc ic ."
+        "fb fb fb fb fb";
+
+    justify-content: center;
+
+    height: 100vh;
+    width: 100vw;
+
+}
+
+/*Everything character info/stat related*/
+#char_container {
+    grid-area: cc;
+
+    /*background-color: green;*/
+
+    width: 36vh;
+    height: 34vh;
+
+    margin-right: 3vh;
+    margin-top: 1vh;
+
+    display: grid;
+
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+
+    grid-template-areas:
+        "cgi"
+        "csc"
+        ".";
+}
+
+#char_general_info_container{
+    grid-area: cgi;
+
+    display: flex;
+    height: 14vh;
+}
+
+#char_status {
+    background-color: ghostwhite;
+    width: 21.9175vh;
+
+    border: solid 0.5vh;
+    border-color: #3e2114;
+    border-left: none;
+}
+
+#char_name{
+    margin-top: 1vh;
+    margin-left: 1vh;
+    margin-bottom: 0.5vh;
+
+    font-size: 2vh;
+}
+
+#lv{
+    margin-left: 1vh;
+    font-size: 1.25vh;
+}
+
+/*HP/EXP Bar*/
+.status_word{
+    width: 5vh;
+    margin-top: 1.2vh;
+    margin-left: 1vh;
+
+    font-size: 1.5vh;
+}
+
+.status_num{
+    position: absolute;
+    left: 25%;
+    top: 20%;
+
+    font-size: 1.5vh;
+}
+
+#hp_bar_container{
+    background-color: lightgray;
+
+    width: 15vh;
+    height: 3vh;
+    border-radius: 3px;
+
+    margin-top: 0.8vh;
+    margin-left: 0vh;
+
+    position: relative;
+}
+
+#hp_bar{
+    background-color: red;
+    width: 100%;
+    height: 100%;
+
+    border-radius: 3px;
+
+    font-size: 2vh;
+
+}
+
+#exp_bar_container {
+    background-color: lightgray;
+
+    width: 15vh;
+    height: 3vh;
+    border-radius: 3px;
+
+    margin-top: 0.8vh;
+    margin-left: 0vh;
+
+    position: relative;
+}
+
+#exp_bar {
+    background-color: yellow;
+    width: 0%;
+    height: 100%;
+
+    border-radius: 3px;
+
+    font-size: 2vh;
+}
+/*End of HP/EXP Bar*/
+
+#char_portrait{
+    position: relative;
+
+    background-color: #548687;
+}
+
+#char_portrait_img{
+    height: 13vh;
+    width: 13vh;
+
+    border: solid 0.5vh;
+    border-color: #3e2114;
+}
+
+#char_arm{
+    position: absolute;
+
+    background-color: gray;
+
+    top: 7%;
+    right: 5%;
+
+    font-size: 1.5vh;
+}
+
+#char_stat_container{
+    grid-area: csc;
+    
+    height: 13.3vh;
+    width: 35.4vh;
+
+    justify-content: center;
+
+    background-color: ghostwhite;
+
+    border: solid 0.5vh;
+    border-top: none;
+    border-color: #3e2114;
+}
+
+.char_stat{
+    width: 8vh;
+    text-align: center;
+    font-size: 2vh;
+}
+
+.char_stat_alt{
+    width: 8vh;
+    text-align: center;
+    font-size: 2vh;
+    display: none;
+    margin-left: 2vh;
+    margin-right: 2vh;
+}
+
+#toggle_stat_button{
+    width: 8vh;
+    
+}
+
+
+
+#backstory_button {
+    border: solid 0.5vh;
+    border-color: #3e2114;
+    border-bottom: none;
+
+    font-size: 1.5vh;
+    width: 36.4vh;
+    margin-right: 0.2vh;
+    border-radius: 0;
+}
+
+#backstory_container{
+    /*background-color: navajowhite;*/
+
+    height: 6vh;
+}
+
+#backstory {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    font-size: 1.5vh;
+    background-color: ghostwhite;
+
+    width: 35.4vh;
+
+    border: solid 0.5vh;
+    border-top: none;
+    border-color: #3e2114;
+}
+/*End of character info/stat related*/
+
+#inventory_container {
+    grid-area: ic;
+
+    background-color: #3e2114;
+
+    width: 36vh;
+    height: 44vh;
+
+    margin-left: 3vh;
+    margin-top: 1vh;
+
+}
+
+#inventory_buttons{
+    margin-top: 1vh;
+    margin-left: 1vh;
+    margin-right: 1vh;
+}
+
+#inventory_buttons button {
+    font-size: 0.7vh;
+    margin: 0;
+    float: left;
+    /*border: 1px outset white;*/
+    height: 3vh;
+    width: 6.8vh;
+}
+
+.active_inventory_button {
+    background-color: lightgray;
+}
+
+.inventory_tab {
+    /*margin-top: 3vh;*/
+    margin-left: 1vh;
+    margin-right: 1vh;
+
+    background-color: ghostwhite;
+
+    height: 36vh;
+    width: 34vh;
+
+    overflow: auto;
+}
+
+.inventory_tab .sortable{
+    background-color: gray;
+    margin-top: 1vh;
+    
+}
+
+.inventory_tab .sortable li{
+    font-size: 1.5vh;
+    background-color: yellow;
+
+    width: 15vh;
+    height: 2.5vh;
+
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
+
+    display: flex;
+    align-items: center;
+}
+
+#equip_container {
+    height: 36vh;
+    width: 34vh;
+
+    background-color: ghostwhite;
+    margin-right: 1vh;
+    margin-left: 1vh;
+
+    background-image: url("images/inventory/equip_tab.png");
+    background-size: 34vh;
+
+    position: relative;
+    margin-top: 4vh;
+}
+
+.equip_box{
+    width: 5vh;
+    height: 5vh;
+    background-color: turquoise;
+
+    position: absolute;
+
+    cursor: pointer;
+
+    z-index: 1;
+}
+
+#head_box{
+    top: 15%;
+    right: 42.5%;
+}
+
+#chest_box {
+    top: 40%;
+    right: 42.5%;
+}
+
+#weapon_box {
+    top: 55%;
+    right: 68%;
+}
+
+#jewel_box{
+    top: 55%;
+    right: 13%;
+}
+
+#feet_box {
+    top: 75%;
+    right: 42.5%;
+}
+
+#unequip_box{
+    width: 5vh;
+    height: 5vh;
+
+    position: absolute;
+
+    top: 75%;
+    right: 13%;
+
+    background-color: brown;
+
+    z-index: 0;
+
+}
+
+#weapons_container {
+    display: none;
+}
+
+#armor_container {
+    display: none;
+}
+
+#use_container {
+    display: none;
+}
+
+#misc_container{
+    display: none;
+}
+
+#gold_count{
+    text-align: right;
+    margin-top: 1vh;
+    margin-right: 2vh;
+    color: white;
+}
+
+#move_deck_container{
+    background-color: white;
+
+    margin-top: 4vh;
+
+    height: 25vh;
+    width: 34vh;
+
+}
+
+#move_deck_container ul{
+    margin-top: 5vh;
+    padding-top: 2vh;
+}
+
+#move_deck_container ul li{
+    font-size: 1vh;
+    margin-top: 0.5vh;
+    margin-left: 0.5vh;
+
+    width: 7vh;
+
+    background-color: gray;
+}
+
+#deck_buttons{
+    margin-top: 2vh;
+}
+
+#deck_buttons button{
+    font-size: 1vh;
+    margin: 0;
+    float: left;
+    height: 3vh;
+    width: 9vh;
+    border-right: solid 1px;
+}
+
+.active_deck_button{
+    background-color: lightgray;
+}
+
+#draw_pile{
+    display: none;
+}
+
+#discard_pile{
+    display: none;
+}
+
+#moves_list{
+
+}
+
+#moves_list li{
+    display: flex;
+}
+
+.move_count{
+    margin-left: 0.5vh;
+}
+
+#screen_container {
+    grid-area: sc;
+
+    background-color: azure;
+
+    width: 72vh;
+    height: 72vh;
+
+    margin-top: 1vh;
+
+    display: grid;
+    grid-template-areas:
+        "mc"
+        "dc";
+}
+
+#main_display_container{
+    grid-area: mc;
+
+    background-color: darkslategray;
+
+    border: solid 1vh;
+    border-color: #3e2114;
+
+    width: 72vh;
+    height: 54vh;
+}
+
+#dialogue_container {
+    grid-area: dc;
+
+    background-color: #758173;
+
+    border: solid 1vh;
+    border-top: none;
+    border-color: #3e2114;
+
+    /*Make sure to match screen_container*/
+    width: 72vh;
+    height: 18vh;
+
+    margin-bottom: 6vh;
+
+    display: flex;
+}
+
+#dialogue_portrait {
+    background-color: #548687;
+
+    height: 15vh;
+    width: 15vh;
+
+    /*border: solid 0.5vh;*/
+
+    text-align: center;
+}
+
+#dialogue_portrait img{
+    height: 15vh;
+    width: 15vh;
+    /*border: solid 0.5vh;*/
+}
+
+#dialogue_portrait p{
+    margin: 0;
+    padding: 0;
+
+    height: 2.4vh;
+
+    padding-top: 0.6vh;
+
+    background-color: ghostwhite;   
+   
+
+    font-size: 1.5vh;
+}
+
+#dialogue_text{
+    width: 56vh;
+    height: 18vh;
+
+    background-color: ghostwhite;
+
+    /*border: solid 0.5vh;*/
+    border-left: solid 1vh;
+    border-color: #3e2114;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#dialogue_text p{
+    width: 56vh;
+    height: 17vh;
+
+    font-size: 1.3vh;
+
+    margin: 0;
+    margin-top: 1.5vh;
+    margin-left: 0.5vh;
+}
+
+#dialogue_button_container{
+    text-align: right;
+    margin: 0;
+    margin-right: 2vh;
+    margin-bottom: 1vh;
+
+}
+
+/*Styling for different screen formats*/
+#content{
+    width: 72vh;
+    height: 54vh;
+}
+
+/*Start screen*/
+.start_screen{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+}
+
+/*Character select screen*/
+.char_select_screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row;
+
+    cursor: pointer;
+}
+
+.character_select_portrait {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.character_select_portrait:hover{
+    transform: scale(1.05);
+    box-shadow: 0px 0px 0.5vh rgba(0, 0, 0, 1);
+}
+
+.character_select_portrait img{
+    height: 14vh;
+    width: 14vh;
+    margin-left: 1vh;
+    margin-right: 1vh;
+    margin-top: 1vh;
+}
+
+.character_select_portrait p{
+    margin-top: 0.5vh;
+    margin-bottom: 1vh;
+    font-size: 1.25vh;
+}
+
+/*Character select info screen*/
+.character_select_info_screen{
+    display: grid;
+
+    font-size: 1vh;
+
+    grid-template-columns: 6vh 8vh 8vh 8vh 4vh 8vh 8vh 16vh 2vh;
+    grid-template-rows: 12vh 20vh 5vh 7vh 10vh;
+
+    grid-template-areas:
+        ". name name name name name name name name"
+        ". picture picture picture . backstory backstory backstory ."
+        ". picture picture picture . deck deck deck ."
+        ". stats stats stats . deck deck deck ."
+        ". traits traits traits . button button button ."
+}
+
+.select_info_name_container{
+    grid-area: name;
+
+    display: flex;
+
+    align-items: center;
+}
+
+.select_info_name_container p{
+    font-size: 4vh;
+}
+
+.select_info_image_container{
+    grid-area: picture;
+}
+
+.select_info_image_container img{
+    height: 24vh;
+    width: 24vh;
+}
+
+.select_info_backstory_container {
+    grid-area: backstory;
+}
+
+.select_info_stats_container {
+    grid-area: stats;
+
+    display:flex;
+    justify-content:center;
+}
+
+.select_info_traits_container {
+    grid-area: traits;
+}
+
+.select_info_deck_container {
+    grid-area: deck;
+}
+
+.select_info_button_container{
+    grid-area: button;
+}
+
+/*Map Screen*/
+.map_screen{
+
+}
+
+.map_container{
+    position: relative;
+}
+
+.map_marker{
+    position: absolute;
+}
+
+.map_marker img{
+    width: 6vh;
+    height: 6vh;
+}
+
+.map_marker :hover{
+    cursor: pointer;
+}
+
+#dungeon{
+    top: 20%;
+    right: 20%;
+    z-index: 1;
+}
+
+/*Event screen styling*/
+.event_screen{
+    width: 72vh;
+    height: 54vh;
+
+    background-color: #2b2b2b;
+
+}
+
+.event_title{
+   
+}
+
+.event_title p{
+    color: white;
+    
+    font-size: 2.5vh;
+
+    margin-left: 5vh;
+    margin-top: 5vh;
+    /*margin-bottom: 2vh;*/
+
+}
+
+.event_screen button{
+    color: white;
+
+    background-color: #535353;
+
+
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+
+    width: 35vh;
+    height: 5vh;
+
+    font-size: 1.2vh;
+}
+
+.event_screen button:hover{
+    background-color: #494949;
+}
+
+
+.event_image_container {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+
+    margin-left: 3vh;
+}
+
+.event_image_container img{
+    height: 30vh;
+    width: 30vh;
+
+    border: solid;
+
+    margin-top: 1vh;
+}
+
+.event_choice_container{
+    color: white;
+
+    font-size: 1.7vh;
+
+    font-family: 'Indie Flower', cursive;
+
+
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+
+    margin-left: 1.5vh;
+    margin-right: 0.5vh;
+    margin-top: 1vh;
+}
+
+/*Combat screen*/
+.combat_screen{
+    display: grid;
+
+    grid-template-columns: 3vh 22vh 22vh 22vh 3vh;
+    grid-template-rows: auto auto auto 7.5vh 7.5vh;
+    grid-template-areas:
+        ". an an an ."
+        ". . . . ."
+        ". e1 e2 e3 ."
+        ". ph ph ph ."
+        ". ph ph ph .";
+
+}
+
+#area_name{
+    grid-area: an;
+    text-align: center;
+
+}
+
+#area_name p{
+    font-size: 2vh;
+
+    margin-top: 2vh;
+}
+
+.intent{
+    text-align: center;
+    font-size: 1.5vh;
+}
+
+#intent_1{
+}
+
+#intent_2{
+}
+
+#intent_3{
+}
+
+.enemy{
+    text-align: center;
+}
+
+.enemy img{
+    width: 15vh;
+    height: 15vh;
+}
+
+.enemy_active{
+    box-shadow: 0 0 7px #2B2118;
+}
+
+
+#enemy_1{
+    grid-area: e1;
+}
+
+#enemy_2{
+    grid-area: e2;
+}
+
+#enemy_3{
+    grid-area: e3;
+}
+
+.enemy_health{
+    text-align: center;
+    font-size: 1.5vh;
+}
+
+#enemy_health_1{
+}
+
+#enemy_health_2 {
+}
+
+#enemy_health_3 {
+}
+
+.enemy_armor{
+    font-size: 1.5vh;
+    text-align: center;
+    color: gray;
+}
+
+.player_hand{
+    grid-area: ph;
+    background-color: gray;
+
+    height: 15vh;
+
+    margin-left: 2vh;
+    margin-right: 2vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    position: relative;
+}
+
+#action_points{
+    position: absolute;
+
+    top: 55%;
+    right: 90%;
+}
+
+#end_turn_button {
+    position: absolute;
+    
+    top: 65%;
+    right: -5%;
+
+    z-index: 1;
+}
+
+.move_card{
+    height: 12vh;
+    width: 8vh;
+
+    font-size: 1vh;
+
+    margin-left: 1vh;
+    margin-right: 1vh;
+
+    background-color: white;
+}
+
+/*General classes*/
+.right_align {
+    text-align: right;
+}
+
+.center_align{
+    text-align: center;
+}
+
+.margin_1vh{
+    margin: 1vh;
+    
+}
+
+.margin_t_0 {
+    margin-top: 0;
+}
+
+.fill_screen{
+    width: 72vh;
+    height: 54vh;
+}
+
+.flex_container {
+    display: flex;
+}
+
+/*Collapsible*/
+.collapsible_button:after {
+    content: '+';
+    float: right;
+}
+
+.collapsible_button_active:after {
+    content: "-";
+}
+
+
+/*Dialogue text colors*/
+.yellow{
+    color: yellow;
+}
+
+/*Transition Effect*/
+.transition_effect{
+    background-color: black;
+    
+    width: 0vh;
+    height: 54vh;
+    position: absolute;
+}
+
+/*Testing*/
+#test_sell_box{
+    height: 5vh;
+    width: 5vh;
+    font-size: 1vh;
+    background-color: white;
+    position: absolute;
+    top: 80%;
+    right: 20%;
+}

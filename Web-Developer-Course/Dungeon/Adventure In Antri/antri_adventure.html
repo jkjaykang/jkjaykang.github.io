@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Adventure In Antri</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="images/favicon/shield_item.png" />
+    <link href="jquery_ui/jquery-ui.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+    </script>
+    <script src="jquery_ui/jquery-ui.js"></script>
+    <script src="adventureScript.js"></script>
+    <link rel="stylesheet" type="text/css" href="adventureStyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Container for everything -->
+    <div id="whole_container" class="container">
+
+        <!-- title bar -->
+        <div id="title_bar">
+            Adventure In Antri
+        </div>
+
+        <!-- Container for Character stats/info section -->
+        <div id="char_container" class="container">
+
+            <!-- Container for character portrait, HP, EXP -->
+            <div id="char_general_info_container" class="container">
+                <div id="char_portrait">
+                    <img id="char_portrait_img" src="images/char_portrait/Ita/Ita_idle.png" alt="ita_idle" />
+                </div>
+
+                <div id="char_status">
+                    <div id="char_name">
+                        Ita Chul
+                    </div>
+
+                    <div id="lv">
+                        Lv. 5
+                    </div>
+
+                    <div class="flex_container">
+                        <div class="status_word">HP:</div>
+                        <div id="hp_bar_container">
+                            <div id="hp" class="status_num">
+                                20/20
+                            </div>
+
+                            <div id="hp_bar">
+
+                            </div>
+
+                            <p id="char_arm">0</p>
+                        </div>
+                    </div>
+
+
+                    <div class="flex_container">
+                        <div class="status_word">XP:</div>
+                        <div id="exp_bar_container">
+                            <div id="exp" class="status_num">
+                                0/30
+                            </div>
+
+                            <div id="exp_bar">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--<button id="hp_test_button">HP Test!</button>-->
+                </div>
+            </div>
+
+            <div id="char_stat_container" class="flex_container">
+                <div class="char_stat">
+                    <p class="tooltip_attached" title="Strength determines, well, how strong you are">STR</p>
+                    <p id="char_str">2</p>
+                </div>
+                <div class="char_stat">
+                    <p class="tooltip_attached" title="Yeah slippery, peppery">DEX</p>
+                    <p id="char_dex">2</p>
+                </div>
+                <div class="char_stat">
+                    <p class="tooltip_attached" title="Brain think, that good">INT</p>
+                    <p id="char_int">2</p>
+                </div>
+                <div class="char_stat">
+                    <p class="tooltip_attached" title="Silver tongue, yada yada">CHR</p>
+                    <p id="char_chr">3</p>
+                </div>
+                <div class="char_stat_alt">
+                    <p class="tooltip_attached" title="How the universe views you">KAR</p>
+                    <p id="char_kar">High</p>
+                </div>
+                <div class="char_stat_alt">
+                    <p class="tooltip_attached" title="How people view you">REP</p>
+                    <p id="char_rep">High</p>
+                </div>
+            </div>
+
+            <!--<div class="right_align">
+                <button id="toggle_stat_button">Swap</button>
+            </div>-->
+            
+
+            <div id="backstory_container">
+
+                <div class="right_align">
+                    <button id="backstory_button" class="collapsible_button">Backstory/Traits </button>
+                </div>
+
+
+
+                <div id="backstory">
+                    <p id="backstory_text">
+                        Ita Chul is a halfling blacksmith. She might not be that experienced, but she shows great promise!.
+                        It sure is fun to be a blacksmith eh? Pays well too. Is she unionized or is that a human concept?
+                    </p>
+
+                    <p>Traits:</p>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <!-- Container for Inventory/Misc section -->
+        <div id="inventory_container" class="container">
+            <div id="inventory_buttons">
+                <button id="equip_button" class="inventory_button active_inventory_button">equip</button>
+                <button id="weapons_button" class="inventory_button">weapons</button>
+                <button id="armor_button" class="inventory_button">armor</button>
+                <button id="use_button" class="inventory_button">use</button>
+                <button id="misc_button" class="inventory_button">misc</button>
+            </div>
+
+            <div id="inventory_screen_container">
+                <div id="equip_container">
+                    <!--<div class="equip_box draggable" id="head_box"></div>
+            <div class="equip_box draggable" id="chest_box"></div>
+            <div class="equip_box draggable" id="weapon_box"></div>
+            <div class="equip_box draggable" id="jewel_box"></div>
+            <div class="equip_box draggable" id="feet_box"></div>-->
+                    <div id="unequip_box">tr</div>
+                </div>
+                <div id="weapons_container" class="inventory_tab">
+                    <ul id="weapons_list" class="sortable">
+                        <!--<li class="sword weapon">
+                    Sword
+                    <button class="item_equip_button">E</button>
+                </li>-->
+                    </ul>
+                </div>
+                <div id="armor_container" class="inventory_tab">
+                    <ul id="armor_list" class="sortable">
+                    </ul>
+                </div>
+                <div id="use_container" class="inventory_tab">
+                    <ul id="use_list" class="sortable">
+                    </ul>
+                </div>
+                <div id="misc_container" class="inventory_tab">
+                    <ul id="misc_list" class="sortable">
+                    </ul>
+                </div>
+            </div>
+
+            <div id="gold_count">
+                Gold: 0
+            </div>
+
+            <div id="deck_buttons">
+                <button id="draw_pile_button" class="deck_button">Draw pile</button>
+                <button id="discard_pile_button" class="deck_button">Discard pile</button>
+                <button id="deck_list_button" class="deck_button active_deck_button">Deck List</button>
+            </div>
+
+            <div id="move_deck_container">
+                <ul id="draw_pile">
+                    
+                </ul>
+                <ul id="discard_pile">
+                    
+                </ul>
+                <ul id="moves_list" class="sortable">
+                    
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Container for the game screen section -->
+        <div id="screen_container" class="container">
+            
+            <!-- Container for the main display section -->
+            <div id="main_display_container" class="container">
+                <div class="transition_effect">
+
+                </div>
+
+                <div id="content" class="start_screen">
+                    <div>
+                        <p>Adventure In Antri</p>
+                    </div>
+                    <div>
+                        <button class="choice change_slide char_select_sli">START!</button>
+                    </div>
+                </div>
+
+                
+
+
+                <!--<div id="content" class="combat_screen">
+                    <div id="area_name">
+                        <p>Caves I</p>
+                    </div>
+
+                    <div id="enemy_1" class="enemy slime_1">
+                        <div id="intent_1" class="intent">
+                            Attack
+                        </div>
+                        <img src="images/enemy/test_enemy.png" alt="enemy1" />
+                        <div id="enemy_health_1" class="enemy_health">
+                            10
+                        </div>
+                        <div id="enemy_armor_1" class="enemy_armor">
+                            0
+                        </div>
+                    </div>
+
+                    <div id="enemy_2" class="enemy slime_2">
+                        <div id="intent_2" class="intent">
+                            Block
+                        </div>
+                        <img src="images/enemy/test_enemy.png" alt="enemy1" />
+                        <div id="enemy_health_2" class="enemy_health">
+                            10
+                        </div>
+                        <div id="enemy_armor_2" class="enemy_armor">
+                            0
+                        </div>
+                    </div>
+
+                    <div id="enemy_3" class="enemy slime_3">
+                        <div id="intent_3" class="intent">
+                            Attack
+                        </div>
+                        <img src="images/enemy/test_enemy.png" alt="enemy1" />
+                        <div id="enemy_health_3" class="enemy_health">
+                            10
+                        </div>
+                        <div id="enemy_armor_3" class="enemy_armor">
+                            0
+                        </div>
+                    </div>
+
+                    <div class="player_hand">
+                        <div id="action_points">4/4</div>
+                        
+                        <button id="end_turn_button">End turn</button>
+                        
+                    </div>
+                </div>-->
+
+            </div>
+
+
+            <!-- Container for the dialogue section -->
+            <div id="dialogue_container" class="container">
+                <div id="dialogue_portrait">
+                    <img id="dialogue_portrait_image" src="images/char_portrait/Ita/Ita_laughing.gif" alt="dialogue_portrait" />
+                    <p id="dialogue_portrait_name">Ita Chul</p>
+                </div>
+                <div id="dialogue_text">
+                    <p id="dialogue_content">
+                        Yea, I'm talking. This is a test text y'know? Yes yes?
+                    </p>
+                    <div id="dialogue_button_container">
+                        <button id="back_dialogue_button">&#11164</button>
+                        <button id="forward_dialogue_button">&#11166</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- footer bar -->
+        <div id="footer_bar">
+            These buttons are for testing purposes. Huzzah bug fixing!
+            <div>
+                <button id="hp_test_button">HP bar test</button>
+                <button id="exp_test_button">XP bar test</button>
+                <button id="replace_content_button">Replace screeen content test</button>
+                <button id="add_sword_button">Add a sword</button>
+                <button id="add_dagger_button">Add a dagger</button>
+                <button id="console_item_button">Console log inventory</button>
+                <button id="console_equip_button">Console log equipment</button>
+                <button id="console_previous">Console previous slide</button>
+                <button id="console_stats">Console various stats</button>
+                <button id="test_dialogue_button">Trigger test dialogue</button>
+                <button id="update_deck_button">Update deck</button>
+                <button id="draw_button">Draw 1</button>
+                <button id="draw_3_button">Draw 3</button>
+                <button id="start_combat_button">Start test combat</button>
+                <button id="transition_button">Start transition</button>
+                <!--<div id="test_sell_box">"sell" it</div>-->
+            </div>
+            
+        </div>
+
+    </div>
+
+
+</body>
+</html>

@@ -12,6 +12,24 @@ var itaStartTemplate = {
     traits: ["strong_willed", "talented", "clumsy"]
 }
 
+var veraStartTemplate = {
+    name: "Vera Daran",
+    portrait: "images/char_portrait/Vera/Vera_idle.png",
+    hp: 15,
+    exp: 10,
+    str: 4,
+    dex: 5,
+    int: 7,
+    chr: 4,
+    backstory: `Studying a rather peculiar field of magic, Vera is an avid conoisseur of everything to do with fear.
+                While she claims she is studying fear magic to help people get over their fears, she seems to find
+                an awful amount of joy making a bandit or a monster run away crying.Due to the amount of scary stories
+                she reads to research fear doesn't help her fall asleep, resulting in the bags under her eyes.`,
+    traits: ["magical_aptitude", "insomniac"],
+    items: ["wooden_staff"],
+    skills: ["ball_o_fear"]
+}
+
 var previous_slide;
 
 
@@ -30,7 +48,8 @@ var expStat = {
 
 var weaponInventory = {
     sword: 0,
-    dagger: 0
+    dagger: 0,
+    wooden_staff: 0,
 }
 
 var armorInventory = {
@@ -45,6 +64,13 @@ var miscInventory = {
     key: 0
 }
 
+var cardModifier = {
+    strike_count: 5,
+    defend_count: 5
+}
+
+var playerGold = 0;
+
 var equippedItem = {
     head: "None",
     chest: "None",
@@ -53,9 +79,12 @@ var equippedItem = {
     feet: "None",
 }
 
-var moveDeck = ["strike", "strike", "strike", "defend", "defend", "defend", "special"]
+var moveDeck = [];
+
+var playerSkills = []
 
 //Variables for combat 
+var currentCombat = "intro";
 var combatDrawPile = moveDeck;
 var combatDiscardPile = [];
 
@@ -66,21 +95,24 @@ var combat_turn = 0;
 
 var enemies_stat = {
     enemy_1: {
-        health: 10,
-        max_health: 10,
-        armor: 0
+        health: 0,
+        max_health: 0,
+        armor: 0,
+        alive: false
     },
 
     enemy_2: {
-        health: 10,
-        max_health: 10,
-        armor: 0
+        health: 0,
+        max_health: 0,
+        armor: 0,
+        alive: false
     },
 
     enemy_3: {
-        health: 10,
-        max_health: 10,
-        armor: 0
+        health: 0,
+        max_health: 0,
+        armor: 0,
+        alive: false
     }
     
 }
@@ -100,25 +132,68 @@ var traitsDict = {
     clumsy: {
         name: "clumsy",
         description: 'Geez am clumsy'
+    },
+    magical_aptitude: {
+        name: "magical aptitude",
+        description: "Spell cards deal more damage"
+    },
+    insomniac: {
+        name: "insomniac",
+        description: "Heal less at taverns"
     }
 }
 
-var weaponsDict = {
+var itemDict = {
     sword: {
         name: 'Sword',
-        description: 'Standard sword. Sharp!'
+        description: 'Standard sword. Sharp!',
+        cost: 20,
+        type: "weapon",
+        card: "strike",
     },
 
     dagger: {
         name: 'Dagger',
-        description: 'Small, concealable weapon. Sharp!'
+        description: 'Small, concealable weapon. Sharp!',
+        cost: 15,
+        type: "weapon",
+        card: "strike"
+    },
+
+    wooden_staff: {
+        name: 'Wooden staff',
+        description: 'This is basically just a big stick. Attack: staff strike',
+        cost: 10,
+        type: "weapon",
+        card: "staff_strike"
     }
 }
 
 var moves = {
     strike: { type: "attack", value: 5, cost: 1},
     defend: { type: "defend", value: 5, cost: 1},
-    special: { type: "attack", value: 10, cost: 2}
+    special: { type: "attack", value: 10, cost: 2 },
+    staff_strike: {
+        name: "staff strike",
+        type: "attack",
+        value: 5,
+        cost: 1,
+        description: "Vera strikes with her staff dealing damage"
+        },
+    protect: {
+        name: "protect",
+        type: "defend",
+        value: 5,
+        cost: 1,
+        description: "Vera casts a protective spell, blocking damage for the turn"
+    },
+    ball_o_fear: {
+        name: "Ball-o-fear",
+        type: "aoe",
+        value: 5,
+        cost: 2,
+        description: "Vera lobs a solidified ball of fear, dealing damage to all enemies"
+    }
 }
 
 var enemies = {
@@ -140,16 +215,32 @@ var enemies = {
     }
 }
 
+var combat = {
+    intro: {
+        area: "Caves I",
+        enemies: ["slime_2"],
+        reward: ["gold"]
+    }
+}
 
 
 //Game Dialogue Dictionary
 var dialogueDict = {
-    test_dialogue: [["narrator", "narrator", "narrator", "narrator"],
-        ["images/char_portrait/Ita/Ita_idle.png", "images/char_portrait/Ita/Ita_idle.png", "images/char_portrait/Ita/Ita_idle.png", "images/char_portrait/Ita/Ita_laughing.gif"],
-        ["This is a test dialogue, part1", "This is the next slide, part 2 to be exact", "This is the most-awaited slide 3", "This is the final slide. Go home."]],
-    intro_dialogue_vera: [["Vera", "Vera"], 
-        ["images/char_portrait/Ita/Ita_idle.png", "images/char_portrait/Ita/Ita_idle.png"],
-        ["Intro, expositon yea!", "How about you do some sprite work now huh?"]],
+    //test_dialogue: [["narrator", "narrator", "narrator", "narrator"],
+    //    ["images/char_portrait/Ita/Ita_idle.png", "images/char_portrait/Ita/Ita_idle.png", "images/char_portrait/Ita/Ita_idle.png", "images/char_portrait/Ita/Ita_laughing.gif"],
+    //    ["This is a test dialogue, part1", "This is the next slide, part 2 to be exact", "This is the most-awaited slide 3", "This is the final slide. Go home."]],
+    intro_dialogue_vera: {
+        speaker: ["Vera", "Vera", "Vera", "Vera", "Vera", "Vera", "Vera", "Vera"],
+        image: ["images/char_portrait/Vera/Vera_annoyed.png", "images/char_portrait/Vera/Vera_annoyed.png",
+            "images/char_portrait/Vera/Vera_idle.png", "images/char_portrait/Vera/Vera_idle.png", "images/char_portrait/Vera/Vera_intro_suprised.png", "images/char_portrait/Vera/Vera_idle.png",
+            "images/char_portrait/Vera/Vera_idle.png", "images/char_portrait/Vera/Vera_idle.png"],
+        quote: ["Ow, that's one nasty headache...", "What happened? Did I faint? What was in that food?", "Wait... What am I feeling right now? I feel a bit less knowledgable...?",
+            "Lets see...", "Level 1??!", "Why'd I bother going to university?", "Well. What can you do? Perks of being an elf, time is of little concern.", "But if I'm level one...",
+            "Yup, all my equipment is gone too.", "Huh, I think I feel something in my weapons tab...(Switch to the weapon tab by clicking the 'weapons' button)",
+            "Better than nothing, Let's equip it by clicking the equip(e) button", "Next is the 'deck list'...", "Yea, not much of my skills remain.",
+            "I guess I should try going to a dungeon to see how weak I've really gotten.", "The cave next to the desert... That's a beginner dungeon I think? (Click on the cave)"],
+        function: ["None", "None", "None", "show_char_stat", "None", "None", "None", "show_inventory"]
+    }
 }
 
 var currentDialogue = "None";
@@ -167,12 +258,21 @@ $(function () {
 
     //Set up dialogue functionality
     function startDialogue(dialogueKey) {
+
+        $("#dialogue_container").slideDown({
+            start: function () {
+                $("#dialogue_container").css({
+                    display: "flex"
+                })
+            }
+        });
+
         currentDialogue = dialogueKey;
         currentDialogueSlide = 0;
-        currentDialogueMax = dialogueDict[dialogueKey][2].length;
-        $("#dialogue_portrait_name").html(dialogueDict[dialogueKey][0][0]);
-        $("#dialogue_portrait_image").attr("src", dialogueDict[dialogueKey][1][0]); 
-        $("#dialogue_content").html(dialogueDict[dialogueKey][2][0]);
+        currentDialogueMax = dialogueDict[dialogueKey].quote.length;
+        $("#dialogue_portrait_name").html(dialogueDict[dialogueKey].speaker[0]);
+        $("#dialogue_portrait_image").attr("src", dialogueDict[dialogueKey].image[0]); 
+        $("#dialogue_content").html(dialogueDict[dialogueKey].quote[0]);
     }
 
     $("#back_dialogue_button").click(function () {
@@ -180,9 +280,9 @@ $(function () {
         if (currentDialogue != "None") {
             if (currentDialogueSlide != 0) {
                 currentDialogueSlide -= 1;
-                $("#dialogue_portrait_name").html(dialogueDict[currentDialogue][0][currentDialogueSlide]);
-                $("#dialogue_portrait_image").attr("src", dialogueDict[currentDialogue][1][currentDialogueSlide]);     
-                $("#dialogue_content").html(dialogueDict[currentDialogue][2][currentDialogueSlide]);
+                $("#dialogue_portrait_name").html(dialogueDict[currentDialogue].speaker[currentDialogueSlide]);
+                $("#dialogue_portrait_image").attr("src", dialogueDict[currentDialogue].image[currentDialogueSlide]);     
+                $("#dialogue_content").html(dialogueDict[currentDialogue].quote[currentDialogueSlide]);
             }
         }
     });
@@ -198,13 +298,47 @@ $(function () {
                 $("#dialogue_portrait_image").attr("src", "images/dialogue/empty_dialogue.png");
                 $("#dialogue_portrait_name").html("")
                 $("#dialogue_content").html("");
+                $("#dialogue_container").slideUp();
             } else {
-                $("#dialogue_portrait_name").html(dialogueDict[currentDialogue][0][currentDialogueSlide]);
-                $("#dialogue_portrait_image").attr("src", dialogueDict[currentDialogue][1][currentDialogueSlide]);    
-                $("#dialogue_content").html(dialogueDict[currentDialogue][2][currentDialogueSlide]);
+                $("#dialogue_portrait_name").html(dialogueDict[currentDialogue].speaker[currentDialogueSlide]);
+                $("#dialogue_portrait_image").attr("src", dialogueDict[currentDialogue].image[currentDialogueSlide]);    
+                $("#dialogue_content").html(dialogueDict[currentDialogue].quote[currentDialogueSlide]);
+
+                switch (dialogueDict[currentDialogue].function[currentDialogueSlide]) {
+                    case "None":
+                        break;
+                    case "show_char_stat":
+                        show_char_stat();
+                        break;
+                    case "show_inventory":
+                        show_inventory();
+                        break;
+                }
             }
         }
     });
+
+    function show_char_stat() {
+        $("#char_container").fadeIn({
+            start: function () {
+                $("#char_container").css({
+                    display: "grid"
+                })
+            }
+
+        });
+    }
+
+    function show_inventory() {
+        $("#inventory_container").fadeIn({
+            start: function () {
+                //$("#inventory_container").css({
+                //    //display: "flex"
+                //})
+            }
+        });
+    }
+
 
     //Set up toggle between inventory buttons
     $(document).on("click", ".inventory_button", function () {
@@ -323,9 +457,11 @@ $(function () {
                 break;
             case "chest":
                 chestInventory[itemClass] -= 1;
+                addDefense(itemClass);
                 break;
             case "weapon":
                 weaponInventory[itemClass] -= 1;
+                addStrike(itemClass);
                 break;
             case "jewel":
                 jewelInventory[itemClass] -= 1;
@@ -334,6 +470,25 @@ $(function () {
                 feetInventory[itemClass] -= 1;
                 break;
         }
+
+        updateDeckUI();
+    }
+
+    function addStrike(itemClass) {
+        for (var i = 0; i < cardModifier.strike_count; i++) {
+            moveDeck.push(itemDict[itemClass].card);
+        }
+    }
+
+    function addDefense(itemClass) {
+        for (var i = 0; i < cardModifier.defense_count; i++) {
+            moveDeck.push(itemDict[itemClass].card);
+        }
+        
+    }
+
+    function updateSkill() {
+        moveDeck.push.apply(moveDeck, playerSkills);
     }
 
     function unequipItem(equipBox, itemClass) {
@@ -374,50 +529,59 @@ $(function () {
         
     }
 
-    function addItem(itemClass, equipSlot) {
-        var name = weaponsDict[itemClass].name;
+    function addItem(itemClass, itemType) {
+        var name = itemDict[itemClass].name;
+        var description = itemDict[itemClass].description;
 
-        switch (equipSlot) {
+        switch (itemType) {
             case "head":
                 $("#armor_list").append(`
-                    <li class=\x22`+ itemClass + ` head\x22>` + name + `
-                        <button class="item_equip_button">E</button>
+                    <li class=\x22`+ itemClass + ` head\x22 title = \x22 ` + description + `\x22><p>` + name + `
+                        </p><button class="item_equip_button">E</button>
                     </li>
                 `);
                 break;
             case "chest":
                 $("#armor_list").append(`
-                    <li class=\x22`+ itemClass + ` chest\x22>` + name + `
-                        <button class="item_equip_button">E</button>
+                    <li class=\x22`+ itemClass + ` chest\x22> title = \x22 ` + description + `\x22><p>` + name + `
+                        </p><button class="item_equip_button">E</button>
                     </li>
                 `);
                 break;
             case "weapon":
                 $("#weapons_list").append(`
-                    <li class=\x22`+ itemClass + ` weapon\x22>` + name + `
-                        <button class="item_equip_button">E</button>
+                    <li class=\x22`+ itemClass + ` weapon\x22 title = \x22 ` + description + `\x22><p>` + name + `
+                        </p><button class="item_equip_button">E</button>
                     </li>
                 `);
                 break;
             case "jewel":
                 $("#armor_list").append(`
-                    <li class=\x22`+ itemClass + ` jewel\x22>` + name + `
-                        <button class="item_equip_button">E</button>
+                    <li class=\x22`+ itemClass + ` jewel\x22> title = \x22 ` + description + `\x22><p>` + name + `
+                        </p><button class="item_equip_button">E</button>
                     </li>
                 `);
                 break;
             case "feet":
                 $("#armor_list").append(`
-                    <li class=\x22`+ itemClass + ` feet\x22>` + name + `
-                        <button class="item_equip_button">E</button>
+                    <li class=\x22`+ itemClass + ` feet\x22> title = \x22 ` + description + `\x22><p>` + name + `
+                        </p><button class="item_equip_button">E</button>
                     </li>
                 `);
                 break;
         }
+
+        weaponInventory[itemClass] += 1;
+    }
+
+    function addGold(amount) {
+        playerGold += amount;
+        $("#gold_count").html("Gold: " + playerGold);
     }
 
     function addEquipBox(itemClass, equipSlot) {
-        $("#equip_container").append("<div class=\x22equip_box draggable " + itemClass + "\x22 id=\x22" + equipSlot + "_box\x22></div>");
+        var description = itemDict[itemClass].description;
+        $("#equip_container").append("<div class=\x22equip_box draggable " + itemClass + "\x22 id=\x22" + equipSlot + "_box\x22 title = \x22"+description+"\x22>" + "<img src=\x22images/items/" + itemClass +".png\x22/></div>");
     }
 
     //Set up combat and combat screen
@@ -459,7 +623,7 @@ $(function () {
 
     });
 
-    updateDeck();
+    
 
     function startCombat() {
         combatDrawPile = moveDeck;
@@ -471,7 +635,10 @@ $(function () {
         //Display intenet for each enemy
         $(".enemy").each(function (i) {
             var classArr = $(this).attr('class').split(' ');
+
+            //classArr[1] is the enemy name/type ex) slime_2
             displayIntent(this.id, classArr[1], combat_turn);
+            initializeEnemyStats(this.id, classArr[1]);
         });
     }
 
@@ -517,18 +684,19 @@ $(function () {
         $("#discard_pile").empty();
     }
 
-    function updateDeck() {
+    //UPDATES THE DECK UI, NOT THE VARIABLE
+    function updateDeckUI() {
         $("#moves_list").empty();
         for (var i = 0; i < moveDeck.length; i++) {
             $("#moves_list").append(
-                "<li>" + moveDeck[i] + "</li>"
+                "<li title= \x22" + moves[moveDeck[i]].description + "\x22>" + moves[moveDeck[i]].name + "</li>"
             );
         }
     }
 
-    $(document).on("mouseenter", ".enemy", function () {
+    $(document).on("mouseenter", ".move_card", function () {
 
-        var item = $(this);
+        var item = $(".enemy");
         if (!item.is(".ui-droppable")) {
                 item.droppable({
                     classes: {
@@ -559,10 +727,40 @@ $(function () {
         switch (classArr[2]) {
             case "attack":
                 console.log("attacking!");
-                enemies_stat[enemyId].health = enemies_stat[enemyId].health - classArr[3];
+
+                var damage = classArr[3];
+
+                if (enemies_stat[enemyId].armor > 0) {
+                    damage -= enemies_stat[enemyId].armor;
+                    if (damage < 0) {
+                        damage = 0;
+                    }
+                    enemies_stat[enemyId].armor -= classArr[3];
+                    if (enemies_stat[enemyId].armor < 0) {
+                        enemies_stat[enemyId].armor = 0;
+                    }
+                    $("#" + enemyId).find(".enemy_armor").html(enemies_stat[enemyId].armor);
+                }
+
+                enemies_stat[enemyId].health = enemies_stat[enemyId].health - damage;
+                if (enemies_stat[enemyId].health < 0) {
+                    enemies_stat[enemyId].health = 0;
+                }
                 $("#" + enemyId).find(".enemy_health").html(enemies_stat[enemyId].health);
                 console.log(enemies_stat)
-                //find("img")
+                    
+                //Check if enemy is killed
+                if (enemies_stat[enemyId].health <= 0) {
+                    $("#" + enemyId).animate({ opacity: 0 }, 1000);
+                    enemies_stat[enemyId].alive = false;
+
+                    //If all enemy is dead... End combat
+                    if (enemies_stat["enemy_1"].alive == false && enemies_stat["enemy_2"].alive == false && enemies_stat["enemy_3"].alive == false) {
+                        console.log(currentCombat);
+                        endCombat("win");
+                    }
+                }
+
                 break;
             case "defend":
                 console.log("defending!");
@@ -604,7 +802,7 @@ $(function () {
 
     function newTurn() {
         curr_action_points = max_action_points;
-        hpStat.currArmor = defaultArmor;
+        hpStat.currArmor = hpStat.defaultArmor;
         updateActionPointUI();
 
         drawCard(5);
@@ -636,12 +834,23 @@ $(function () {
 
     }
 
+    function initializeEnemyStats(enemy_id, enemy_name) {
+        enemies_stat[enemy_id].health = enemies[enemy_name].health;
+        enemies_stat[enemy_id].max_health = enemies[enemy_name].health;
+        enemies_stat[enemy_id].armor = enemies[enemy_name].armor;
+        enemies_stat[enemy_id].alive = true;
+        $("#" + enemy_id).find(".enemy_health").html(enemies_stat[enemy_id].max_health);
+        $("#" + enemy_id).find(".enemy_armor").html(enemies_stat[enemy_id].armor);
+    }
+
     function conductEnemyTurn() {
         //alert("Starting enemy turn!");
         $(".enemy").each(function (i) {
             var classArr = $(this).attr('class').split(' ');
             console.log(this.id);
-            conductEnemyAction(this.id, classArr[1], combat_turn);
+            if (enemies_stat[this.id].alive) {
+                conductEnemyAction(this.id, classArr[1], combat_turn);
+            }
             //Conduct enemy action
         });
     }
@@ -651,6 +860,10 @@ $(function () {
         //console.log("Combat turn: " + combat_turn);
         //console.log("Turn actions: " + enemies[enemy_name].turns[combat_turn][0]);
         //console.log("Turn action value: " + enemies[enemy_name].turns[combat_turn][1]);
+
+        //Reset enemy armor
+        enemies_stat[enemy_id].armor = 0;
+        $("#" + enemy_id).find(".enemy_armor").html(enemies_stat[enemy_id].armor);
 
         var enemy_turn = enemies[enemy_name].turns
         turn_index = combat_turn % (enemy_turn.length);
@@ -679,6 +892,11 @@ $(function () {
                 var targetValue = hpStat.currHp - parseFloat(damage);
                 animateHpBar($("#hp_bar"), targetValue);
 
+                //Player lose combat
+                if (hpStat.currHp <= 0) {
+                    endCombat("lose");
+                }
+
                 break;
             case "defend":
                 console.log("monster is Defending!");
@@ -689,6 +907,38 @@ $(function () {
         }
         //enemies[enemy_name];
     }
+
+    function endCombat(outcome) {
+        
+
+        if (outcome == "win") {
+            //Actually give out the rewards
+            console.log("You won!");
+
+            for (var i = 0; i < combat[currentCombat].reward.length; i++) {
+                if (combat[currentCombat].reward[i] == "gold") {
+                    addGold(40);
+                    $("#reward_list").append("<li>gold</li>")
+                } else {
+                    addItem(combat[currentCombat].reward[i])
+                }
+            }
+        } else if (outcome == "lose") {
+            $("#outcome").html("Defeat...");
+            console.log("You lost!");
+        }
+
+        //Display outcome screen w/rewards
+        $(".outcome_screen").fadeIn(1000);
+
+    }
+
+    //Set up game shops
+    $(document).on("click", ".shop_purchase_button", function () {
+        alert("purchase button clicked");
+    });
+
+
 
     //Set up game map (hoverable markers, etc)
     $(document).on({
@@ -746,6 +996,10 @@ $(function () {
                     break;
                 case "dialogue":
                     startDialogue(arr[i + 1]);
+                    break;
+                case "combat_encounter":
+                    combatEncounter(arr[i + 1]);
+                    break;
             }
         }
         
@@ -754,10 +1008,7 @@ $(function () {
     function changeGameSlide(contentStr) {
         //Going back a slide (leaving)
 
-        $(".transition_effect").fadeIn();
-        $(".transition_effect").animate({
-            width: "72vh"
-        }, 700, function () {
+        $(".transition_effect").fadeIn(function () {
             if (contentStr == 0) {
                 $('#content').detach();
                 if (previous_slide == null) {
@@ -875,15 +1126,15 @@ $(function () {
                         <div class="select_info_stats_container">
                             <div class="center_align margin_1vh margin_t_0">
                                 <p class="tooltip_attached" title="Strength determines how strong you are physically, and how healty you are.">STR</p>
-                                <p>6</p>
+                                <p>4</p>
                             </div>
                             <div class="center_align margin_1vh margin_t_0">
                                 <p class="tooltip_attached" title="Dexterity determines how swift and delicate you are with your actions!">DEX</p>
-                                <p>4</p>
+                                <p>5</p>
                             </div>
                             <div class="center_align margin_1vh margin_t_0">
                                 <p class="tooltip_attached" title="Intelligence determines your natural learning rate and knowledge you havea about the world">INT</p>
-                                <p>4</p>
+                                <p>7</p>
                             </div>
                             <div class="center_align margin_1vh margin_t_0">
                                 <p class="tooltip_attached" title="Charisma determines your ability to influence other people, positvely or negatively.">CHR</p>
@@ -893,21 +1144,20 @@ $(function () {
 
                         <div class="select_info_traits_container">
                             <p class="center_align">
-                                <span class="tooltip_attached" title="Deal more damage">Strong-willed</span>, 
-                                <span class="tooltip_attached" title="Learn skills faster">Talented</span>, 
-                                <span class="tooltip_attached" title="Take extra damage">Clumsy</span>
+                                <span class="tooltip_attached" title="Good at magic">Magical Aptitude</span>, 
+                                <span class="tooltip_attached" title="Sleep worse">Insomniac</span>, 
                             </p>
                         </div>
 
                         <div class="select_info_deck_container">
                             <h3>Move Deck:</h3>
-                            <p><span class="tooltip_attached" title="Deal 5 damage">Hammer Strike * 4</span></p>
-                            <p><span class="tooltip_attached" title="Bloack 3 damage">Iron Hide * 4</span></p>
-                            <p><span class="tooltip_attached" title="Deal 10 damage">Meteor Strike * 1</span></p>
+                            <p><span class="tooltip_attached" title="Deal 5 damage">Staff Strike * 4</span></p>
+                            <p><span class="tooltip_attached" title="Bloack 3 damage">Protect * 4</span></p>
+                            <p><span class="tooltip_attached" title="Deal 10 damage">Ball-o-fear * 1</span></p>
                         </div>
 
                         <div class="select_info_button_container">
-                            <button id='ita' class='initialize_button'>Start!</button>
+                            <button id='Vera' class='initialize_button'>Start!</button>
                             <button class='choice change_slide 0'>Go back</button>
                         </div>
 
@@ -918,18 +1168,18 @@ $(function () {
                         break;
                     case "map":
                         $('#main_display_container').append(`
-                    <div id="content" class="map_screen">
-                        <div class="map_container">
-                            <img class='fill_screen' src='images/map/map.png' alt='map' />
-                            <div id='dungeon' class='map_marker'>
-                                <img class='choice change_slide test_slide' src='images/map/markers/dungeon_marker.png' />
-                            </div>
+                            <div id="content" class="map_screen">
+                                <div class="map_container">
+                                    <img class='fill_screen' src='images/map/map.png' alt='map' />
+                                    <div id='dungeon' class='map_marker'>
+                                        <img class='choice combat_encounter intro' src='images/map/markers/dungeon_marker.png' />
+                                    </div>
                                 
-                        </div>
+                                </div>
                             
-                    </div>
+                            </div>
                         
-                `);
+                        `);
                         break;
                     case "intro_slide_1":
                         $('#main_display_container').append(`
@@ -1001,27 +1251,59 @@ $(function () {
                         break;
                 }
             }
-            $(".transition_effect").animate({
-                width: "0"
-            }, 500)
+            $(".transition_effect").fadeOut();
         });
 
         
     }
 
-    //function animateHpBar(id, targetBar, targetValue) {
-    //    if (hpStat.currHp == targetValue || hpStat.currHp <= 0) {
-    //        clearInterval(id);
-    //    } else {
-    //        if (targetValue > hpStat.currHp) {
-    //            hpStat.currHp++;
-    //        } else if (targetValue < hpStat.currHp) {
-    //            hpStat.currHp--;
-    //        }
-    //        targetBar.css("width", hpStat.currHp / hpStat.maxHp * 100 + "%");
-    //        $("#hp").html(hpStat.currHp + "/" + hpStat.maxHp);
-    //    }
-    //} 
+    function combatEncounter(combatCode) {
+        $(".transition_effect").fadeIn(function () {
+            previous_slide = $('#content').detach();
+            $('#main_display_container').append("<div id='content' class='combat_screen'></div>");
+            $('#content').append("<div id='area_name'> <p>" + combat[combatCode].area + "</p> </div>");
+            $('#content').append("<div id='enemy_container'></div>");
+
+            //Append each enemy
+            for (var i = 1; i < combat[combatCode].enemies.length + 1; i++) {
+                $('#enemy_container').append("<div id=\x22enemy_" + i + "\x22 class=\x22enemy " + combat[combatCode].enemies[i-1] + "\x22></div>");
+
+                //intent
+                $('#enemy_'+i).append("<div id=\x22intent_" + i + "\x22 class=\x22intent\x22></div>");
+
+                //Enemy image
+                $('#enemy_' + i).append("<img src='images/enemy/test_enemy.png' alt='enemy1'/>");
+
+                //Health
+                $('#enemy_' + i).append("<div id=\x22enemy_health_" + i + "\x22 class=\x22enemy_health\x22></div>");
+
+                //Armor
+                $('#enemy_' + i).append("<div id=\x22enemy_armor_" + i + "\x22 class=\x22enemy_armor\x22></div>");
+
+            }
+
+            $('#content').append(`
+                <div class="player_hand">
+                    <div id="action_points"></div>
+                    <button id="end_turn_button">End turn</button>
+                </div>
+            `);
+
+            
+            $('#content').append(`
+                <div class="outcome_screen">
+                    <p id="outcome">Victory!</p>
+                    <ul id="reward_list">
+                        
+                    </ul>
+                    <button id="outcome_proceed_button" class="choice change_slide map">Proceed</button>
+                </div>
+            `);
+
+            $(".transition_effect").fadeOut();
+            startCombat();
+        });
+    }
 
     function animateHpBar(targetBar, targetValue) {
         if (hpStat.currHp == targetValue || hpStat.currHp <= 0) {
@@ -1073,10 +1355,12 @@ $(function () {
                 break;
             case "Hall":
                 break;
+            case "Vera":
+                classTemplate = veraStartTemplate;
         }
 
         $("#char_portrait_img").attr("src", classTemplate.portrait);
-        $("#char_name").html("Ida Chul");
+        $("#char_name").html(classTemplate.name);
         $("#lv").html("Lv. 1");
 
         $("#hp").html(classTemplate.hp+ "/" + classTemplate.hp);       
@@ -1097,6 +1381,15 @@ $(function () {
         for (var i = 0; i < classTemplate.traits.length; i++) {
             $("#backstory").append("<p><span class='tooltip_attached'" + "title=\x22" + traitsDict[classTemplate.traits[i]].description +"\x22>" + classTemplate.traits[i] + "</span></p>")
         }
+
+        for (var i = 0; i < classTemplate.items.length; i++) {
+            addItem(classTemplate.items[i], itemDict[classTemplate.items[i]].type);
+        }
+
+        playerSkills = classTemplate.skills;
+        //console.log(moveDeck);
+        updateSkill();
+        updateDeckUI();
 
     };
 
@@ -1168,14 +1461,8 @@ $(function () {
 
     $("#add_dagger_button").click(function () {
 
-        $("#weapons_list").append(`
-            <li class="dagger weapon">
-                Dagger
-                <button class="item_equip_button">E</button>
-            </li>
-
-        `);
-        weaponInventory.dagger = weaponInventory.dagger + 1;
+        addItem("dagger", "weapon");
+        
     });
 
     $("#console_item_button").click(function () {
@@ -1198,7 +1485,7 @@ $(function () {
     });
 
     $("#update_deck_button").click(function () {
-        updateDeck();
+        updateDeckUI();
     });
 
     $("#test_dialogue_button").click(function () {

@@ -8,6 +8,8 @@ body{
 
     margin: 0;
     padding: 0;
+
+    
 }
 
 button{
@@ -88,16 +90,17 @@ ul{
 
 #whole_container{
     background-color: #957964;
+    background-image: url("images/background.png");
 
     display: grid;
 
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: auto 36vh 3vh 74vh 3vh 36vh auto;
     grid-template-rows: auto auto auto;
 
     grid-template-areas:
-        "tb tb tb tb tb"
-        ". cc sc ic ."
-        "fb fb fb fb fb";
+        "tb tb tb tb tb tb tb"
+        ". cc . sc . ic ."
+        "fb fb fb fb fb fb fb";
 
     justify-content: center;
 
@@ -115,10 +118,11 @@ ul{
     width: 36vh;
     height: 34vh;
 
-    margin-right: 3vh;
+    /*margin-right: 6vh;*/
     margin-top: 1vh;
 
     display: grid;
+    display: none;
 
     grid-template-columns: auto;
     grid-template-rows: auto auto auto;
@@ -150,7 +154,7 @@ ul{
     margin-left: 1vh;
     margin-bottom: 0.5vh;
 
-    font-size: 2vh;
+    font-size: 1.5vh;
 }
 
 #lv{
@@ -318,6 +322,8 @@ ul{
 /*End of character info/stat related*/
 
 #inventory_container {
+    display: none;
+
     grid-area: ic;
 
     background-color: #3e2114;
@@ -325,7 +331,7 @@ ul{
     width: 36vh;
     height: 44vh;
 
-    margin-left: 3vh;
+    /*margin-left: 3vh;*/
     margin-top: 1vh;
 
 }
@@ -363,23 +369,36 @@ ul{
 }
 
 .inventory_tab .sortable{
-    background-color: gray;
+    /*background-color: gray;*/
     margin-top: 1vh;
     
 }
 
 .inventory_tab .sortable li{
-    font-size: 1.5vh;
-    background-color: yellow;
+    font-size: 1.2vh;
+    background-color: lightgray;
 
-    width: 15vh;
+    width: 13vh;
     height: 2.5vh;
 
     margin-top: 0.5vh;
     margin-bottom: 0.5vh;
+    margin-left: 2vh;
+
+    border: 1px solid;
+    border-color: dimgray;
 
     display: flex;
     align-items: center;
+}
+
+.inventory_tab .sortable li p{
+    margin-left: 0.5vh;
+}
+
+.item_equip_button {
+    font-size: 1.2vh;
+    margin-left: 1vh;
 }
 
 #equip_container {
@@ -400,13 +419,23 @@ ul{
 .equip_box{
     width: 5vh;
     height: 5vh;
-    background-color: turquoise;
+    /*background-color: turquoise;*/
 
     position: absolute;
 
     cursor: pointer;
 
     z-index: 1;
+}
+
+.equip_box img{
+    width: 5vh;
+    height:5vh;
+
+    border: 0.4vh solid;
+    border-color: #3e2114;
+
+    background-color: white;
 }
 
 #head_box{
@@ -492,9 +521,9 @@ ul{
     margin-top: 0.5vh;
     margin-left: 0.5vh;
 
-    width: 7vh;
+    width: 14vh;
 
-    background-color: gray;
+    background-color: lightgray;
 }
 
 #deck_buttons{
@@ -537,7 +566,6 @@ ul{
 #screen_container {
     grid-area: sc;
 
-    background-color: azure;
 
     width: 72vh;
     height: 72vh;
@@ -565,7 +593,7 @@ ul{
 #dialogue_container {
     grid-area: dc;
 
-    background-color: #758173;
+    background-color: #3e2114;
 
     border: solid 1vh;
     border-top: none;
@@ -578,6 +606,8 @@ ul{
     margin-bottom: 6vh;
 
     display: flex;
+
+    display: none;
 }
 
 #dialogue_portrait {
@@ -589,12 +619,15 @@ ul{
     /*border: solid 0.5vh;*/
 
     text-align: center;
+
+    position: relative;
 }
 
 #dialogue_portrait img{
     height: 15vh;
     width: 15vh;
     /*border: solid 0.5vh;*/
+
 }
 
 #dialogue_portrait p{
@@ -606,8 +639,7 @@ ul{
     padding-top: 0.6vh;
 
     background-color: ghostwhite;   
-   
-
+  
     font-size: 1.5vh;
 }
 
@@ -642,6 +674,10 @@ ul{
     margin-right: 2vh;
     margin-bottom: 1vh;
 
+}
+
+#dialogue_button_container button{
+    background-color: dimgray;
 }
 
 /*Styling for different screen formats*/
@@ -869,10 +905,11 @@ ul{
     grid-template-areas:
         ". an an an ."
         ". . . . ."
-        ". e1 e2 e3 ."
+        ". ec ec ec ."
         ". ph ph ph ."
         ". ph ph ph .";
 
+    position: relative;
 }
 
 #area_name{
@@ -901,6 +938,14 @@ ul{
 #intent_3{
 }
 
+#enemy_container{
+    display: flex;
+    grid-area: ec;
+    justify-content: center;
+
+    position: relative;
+}
+
 .enemy{
     text-align: center;
 }
@@ -916,15 +961,12 @@ ul{
 
 
 #enemy_1{
-    grid-area: e1;
 }
 
 #enemy_2{
-    grid-area: e2;
 }
 
 #enemy_3{
-    grid-area: e3;
 }
 
 .enemy_health{
@@ -991,6 +1033,114 @@ ul{
     background-color: white;
 }
 
+.outcome_screen{
+    display:none;
+     
+    height: 40vh;
+    width: 30vh;
+
+    background-color: dimgray;
+    position: absolute;
+
+    text-align: center;
+
+    right: 30%;
+    top: 15%;
+}
+
+#reward_list{
+    height: 27vh;
+    width: 28vh;
+    background-color: white;
+
+    margin-left: 1vh;
+
+    text-align: left;
+}
+
+#reward_list li{
+    margin-left: 2vh;
+}
+
+#outcome_proceed_button{
+    margin-top: 2vh;
+}
+
+
+/*Shop screen*/
+.shop_screen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+}
+
+.shop_name{
+    text-align: center;
+}
+
+.shop_owner_image{
+    position: absolute;
+
+    width: 30vh;
+    left: 0%;
+    top: 36%;
+}
+
+.shop_name p{
+    font-size: 2.5vh;
+}
+
+.shop_item_container{
+    height: 40vh;
+    width: 60vh;
+    
+    background-color: white;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    overflow: auto;
+}
+
+/*Hides scrollbar for chrome then IE/EDGE */
+.shop_item_container::-webkit-scrollbar{
+    display: none;
+}
+
+.shop_item_container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.shop_item {
+    background-color: dimgray;
+    width: 15vh;
+    height: 20vh;
+    text-align: center;
+
+    margin: 1vh;
+}
+
+.shop_item img{
+    background-color: snow;
+
+    width: 13vh;
+    height: 13vh;
+
+    margin-top: 1vh;
+}
+
+.shop_item button{
+    width: 11vh;
+    font-size: 1vh;
+
+    margin-top: 3vh;
+}
+
 /*General classes*/
 .right_align {
     text-align: right;
@@ -1037,10 +1187,11 @@ ul{
 /*Transition Effect*/
 .transition_effect{
     background-color: black;
-    
-    width: 0vh;
+    display: none;
+    width: 72vh;
     height: 54vh;
     position: absolute;
+    z-index: 100;
 }
 
 /*Testing*/

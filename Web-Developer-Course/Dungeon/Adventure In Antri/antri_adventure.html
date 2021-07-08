@@ -15,6 +15,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+
+    <!--animate on scroll library-->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body>
 
@@ -32,7 +35,7 @@
             <!-- Container for character portrait, HP, EXP -->
             <div id="char_general_info_container" class="container">
                 <div id="char_portrait">
-                    <img id="char_portrait_img" src="images/char_portrait/Ita/Ita_idle.png" alt="ita_idle" />
+                    <img id="char_portrait_img" src="images/char_portrait/Ita_idle.png" alt="ita_idle" />
                 </div>
 
                 <div id="char_status">
@@ -41,7 +44,8 @@
                     </div>
 
                     <div id="lv">
-                        Lv. 5
+                        <p>Lv. 5</p>
+                        <button id="level_up_button">Lv Up!</button>
                     </div>
 
                     <div class="flex_container">
@@ -72,6 +76,8 @@
                             </div>
                         </div>
                     </div>
+
+                    
 
 
                     <!--<button id="hp_test_button">HP Test!</button>-->
@@ -108,7 +114,7 @@
             <!--<div class="right_align">
                 <button id="toggle_stat_button">Swap</button>
             </div>-->
-            
+
 
             <div id="backstory_container">
 
@@ -146,18 +152,18 @@
             <div id="inventory_screen_container">
                 <div id="equip_container">
                     <!--<div class="equip_box draggable" id="head_box"></div>
-            <div class="equip_box draggable" id="chest_box"></div>
-            <div class="equip_box draggable" id="weapon_box"></div>
-            <div class="equip_box draggable" id="jewel_box"></div>
-            <div class="equip_box draggable" id="feet_box"></div>-->
+                    <div class="equip_box draggable" id="chest_box"></div>
+                    <div class="equip_box draggable" id="weapon_box"></div>
+                    <div class="equip_box draggable" id="jewel_box"></div>
+                    <div class="equip_box draggable" id="feet_box"></div>-->
                     <div id="unequip_box">tr</div>
                 </div>
                 <div id="weapons_container" class="inventory_tab">
                     <ul id="weapons_list" class="sortable">
                         <!--<li class="sword weapon">
-                    Sword
-                    <button class="item_equip_button">E</button>
-                </li>-->
+                            Sword
+                            <button class="item_equip_button">E</button>
+                        </li>-->
                     </ul>
                 </div>
                 <div id="armor_container" class="inventory_tab">
@@ -186,13 +192,10 @@
 
             <div id="move_deck_container">
                 <ul id="draw_pile">
-                    
                 </ul>
                 <ul id="discard_pile">
-                    
                 </ul>
                 <ul id="moves_list" class="sortable">
-                    
                 </ul>
             </div>
 
@@ -200,7 +203,7 @@
 
         <!-- Container for the game screen section -->
         <div id="screen_container" class="container">
-            
+
             <!-- Container for the main display section -->
             <div id="main_display_container" class="container">
                 <div class="transition_effect">
@@ -209,145 +212,28 @@
 
                 <div id="content" class="start_screen">
                     <div>
-                        <p>Adventure In Antri</p>
+                        <img src="images/title.png" alt="Adventure in Antri"/>
                     </div>
                     <div>
                         <button class="choice change_slide char_select_sli">START!</button>
                     </div>
                 </div>
 
-                <!--<div id="content" class="shop_screen">
-                    <div class="shop_name">
-                        <p>Are you experienced?</p>
+
+                <!--<div id="content" class="chec_shop_screen">
+                    <div id="chec_shop_title">Are you experienced?</div>
+                    <div id="three_random_card">
+                        <img src="images/card/ball_o_fear.png" alt="card" />
+                        <img src="images/card/ball_o_fear.png" alt="card" />
+                        <img src="images/card/ball_o_fear.png" alt="card" />
                     </div>
-
-                    <img class="shop_owner_image" src="images/shop/Chec.png"/>
-
-                    <div class="shop_item_container">
-                        <div class="shop_item">
-                            <img src="images/items/shield.png" alt="shop_item" />
-                            <button class="shop_purchase_button">purchase</button>
-                        </div>
-
-                        <div class="shop_item">
-                            <img src="images/items/shield.png" alt="shop_item" />
-                            <button class="shop_purchase_button">purchase</button>
-                        </div>
-
-                        <div class="shop_item">
-                            <img src="images/items/shield.png" alt="shop_item" />
-                            <button class="shop_purchase_button">purchase</button>
-                        </div>
-
-                        <div class="shop_item">
-                            <img src="images/items/shield.png" alt="shop_item" />
-                            <button class="shop_purchase_button">purchase</button>
-                        </div>
-
-                        <div class="shop_item">
-                            <img src="images/items/shield.png" alt="shop_item" />
-                            <button class="shop_purchase_button">purchase</button>
-                        </div>
-
-                        <div class="shop_item">
-                            <img src="images/items/shield.png" alt="shop_item" />
-                            <button class="shop_purchase_button">purchase</button>
-                        </div>
-
-                        <div class="shop_item">
-                            <img src="images/items/shield.png" alt="shop_item" />
-                            <button class="shop_purchase_button">purchase</button>
-                        </div>
-
-                        <div class="shop_item">
-                            <img src="images/items/shield.png" alt="shop_item" />
-                            <button class="shop_purchase_button">purchase</button>
-                        </div>-->
-
-                        <!--<div class="shop_item">
-                            <img src="images/items/shield.png" alt="shop_item" />
-                            <button class="shop_purchase_button">purchase</button>
-                        </div>
-
-                        <div class="shop_item">
-                            <img src="images/items/shield.png" alt="shop_item" />
-                            <button class="shop_purchase_button">purchase</button>
-                        </div>
-
-                        <div class="shop_item">
-                            <img src="images/items/shield.png" alt="shop_item" />
-                            <button class="shop_purchase_button">purchase</button>
-                        </div>
-
-                        <div class="shop_item">
-                            <img src="images/items/shield.png" alt="shop_item" />
-                            <button class="shop_purchase_button">purchase</button>
-                        </div>-->
-
-                    <!--</div>
-                    
-                </div>-->
-
-                <!--<div id="content" class="combat_screen">
-                    <div id="area_name">
-                        <p>Caves I</p>
-                    </div>
-
-                    <div id="enemy_container">
-                        <div id="enemy_1" class="enemy slime_1">
-                            <div id="intent_1" class="intent">
-                                Attack
-                            </div>
-                            <img src="images/enemy/test_enemy.png" alt="enemy1" />
-                            <div id="enemy_health_1" class="enemy_health">
-                                10
-                            </div>
-                            <div id="enemy_armor_1" class="enemy_armor">
-                                0
-                            </div>
-                        </div>
-
-                        <div id="enemy_2" class="enemy slime_2">
-                            <div id="intent_2" class="intent">
-                                Block
-                            </div>
-                            <img src="images/enemy/test_enemy.png" alt="enemy1" />
-                            <div id="enemy_health_2" class="enemy_health">
-                                10
-                            </div>
-                            <div id="enemy_armor_2" class="enemy_armor">
-                                0
-                            </div>
-                        </div>
-
-                        <div id="enemy_3" class="enemy slime_3">
-                            <div id="intent_3" class="intent">
-                                Attack
-                            </div>
-                            <img src="images/enemy/test_enemy.png" alt="enemy1" />
-                            <div id="enemy_health_3" class="enemy_health">
-                                10
-                            </div>
-                            <div id="enemy_armor_3" class="enemy_armor">
-                                0
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="player_hand">
-                        <div id="action_points">4/4</div>
-
-                        <button id="end_turn_button">End turn</button>
-
-                    </div>
-
-                    <div class="outcome_screen">
-                        <p id="outcome">Victory!</p>
-                        <ul id="reward_list">
-                            <li>20 G</li>
-                            <li>Slime ball</li>
-                        </ul>
-                        <button id="outcome_proceed_button" class="choice change_slide map">Proceed</button>
+                    <div id="card_shop">
+                        <img src="images/card/ball_o_fear.png" alt="card" />
+                        <img src="images/card/ball_o_fear.png" alt="card" />
+                        <img src="images/card/ball_o_fear.png" alt="card" />
+                        <img src="images/card/ball_o_fear.png" alt="card" />
+                        <img src="images/card/ball_o_fear.png" alt="card" />
+                        <img src="images/card/ball_o_fear.png" alt="card" />
                     </div>
                 </div>-->
 
@@ -362,14 +248,14 @@
                 </div>
                 <div id="dialogue_text">
                     <p id="dialogue_content">
-                        
+
                     </p>
                     <div id="dialogue_button_container">
                         <button id="back_dialogue_button">&#11164</button>
                         <button id="forward_dialogue_button">&#11166</button>
                     </div>
                 </div>
-                
+
             </div>
         </div>
 
@@ -392,13 +278,20 @@
                 <button id="draw_3_button">Draw 3</button>
                 <button id="start_combat_button">Start test combat</button>
                 <button id="transition_button">Start transition</button>
+                <button id="add_gold_button">Add 100 gold</button>
+                <button id="console_deck">Console deck</button>
                 <div id="test_sell_box">"sell" it</div>
             </div>
-            
+
         </div>
 
     </div>
 
+    <!--Animate on Scroll initialization-->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 
 </body>
 </html>

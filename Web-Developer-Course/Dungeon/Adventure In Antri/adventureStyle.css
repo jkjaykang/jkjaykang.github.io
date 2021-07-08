@@ -122,7 +122,7 @@ ul{
     margin-top: 1vh;
 
     display: grid;
-    display: none;
+    /*display: none;*/
 
     grid-template-columns: auto;
     grid-template-rows: auto auto auto;
@@ -160,6 +160,34 @@ ul{
 #lv{
     margin-left: 1vh;
     font-size: 1.25vh;
+
+    display: flex;
+
+    position: relative;
+}
+
+#lv p{
+    margin: 0;
+    margin-right: 0.5vh;
+    margin-top: 0.3vh;
+    padding: 0;
+}
+
+#level_up_button {
+    font-size: 1.25vh;
+    height: 2vh;
+    background-color: white;
+    border: solid 1px;
+    display: none;
+
+    right: 30%;
+
+    position: absolute;
+}
+
+#level_up_button:hover{
+    background-color: yellow;
+    
 }
 
 /*HP/EXP Bar*/
@@ -244,12 +272,22 @@ ul{
 #char_arm{
     position: absolute;
 
-    background-color: gray;
+    color: white;
 
-    top: 7%;
-    right: 5%;
+    background-image: url("images/icon/char_armor.png");
+    background-size: 4vh 4vh;
+
+    height: 4vh;
+    width: 4vh;
+
+    top: -55%;
+    right: 0%;
 
     font-size: 1.5vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #char_stat_container{
@@ -378,8 +416,8 @@ ul{
     font-size: 1.2vh;
     background-color: lightgray;
 
-    width: 13vh;
-    height: 2.5vh;
+    width: 17vh;
+    height: 3vh;
 
     margin-top: 0.5vh;
     margin-bottom: 0.5vh;
@@ -393,12 +431,17 @@ ul{
 }
 
 .inventory_tab .sortable li p{
-    margin-left: 0.5vh;
+    margin-left: 0.3vh;
 }
 
 .item_equip_button {
     font-size: 1.2vh;
     margin-left: 1vh;
+}
+
+.item_use_button{
+    font-size: 1.2vh;
+    margin-right: 1vh;
 }
 
 #equip_container {
@@ -445,7 +488,7 @@ ul{
 
 #chest_box {
     top: 40%;
-    right: 42.5%;
+    right: 44%;
 }
 
 #weapon_box {
@@ -498,6 +541,9 @@ ul{
     text-align: right;
     margin-top: 1vh;
     margin-right: 2vh;
+    
+    font-size: 1.5vh;
+
     color: white;
 }
 
@@ -771,6 +817,10 @@ ul{
     grid-area: backstory;
 }
 
+.select_backstory{
+    font-size: 0.7vh;
+}
+
 .select_info_stats_container {
     grid-area: stats;
 
@@ -816,6 +866,33 @@ ul{
     top: 20%;
     right: 20%;
     z-index: 1;
+}
+
+#cambria{
+    top: 30%;
+    right: 30%;
+    z-index: 1;
+}
+
+/*Town screen*/
+.town_screen{
+    background-image: url("images/town/cambria.png");
+    background-size: 72vh 54vh;
+}
+
+.town_choice_container{
+    width: 72vh;
+    height: 54vh;
+
+    display: flex;
+    justify-content: center;
+}
+
+.town_choice_container button{
+    height: 5vh;
+    margin-top: 44vh;
+    margin-left: 1vh;
+    margin-right: 1vh;
 }
 
 /*Event screen styling*/
@@ -896,14 +973,67 @@ ul{
     margin-top: 1vh;
 }
 
+/*Dungeon Screen*/
+.dungeon_screen {
+    width: 72vh;
+    height: 54vh;
+
+    position: relative;
+}
+
+.dungeon_title{
+    font-size: 3.5vh;
+    margin-left: 4vh;
+    margin-bottom: 0vh;
+}
+
+#dungeon_image_container {
+    margin-left: 2vh;
+    margin-top: 5vh;
+}
+
+#dungeon_image_container img{
+    width: 35vh;
+}
+
+#dungeon_choice_container{
+    margin-left: 2vh;
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: center;
+}
+
+#dungeon_choice_container p{
+    font-size: 1.5vh;
+}
+
+#dungeon_choice_container button{
+    margin-top: 1.5vh;
+    width: 20vh;
+    height: 5vh;
+}
+
+#dungeon_description{
+    margin-top: 5vh;
+    margin-left: 2vh;
+    font-size: 1.5vh;
+}
+
+#chec_shop{
+    position: absolute;
+    top: 60%;
+    right: 5%;
+}
+
 /*Combat screen*/
 .combat_screen{
     display: grid;
 
     grid-template-columns: 3vh 22vh 22vh 22vh 3vh;
-    grid-template-rows: auto auto auto 7.5vh 7.5vh;
+    grid-template-rows: 6vh auto 7.5vh 10vh;
     grid-template-areas:
-        ". an an an ."
         ". . . . ."
         ". ec ec ec ."
         ". ph ph ph ."
@@ -912,7 +1042,7 @@ ul{
     position: relative;
 }
 
-#area_name{
+/*#area_name{
     grid-area: an;
     text-align: center;
 
@@ -922,7 +1052,7 @@ ul{
     font-size: 2vh;
 
     margin-top: 2vh;
-}
+}*/
 
 .intent{
     text-align: center;
@@ -948,11 +1078,17 @@ ul{
 
 .enemy{
     text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
 }
 
 .enemy img{
-    width: 15vh;
-    height: 15vh;
+    width: 20vh;
+    height: 20vh;
 }
 
 .enemy_active{
@@ -972,6 +1108,16 @@ ul{
 .enemy_health{
     text-align: center;
     font-size: 1.5vh;
+    width: 4vh;
+    height: 4vh;
+    color: white;
+
+    background-image: url("images/icon/health.png");
+    background-size: 4vh 4vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #enemy_health_1{
@@ -983,15 +1129,24 @@ ul{
 #enemy_health_3 {
 }
 
-.enemy_armor{
+.enemy_armor {
     font-size: 1.5vh;
     text-align: center;
-    color: gray;
+    width: 4vh;
+    height: 4vh;
+    color: white;
+
+    background-image: url("images/icon/armor.png");
+    background-size: 4vh 4vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .player_hand{
     grid-area: ph;
-    background-color: gray;
+    /*background-color: gray;*/
 
     height: 15vh;
 
@@ -1022,15 +1177,22 @@ ul{
 }
 
 .move_card{
-    height: 12vh;
-    width: 8vh;
-
     font-size: 1vh;
 
     margin-left: 1vh;
     margin-right: 1vh;
+    
+}
 
-    background-color: white;
+.move_card img{
+    width: 12vh;
+    /*cursor: pointer;*/
+}
+
+.move_card img:hover{
+    transform: scale(1.1);
+    cursor:pointer;
+    
 }
 
 .outcome_screen{
@@ -1066,6 +1228,61 @@ ul{
     margin-top: 2vh;
 }
 
+/*Chec Shop Screen*/
+.chec_shop_screen{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#chec_shop_title{
+    color: white;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+#card_shop{
+    margin-top: 1vh;
+}
+
+#three_random_card{
+    width: 40vh;
+    height: 20vh;
+
+    background-color: white;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+#three_random_card img{
+    height: 15vh;
+    margin-right: 0.5vh;
+    margin-left: 0.5vh;
+}
+
+#card_shop{
+    width: 60vh;
+    height: 25vh;
+
+    background-color: white;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+#card_shop img{
+    height: 13vh;
+
+    margin-right: 0.3vh;
+    margin-left: 0.3vh;
+}
 
 /*Shop screen*/
 .shop_screen{
@@ -1092,7 +1309,7 @@ ul{
     font-size: 2.5vh;
 }
 
-.shop_item_container{
+#shop_item_container{
     height: 40vh;
     width: 60vh;
     
@@ -1107,11 +1324,11 @@ ul{
 }
 
 /*Hides scrollbar for chrome then IE/EDGE */
-.shop_item_container::-webkit-scrollbar{
+#shop_item_container::-webkit-scrollbar{
     display: none;
 }
 
-.shop_item_container {
+#shop_item_container {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
@@ -1134,11 +1351,22 @@ ul{
     margin-top: 1vh;
 }
 
-.shop_item button{
-    width: 11vh;
+.item_price{
     font-size: 1vh;
+    margin: 0;
+    margin-top: 1vh;
+    margin-bottom: 0.2vh;
+}
 
-    margin-top: 3vh;
+
+.shop_item button{
+    width: 9vh;
+    font-size: 1vh;
+    margin-bottom: 2vh;
+}
+
+#shop_leave_button{
+    margin-top: 1.5vh;
 }
 
 /*General classes*/

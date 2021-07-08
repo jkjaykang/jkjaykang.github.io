@@ -16,7 +16,7 @@ var descriptions = {
     "soup": "What am I eating? It's pumpkin soup. You want some?",
     "shield": "That will block most attacks, or it will break trying!",
     "whetstone": "That's my speical whetstone made with special alloy. Only one swipe needed to sharpen a blade.",
-    "dagger": "Are daggers the cupcakes of swords? Aren't they just a smaller sword? Like how cupcakes are smaller cakes?",
+    "dagger": "Are daggers the cupcakes of swords?",
     "old_shield": "Oops, how'd that get there? That's the first shield I made. It's mostly paperweight at this point.",
     "arrows": "We don't sell bows, but we do sell arrows.",
     "heavy_chestplate": "That's a heavy chestplate with some modification to make it easy and comfortable to wear.",

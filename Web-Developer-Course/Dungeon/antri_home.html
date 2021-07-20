@@ -2,7 +2,7 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Portfolio</title>
+    <title>Welcome To Antri</title>
     <meta charset="utf-8" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,26 +15,32 @@
     <script src="antriScript.js"></script>
     <link rel="stylesheet" type="text/css" href="antriStyle.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Mate+SC&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
     <!--navbar-->
     <nav class="navbar navbar-expand-lg fixed-top navbar-home">
         <div class="container-fluid">
-            <a class="navbar-brand ms-3" href="antri_home.html">
-                <img src="images/old_shield_item.png" alt="logo" width="40" height="40" />
+            <a class="navbar-brand ms-5" href="antri_home.html">
+                <img src="images/antri_logo.png" alt="logo" height="40" />
+                
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHamburger" aria-controls="navbarHamburger" aria-expanded="false" aria-label="Toggle navigation">
                 <!--<span class="navbar-toggler-icon"></span>-->
                 <img src="images/navbar_icon.png" alt="logo" width="30" height="30" />
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav abs-center-x">
-                    <li class="nav-item">
+            <div class="collapse navbar-collapse" id="navbarHamburger">
+                <ul class="navbar-nav">
+                    <li class="nav-item ms-3">
                         <a class="nav-link active" aria-current="page" href="antri_home.html">Home</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown ms-3">
                         <a class="nav-link dropdown-toggle" href="#" id="raceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Race
                         </a>
@@ -45,14 +51,14 @@
                             <li><a class="dropdown-item" href="antri_halfling.html">Halfling</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item ms-3">
                         <a class="nav-link" aria-current="page" href="antri_creatures.html">Wildlife</a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item ms-3">
                         <a class="nav-link" aria-current="page" href="antri_map.html">World</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item ms-3">
                         <a class="nav-link" aria-current="page" href="antri_deity.html">Deities</a>
                     </li>
                 </ul>
@@ -79,8 +85,9 @@
         <div class="row vertical-align">
             <div class="col-sm-8 ms-5 mt-5">
                 <p>
-                    This website is something I created to practice Bootstrap and website-making
-                    in general. I love writing and drawing about fantasy world building and setting,
+                    This website is about "Antri", a world I created based on a fantasy setting.
+                    This project is something I created to practice Bootstrap and website-making
+                    in general. I love writing and drawing about fantasy worlds and settings,
                     so I decided to theme it that way. I had a great
                     time making this, so I hope that you can enjoy viewing and reading it too.
                 </p>
@@ -102,7 +109,7 @@
             <div class="card m-5" style="width: 22rem;">
                 <img id="blacksmith_card" src="images/blacksmith_website.PNG" class="card-img-top img-fluid mt-2" alt="blacksmith_website">
                 <div class="card-body">
-                    <h5 class="card-title">Ita's Blacksmith</h5>
+                    <h5 class="card-title"><b>Ita's Blacksmith</b></h5>
                     <p class="card-text">
                         The idea of this website was to build a shop interface resembling one you would see
                         in a game. To match that idea I used pixel art, which I think came out pretty nice.

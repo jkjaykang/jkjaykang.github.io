@@ -31,13 +31,15 @@ var veraStartTemplate = {
                 she reads to research fear doesn't help her fall asleep, resulting in the bags under her eyes.`,
     traits: ["magical_aptitude", "insomniac"],
     items: ["wooden_staff", "leather_armor"],
-    skills: ["ball_o_fear"]
+    skills: ["ball_o_fear", "quick_planning", "fade", "weaken", "weaken"]
 }
 
 var previous_slide;
 
 
 //These are the variables for the current stat of the character
+var selectedCharacter;
+
 var hpStat = {
     currHp: 35,
     maxHp: 35,
@@ -49,6 +51,13 @@ var expStat = {
     currExp: 0,
     maxExp: 30
 };
+
+var chrStat = {
+    str: 0,
+    dex: 0,
+    int: 0,
+    chr: 0
+}
 
 var level = 1;
 
@@ -87,6 +96,7 @@ var equippedItem = {
 }
 
 var moveDeck = [];
+var dungeonMoveDeck = [];
 
 var playerSkills = []
 
@@ -95,7 +105,7 @@ var dungeonFloor = 0;
 
 //Variables for combat 
 var currentCombat = "intro";
-var combatDrawPile = moveDeck;
+var combatDrawPile = dungeonMoveDeck;
 var combatDiscardPile = [];
 
 var curr_action_points = 3;
@@ -107,11 +117,23 @@ var enemy_count = 0;
 var enemyArray;
 var enemy_index = 0;  
 
+//Vera combat variables
+var fear = 0;
+var fear_active = false;
+
+
+//Hall combat variables
+
+
 var enemies_stat = {
     enemy_1: {
         health: 0,
         max_health: 0,
         armor: 0,
+        status: {
+            weak: 0,
+            vulnerable: 0,
+        },
         alive: false
     },
 
@@ -119,6 +141,10 @@ var enemies_stat = {
         health: 0,
         max_health: 0,
         armor: 0,
+        status: {
+            weak: 0,
+            vulnerable: 0,
+        },
         alive: false
     },
 
@@ -126,6 +152,10 @@ var enemies_stat = {
         health: 0,
         max_health: 0,
         armor: 0,
+        status: {
+            weak: 0,
+            vulnerable: 0,
+        },
         alive: false
     }
     
@@ -215,63 +245,233 @@ var shopDict = {
 }
 
 var movesDict = {
-    strike: { type: "attack", value: 5, cost: 1},
-    defend: { type: "defend", value: 5, cost: 1},
-    special: { type: "attack", value: 10, cost: 2 },
     staff_strike: {
         name: "staff strike",
-        type: "attack",
-        value: 5,
+        type: ["attack"],
+        value: [5],
         cost: 1,
         description: "Vera strikes with her staff dealing damage"
         },
     block: {
         name: "block",
-        type: "defend",
-        value: 5,
+        type: ["defend"],
+        value: [5],
         cost: 1,
         description: "Block 5 damage"
     },
     ball_o_fear: {
         name: "Ball-o-fear",
-        type: "aoe",
-        value: 5,
+        type: ["aoe"],
+        fear_type: ["aoe"],
+        value: [5],
+        fear_value: ["10"],
         cost: 2,
+        fear_cost: 10,
         description: "Vera lobs a solidified ball of fear, dealing damage to all enemies"
+    },
+    quick_planning: {
+        name: "Quick Planning",
+        type: ["draw"],
+        value: [3],
+        cost: 1,
+        description: "Draw 3 cards"
+    },
+    fade: {
+        name: "Fade",
+        type: ["draw", "defend"],
+        value: [1, 7],
+        cost: 1,
+        description: "Block 7 damage. Draw 1 card."
+    },
+    weaken: {
+        name: "Weaken",
+        type: ["status"],
+        value: ["weak"],
+        duration: [3],
+        cost: 1,
+        description: "Apply 3 turns of weak to an enemy"
+    },
+    expose: {
+        name: "Expose",
+        type: ["status", "status"],
+        value: ["weak", "vulnerable"],
+        duration: [2, 2],
+        cost: 1,
+        description: "Apply 2 turns of weak and vulnerable to an enemy"
+    },
+    fearbolt: {
+        name: "Fearbolt",
+        type: ["attack"],
+        value: [10],
+        cost: 1,
+        fear_type: ["attack"],
+        fear_value: [20],
+        fear_cost: 20,
+        description: "Deal 10 damage. Fear 20: Deal 20 damage."
+    },
+    fearppuccino: {
+        name: "Fearppuccino",
+        type: ["defend", "energy"],
+        value: [5, 1],
+        cost: 1,
+        fear_type: ["defend", "energy"],
+        fear_value: [10, 2],
+        fear_cost: 10,
+        description: "Block 5 damage. Gain 1 Energy. Fear 10: Block 10 damage. Gain 2 Energy."
+    },
+    look_ahead: {
+        name: "Look ahead",
+        type: ["draw", "defend"],
+        value: ["1", "3"],
+        cost: 0,
+        description: "Draw 1 card. Block 3 damage."
+    },
+    multitask: {
+        name: "Multi-task",
+        type: ["attack", "defend"],
+        value: [8, 8],
+        cost: 2,
+        description: "Deal 8 damage. Block 8 damage."
+    },
+    preparation_seal: {
+        name: "Preparation Seal",
+        type: ["block"],
+        value: ["5"],
+        cost: 1,
+        fear_type: ["draw", "energy"],
+        fear_value: [4, 4],
+        fear_cost: 40,
+        description: "Block 5 damage. Fear 40: Draw 4 cards. Gain 4 energy."
+    },
+    purple_haze: {
+        name: "Purple haze",
+        type: ["aoe-status"],
+        value: ["weak"],
+        duration: [1],
+        cost: 1,
+        fear_type: ["aoe-status"],
+        fear_value: ["weak"],
+        fear_cost: [10],
+        description: "Apply 1 turn of weak to all enemies. Fear 10: Apply 2 turns of weak to all enemies."
+    },
+    spreading_scare: {
+        name: "Spreading scare",
+        type: ["aoe"],
+        value: [20],
+        cost: 3,
+        description: "Deal 20 damage to all enemies."
+    },
+    weave: {
+        name: "weave",
+        type: ["status", "block"],
+        value: ["weak", "8"],
+        duration: [1],
+        cost: 1,
+        description: "Apply 1 turn of weak to an enemy. Block 8 damage"
+    },
+    wisps: {
+        name: "wisps",
+        type: ["block", "fear"],
+        value: [5, 10],
+        cost: 1,
+        description: "Block 5 damage. Generate 10 fear."
+    },
+    mindcrush: {
+        name: "Mindcrush",
+        type: ["attack"],
+        value: [17],
+        cost: 2,
+        fear_type: ["attack"],
+        fear_value: [50],
+        fear_cost: [50],
+        description: "Deal 17 damage. Fear 50: Deal 50 damage."
+    },
+    fear_beast: {
+        name: "Fear: Beast",
+        type: ["attack", "draw"],
+        value: [12, 2],
+        cost: 2,
+        fear_type: ["attack", "draw"],
+        fear_value: [24, 3],
+        fear_cost: [30],
+        description: "Deal 12 damage. Draw 2 cards. Fear 30: Deal 24 damage. Draw 3 cards."
+    },
+    fear_disease: {
+        name: "Fear: Disease",
+        type: ["status", "status"],
+        value: ["weak", "vulnerable"],
+        duration: [5, 5],
+        cost: 3,
+        fear_type: ["status", "status"],
+        fear_value: [99, 99],
+        fear_cost: [50],
+        description: "Apply 5 turns of weak and vulnerable to an enemy. Fear 50: Apply 99 turns of weak and vulnerable to an enemy."
+    },
+    fear_death: {
+        name: "Fear: Death",
+        type: ["aoe"],
+        value: ["20"],
+        cost: 4,
+        fear_type: ["aoe"],
+        fear_value: [100],
+        fear_cost: [100],
+        description: "Deal 20 damage to all enemies. Fear 100: Deal 100 damage to all enemies."
+    }
+
+}
+
+var veraCommonPool = ["fearbolt", "ball_o_fear", "fade", "multitask", "look_ahead", "purple_haze", "weaken", "wisps"];
+var veraUncommonPool = ["expose", "fearppuccinho", "preparation_seal", "quick_planning", "weave"];
+var veraRarePool = ["fear_beast", "fear_death", "fear_disease", "spreading_scare"];
+
+
+var statusDict = {
+    weak: {
+        value: .40,
+        description: "Weak enemies deal 40% less damage" 
+    },
+    vulnerable: {
+        value: 1.5,
+        description: "Vulnerable enemies take 50% more damage"
     }
 }
 
 var enemiesDict = {
     slime_1: {
+        name: "Slime",
         turns: [["attack", 5], ["attack", 6], ["defend", 5], ["defend", 5], ["attack", 7]],
         health: 10,
         armor: 0
     },
     slime_2: {
+        name: "Slime",
         turns: [["defend", 4], ["attack", 5], ["defend", 4], ["attack", 6], ["defend", 5]],
         health: 10,
         armor: 0
     },
     slime_3: {
+        name: "Slime",
         turns: [["attack", 5], ["attack", 5], ["defend", 5], ["defend", 5], ["attack", 5]],
         health: 10,
         armor: 0
     },
     slime_boss: {
+        name: "Grime",
         turns: [["attack", 100], ["attack", 200]],
         health: 200,
         armor: 0
+    },
+    fruitbat: {
+        name: "Fruitbat",
+        turns: [["attack", 5], ["attack", 6], ["defend", 5], ["attack", 10]]
+    },
+    shade: {
+        name: "Shade",
+        turns: [["defend", 5], ["defend", 5], ["defend", 5], ["defend", 5]]
     }
 }
 
 var combatDict = {
-    intro: {
-        area: "Caves I",
-        enemies: ["slime_1"],
-        reward: ["gold"],
-        next: ["change_slide", "map"]
-    },
-
     caves_1: {
         area: "Caves",
         enemies: ["slime_1", "slime_1"],
@@ -279,12 +479,62 @@ var combatDict = {
         next: ["dungeon_slide", "caves"]
     },
 
-    test_boss: {
-        area: "Deep caves",
-        enemies: ["slime_boss"],
-        reward: ["gold"],
-        next: ["dungeon_slide", "caves"]
+    caves_2: {
+
+    },
+
+    caves_3: {
+
+    },
+
+    caves_4: {
+
+    },
+
+    caves_5: {
+
+    },
+
+    caves_6: {
+
+    },
+
+    caves_7: {
+
+    },
+
+    caves_8: {
+
+    },
+
+    caves_9: {
+
+    },
+
+    caves_10: {
+
+    },
+
+    caves_boss_1: {
+
+    },
+
+    caves_boss_2: {
+
+    },
+
+    deep_caves_1: {
+
+    },
+
+    deep_caves_boss_1: {
+
+    },
+
+    twisted_catacombs: {
+
     }
+
 }
 
 var eventDict = {
@@ -328,10 +578,133 @@ var eventDict = {
     caves_1: {
         title: "Rat chef",
         image: "intro_encounter",
-        description: "You see a rat. He do be cooking.",
-        choices: ["Eat"],
+        description: `As you are exploring the dungeon, you see a particular rat. The rat seems to be cooking a meal with its rat sized paws and its rat sized tools.
+                     Although it notices you, it does not scurry away, instead pushes a small bowl filled with its cooking towards you.`,
+        choices: ["Eat", "Improve the recipe [int 10]", "Give the rat a grand compliment [chr 10]", "Leave"],
+        choicesEffects: [["change_slide", "caves_1_1"], ["change_slide", "caves_1_2"], ["change_slide", "caves_1_3"], ["change_slide", "caves_1_4"]]
+    },
+
+    caves_1_1: {
+        title: "Rat chef",
+        image: "intro_encounter",
+        description: "You taste contents of the bowl. It is delicious and flashback-inducing. You feel inviograted. (Hp recovered by 10)",
+        choices: ["Leave"],
         choicesEffects: [["dungeon_slide", "caves"]]
-    }
+    },
+
+    caves_1_2: {
+        title: "Rat chef",
+        image: "intro_encounter",
+        description: `You taste the dish and give a constructive criticism. You suggest an addition of couple of spices. The rat scurries off and comes back with the
+                      mentioned spices. The resulting dish is fantastic, and the rat gives you some to take home. (Hp recovered by 15, 'rat stew' added to inventory.)`,
+        choices: ["Leave"],
+        choicesEffects: [["dungeon_slide", "caves"]]
+    },
+
+    caves_1_3: {
+        title: "Rat chef",
+        image: "intro_encounter",
+        description: `After tasting the dish, you shower the chef with compliments. You compare its cooking to mythic dishes from legends and fairy tales, the rat seems happy
+                      despite its lack of knowledge of classic literature. The rat gives you a gift. (Hp recovered by 10. 'rat signature' added to invventory.)`,
+        choices: ["Leave"],
+        choicesEffects: [["dungeon_slide", "caves"]]
+    },
+
+    caves_1_4: {
+        title: "Rat chef",
+        image: "intro_encounter",
+        description: `Only an insane person would eat a food prepared by a rat. While its little chef hat is adorable, it does not mean he passed an health inspection. You leave.`,
+        choices: ["Leave"],
+        choicesEffects: [["dungeon_slide", "caves"]]
+    },
+
+    caves_2: {
+        title: "A large rock",
+        image: "intro_encounter",
+        description: "It's a large rock. Its strange color make it seem out of place.",
+        choices: ["Lift the rock. [str 7]", "Leave"],
+        choicesEffects: [["change_slide", "caves_2_1"], ["change_slide", "caves_2_2"]]
+    },
+
+    caves_2_1: {
+        title: "A large rock",
+        image: "intro_encounter",
+        description: "You move the rock out of its place, and you find a gold pouch. (30 gold added to inventory)",
+        choices: ["Leave"],
+        choicesEffects: [["dungeon_slide", "caves"]]
+    },
+
+    caves_2_2: {
+        title: "A large rock",
+        image: "intro_encounter",
+        description: "You already have enough problems. You do not need to add back injury to the list.",
+        choices: ["Leave"],
+        choicesEffects: [["dungeon_slide", "caves"]]
+    },
+
+    caves_3: {
+        title: "A hungry shade",
+        image: "intro_encounter",
+        description: "You encounter a shade. It seems out of energy and having a hard time even maintaining its shape. Shades like eating light, right?",
+        choices: ["Feed it a lit torch. [torch -1]", "Light a fire [dex 10]", "Leave"],
+        choicesEffects: [["change_slide", "caves_3_1"], ["change_slide", "caves_3_2"], ["change_slide", "caves_3_3"]]
+    },
+
+    caves_3_1: {
+        title: "A hungry shade",
+        image: "intro_encounter",
+        description: "You feed the shade a lit torch. It gulps it down very quickly. After it is rejuvinated, the shade begins to follow you. (Card 'shade attack' added)",
+        choices: ["Leave"],
+        choicesEffects: [["dungeon_slide", "caves"]]
+    },
+
+    caves_3_2: {
+        title: "A hungry shade",
+        image: "intro_encounter",
+        description: "Utlizing your surrounding and amazing dexterity and effort, you manage to light a fire. The shade gulps it down. Delighted, it begins to follow you. (Card 'shade attack' added)",
+        choices: ["Leave"],
+        choicesEffects: [["dungeon_slide", "caves"]]
+    },
+
+    caves_3_3: {
+        title: "A hungry shade",
+        image: "intro_encounter",
+        description: "You decided to leave the shade alone.",
+        choices: ["Leave"],
+        choicesEffects: [["dungeon_slide", "caves"]]
+    },
+
+    caves_4: {
+        title: "A blockage",
+        image: "intro_encounter",
+        description: "You encounter a blockage. Only way through is by digging it out.",
+        choices: ["Use a shovel [shovel -1]", "SMASH! [str 12]", "Use your hands"],
+        choicesEffects: [["change_slide", "caves_4_1"], ["change_slide", "caves_4_2"], ["change_slide", "caves_4_3"]],
+    },
+
+    caves_4_1: {
+        title: "A blockage",
+        image: "intro_encounter",
+        description: "Shovel makes digging the blockage an ease. Technology!",
+        choices: ["Pass through"],
+        choicesEffects: [["dungeon_slide", "caves"]]
+    },
+
+    caves_4_2: {
+        title: "A blockage",
+        image: "intro_encounter",
+        description: "You punch through the blockage like a madman without a help from a tool. Take that human ingenuity!",
+        choices: ["Pass through"],
+        choicesEffects: [["dungeon_slide", "caves"]]
+    },
+
+    caves_4_3: {
+        title: "A blockage",
+        image: "intro_encounter",
+        description: "You use your hands to clear out the blockage. Your hands hurt, and the dirt under the nails is gonna be a pain the clean... (hp -10)",
+        choices: ["Pass through"],
+        choicesEffects: [["dungeon_slide", "caves"]]
+    },
 
     
 
@@ -340,14 +713,15 @@ var eventDict = {
 var dungeonDict = {
     caves: {
         area: "Caves",
-        description: `Dark and rocky, caves are a home to many creatures who prefer the darkness to the morning sun. Caves are also hard to navigate and home to many blockages,
-                            so bring torches, shovels, and maybe even bombs.Be careful when clearing blockages, unless you prefer a closed casket funeral.`
+        description: `Dark and rocky, caves are a home to many creatures who prefer the darkness to the morning sun. Despite it's uninviting environment, creatures living in caves
+                      are not too dangerous, making it a great place for a new monster murderer to train. However, caves are hard to navigate and home to many blockages, so bring torches, 
+                      shovels, and maybe even bombs.`
     }
 }
 
 var townDict = {
     cambria: {
-        choices: ["Tavern", "Potion Shop", "Blackmsith", "Muck around", "Leave"],
+        choices: ["Tavern", "Potion Shop", "Blackmsith", "Train", "Leave"],
         choicesEffects: [[], ["change_slide", "cambria_potion_seller"], [], [], ["change_slide", "map"]]
     }
 }
@@ -674,7 +1048,7 @@ $(function () {
         }
 
         moveDeck = moveDeck.filter(a => a !== itemDict[itemClass].card);
-        combatDrawPile = moveDeck.slice();
+        //combatDrawPile = moveDeck.slice();
         console.log(moveDeck);
         updateDeckUI();
         
@@ -818,13 +1192,20 @@ $(function () {
     
 
     function startCombat() {
-        combatDrawPile = moveDeck.slice();
+        combatDrawPile = dungeonMoveDeck.slice();
         combatDiscardPile = [];
         updateDrawPile();
         emptyDiscardPile();
         newTurn();
         combat_turn = 0;
         enemy_count = $(".enemy").length;
+
+        if (selectedCharacter == "Vera") {
+            fear = 0;
+            console.log("Fear: " + fear);
+            $("#fear_bar").html(fear);
+        }
+
         //console.log(enemy_count);
 
         //Display intenet for each enemy
@@ -841,19 +1222,21 @@ $(function () {
     function drawCard(amount) {
         for (var i = 0; i < amount; i++) {
             //###RESHUFFLE ONCE DRAW PILE IS DEPLETED#####
+            //console.log("Combat draw Pile length: " + combatDrawPile.length);
             if (combatDrawPile.length <= 0) {
                 if (combatDiscardPile.length <= 0) {
                     return;
                 }
-                combatDrawPile = combatDiscardPile;
+                combatDrawPile = combatDiscardPile.slice();
                 emptyDiscardPile();
                 updateDrawPile();
                 
             } 
             var cardIndex = Math.round(Math.random() * (combatDrawPile.length - 1));
             var card = combatDrawPile[cardIndex];
+            var cardText = cardDescription(card);
             $(".player_hand").append(
-                "<div data-aos='fade-left' class=\x22move_card " + card + " " + movesDict[card].type + " " + movesDict[card].value + " " + movesDict[card].cost + " draggable\x22>" + "<img src=\x22images/card/" + card + ".png\x22 />" +"</div>"
+                "<div data-aos='fade-left' class=\x22move_card " + card + " draggable\x22>" + "<img src=\x22images/card/" + card + ".png\x22 />" + "<p>" + cardText + "</p>" +"</div>"
             );
 
             //console.log($(".move_card"));
@@ -870,6 +1253,31 @@ $(function () {
         
     }
 
+    function cardDescription(card) {
+        //Get value, adjust based on status, update!
+        var returnString = "" 
+        for (var i = 0; i < movesDict[card].type.length; i++) {
+            switch (movesDict[card].type[i]) {
+                case "attack":
+                    returnString += "Deal " + movesDict[card].value[i] + " damage."
+                    break;
+                case "defend":
+                    returnString += "Gain " + movesDict[card].value[i] + " armor."
+                    break;
+                case "aoe":
+                    returnString += "Deal " + movesDict[card].value[i] + " damage to all enemies."
+                    break;
+                case "draw":
+                    returnString += "Draw " + movesDict[card].value[i] + " card(s)."
+                    break;
+                case "status":
+                    returnString += "Apply " + movesDict[card].duration[i] + "turn(s) of weak" + movesDict[card].value[i] + "."
+                    break;
+            }
+        }
+        return returnString;
+    }
+
     function updateDrawPile() {
         $("#draw_pile").empty();
         for (var i = 0; i < combatDrawPile.length; i++) {
@@ -881,6 +1289,7 @@ $(function () {
 
     function emptyDiscardPile() {
         $("#discard_pile").empty();
+        combatDiscardPile = [];
     }
 
     //UPDATES THE DECK UI, NOT THE VARIABLE
@@ -889,6 +1298,15 @@ $(function () {
         for (var i = 0; i < moveDeck.length; i++) {
             $("#moves_list").append(
                 "<li title= \x22" + movesDict[moveDeck[i]].description + "\x22>" + movesDict[moveDeck[i]].name + "</li>"
+            );
+        }
+    }
+
+    function updateDungeonDeckUI() {
+        $("#moves_list").empty();
+        for (var i = 0; i < dungeonMoveDeck.length; i++) {
+            $("#moves_list").append(
+                "<li title= \x22" + movesDict[dungeonMoveDeck[i]].description + "\x22>" + movesDict[dungeonMoveDeck[i]].name + "</li>"
             );
         }
     }
@@ -902,12 +1320,17 @@ $(function () {
                         "ui-droppable-hover": "ui-state-hover"
                     },
                     drop: function (event, ui) {
-                        var classArr = ui.draggable.attr('class').split(' ');
-                        if (curr_action_points < parseInt(classArr[4])) {
+                        var cardName = ui.draggable.attr('class').split(' ')[1];
+                        if (curr_action_points < movesDict[cardName].cost) {
                             //Play an error sound, maybe make action point shine?
                         } else {
-                            playCard(classArr, this.id);
-                            ui.draggable.remove();
+                            if (fear_active == true && fear < movesDict[cardName].fear_cost) {
+                                //Play error sound?
+                            } else {
+                                playCard(cardName, this.id);
+                                ui.draggable.remove();
+                            }
+                            
                         }
                         
                     }
@@ -916,92 +1339,124 @@ $(function () {
     });
 
 
-    function playCard(classArr, enemyId) {
+    function playCard(cardName, enemyId) {
         console.log(enemyId);
 
-        var card_cost = parseInt(classArr[4])
+        var card_cost = movesDict[cardName].cost;
         curr_action_points -= card_cost;
         updateActionPointUI();
-        //Card effect. classArr[2] is type, classArr[3] is value
-        switch (classArr[2]) {
-            case "attack":
-                console.log("attacking!");
 
-                var damage = classArr[3];
-                var armor = enemies_stat[enemyId].armor;
-
-                //Calculate damage
-                var result = calculateDamage(damage, armor)
-                damage = result[0];
-                armor = result[1];
-                //if (enemies_stat[enemyId].armor > 0) {
-                //    damage -= enemies_stat[enemyId].armor;
-                //    if (damage < 0) {
-                //        damage = 0;
-                //    }
-                //    enemies_stat[enemyId].armor -= classArr[3];
-                //    if (enemies_stat[enemyId].armor < 0) {
-                //        enemies_stat[enemyId].armor = 0;
-                //    }
-                //    
-                //}
-                enemies_stat[enemyId].armor = armor;
-                $("#" + enemyId).find(".enemy_armor").html(enemies_stat[enemyId].armor);
-
-                //Adjust enemy health based on damage
-                enemies_stat[enemyId].health = enemies_stat[enemyId].health - damage;
-                if (enemies_stat[enemyId].health < 0) {
-                    enemies_stat[enemyId].health = 0;
-                }
-                $("#" + enemyId).find(".enemy_health").html(enemies_stat[enemyId].health);
-
-
-                console.log(enemies_stat)
-                    
-                checkEnemyDeath(enemyId);
-
-                break;
-            case "defend":
-                console.log("defending!");
-                hpStat.currArmor += parseInt(classArr[3]);
-                console.log(hpStat.currArmor);
-                $("#char_arm").html(hpStat.currArmor);
-                console.log(hpStat);
-                break;
-            case "aoe":
-                $(".enemy").each(function () {
-                    var damage = classArr[3];
-                    var armor = enemies_stat[this.id].armor;
-                    var result = calculateDamage(damage, armor);
-
-                    damage = result[0];
-                    armor = result[1];
-                    console.log(armor);
-
-                    enemies_stat[this.id].armor = armor;
-                    $("#" + this.id).find(".enemy_armor").html(enemies_stat[this.id].armor);
-
-                    //Adjust enemy health based on damage
-                    enemies_stat[this.id].health = enemies_stat[this.id].health - damage;
-                    if (enemies_stat[this.id].health < 0) {
-                        enemies_stat[this.id].health = 0;
-                    }
-                    $("#" + this.id).find(".enemy_health").html(enemies_stat[this.id].health);
-
-                    checkEnemyDeath(this.id);
-                });
-
-                break;
+        if (fear_active) {
+            fear -= movesDict[cardName].fear_cost;
+            console.log("Fear: " + fear);
+            $("#fear_bar").html(fear);
         }
 
+        for (var i = 0; i < movesDict[cardName].type.length; i++) {
+            switch (movesDict[cardName].type[i]) {
+                case "attack":
+                    console.log("attacking!");
+
+                    var damage = movesDict[cardName].value[i];
+                    var armor = enemies_stat[enemyId].armor;
+
+                    //Calculate damage
+                    var result = calculateDamage(damage, armor)
+                    damage = result[0];
+                    armor = result[1];
+
+                    //Adjust armor
+                    enemies_stat[enemyId].armor = armor;
+                    $("#" + enemyId).find(".enemy_armor").html(enemies_stat[enemyId].armor);
+
+                    //Adjust enemy health based on damage
+                    adjustEnemyHealth(enemyId, damage);
+
+
+                    console.log(enemies_stat)
+
+                    checkEnemyDeath(enemyId);
+
+                    if (selectedCharacter == "Vera") {
+                        fear += damage;
+                        $("#fear_bar").html(fear);
+                    }
+
+
+                    break;
+                case "defend":
+                    console.log("defending!");
+                    hpStat.currArmor += movesDict[cardName].value[i];
+                    console.log(hpStat.currArmor);
+                    $("#char_arm").html(hpStat.currArmor);
+                    console.log(hpStat);
+                    break;
+                case "aoe":
+                    $(".enemy").each(function () {
+                        var damage = movesDict[cardName].value[i];
+                        var armor = enemies_stat[this.id].armor;
+
+                        if (fear_active) {
+                            damage = movesDict[cardName].fear_value;
+                        }
+
+                        //Calculate damage
+                        var result = calculateDamage(damage, armor);
+                        damage = result[0];
+                        armor = result[1];
+
+                        //Adjust armor
+                        enemies_stat[this.id].armor = armor;
+                        $("#" + this.id).find(".enemy_armor").html(enemies_stat[this.id].armor);
+
+                        //Adjust enemy health based on damage
+                        adjustEnemyHealth(this.id, damage);
+
+                        checkEnemyDeath(this.id);
+
+                        if (selectedCharacter == "Vera" && !fear_active) {
+                            fear += damage;
+                            $("#fear_bar").html(fear);
+                        }
+                    });
+
+                    break;
+                case "draw":
+                    console.log("Drawing card!");
+                    drawCard(movesDict[cardName].value[i]);
+                    break;
+                case "status":
+                    applyStatusEffect(enemyId, movesDict[cardName].value[i], movesDict[cardName].duration[i]);
+                    updateEnemyIntent(enemyId);
+                    break;
+            }
+        }
+
+        
+
         //Put card in discard pile
-        combatDiscardPile.push(classArr[1]);
+        combatDiscardPile.push(cardName);
         $("#discard_pile").append(
-            "<li class=\x22" + classArr[1] + "\x22>" + classArr[1] + "</li>"
+            "<li class=\x22" + cardName + "\x22>" + cardName + "</li>"
         );
         
         
     };
+
+    //Vera Fear mechanic
+    $(document).on("click", "#fear_bar", function () {
+        if (fear_active) {
+            $("#fear_bar").css("background-image", "url('images/icon/fear_bar.png')");
+            console.log("Fear is now not active");
+            fear_active = false;
+        } else {
+            $("#fear_bar").css("background-image", "url('images/icon/fear_bar_highlight.png')");
+            console.log("Fear is now active");
+            fear_active = true;
+        }
+
+    });
+
 
     function calculateDamage(damage, armor) {
 
@@ -1021,6 +1476,86 @@ $(function () {
         return [return_damage, return_armor];
     }
 
+    function adjustEnemyHealth(enemyId, damage) {
+        enemies_stat[enemyId].health = enemies_stat[enemyId].health - damage;
+        if (enemies_stat[enemyId].health < 0) {
+            enemies_stat[enemyId].health = 0;
+        }
+        $("#" + enemyId).find(".enemy_health").html(enemies_stat[enemyId].health);
+    }
+
+    function applyStatusEffect(enemyId, effect, duration) {
+
+        enemies_stat[enemyId].status[effect] += duration;
+
+        if ($("#" + enemyId).find(".enemy_status_container").find("." + effect).length) {
+            console.log("status does exist")
+
+            console.log(enemies_stat);
+
+            //Update the UI
+            $("#" + enemyId).find(".enemy_status_container").find("." + effect).html(enemies_stat[enemyId].status[effect]);
+        } else {
+            console.log("status does not exist!")
+            //Update enemies_stat dictionary with new status and its duration
+
+            //Update the UI
+            $("#" + enemyId).find(".enemy_status_container").append("<div title=\x22" + statusDict[effect].description + "\x22 class=\x22status_effect " + effect + "\x22>" + duration + "</div>");
+            var urlString = "url(\x22images/icon/" + effect + ".png\x22)";
+            console.log(urlString);
+            $("#" + enemyId).find(".enemy_status_container").find("." + effect).css("background-image", urlString);
+
+            console.log(enemies_stat);
+        }
+
+        
+    }
+
+    function decrementEnemyStatus() {
+        //Loop through each enemy decrement their status
+
+        for (var i = 1; i <= 3; i++) {
+
+            for (const [key,value] of Object.entries(enemies_stat["enemy_" + i].status)) {
+                if (enemies_stat["enemy_" + i].status[key] > 0) {
+                    enemies_stat["enemy_" + i].status[key] -= 1
+                    if (enemies_stat["enemy_" + i].status[key] <= 0) {
+                        $("#enemy_" + i).find(".enemy_status_container").find("." + key).remove();
+                    } else if (enemies_stat["enemy_" + i].status[key] > 0) {
+                        $("#enemy_" + i).find(".enemy_status_container").find("." + key).html(enemies_stat["enemy_" + i].status[key]);
+                    }
+                }
+                
+            }
+
+            console.log(enemies_stat);
+
+                
+            
+        }
+        
+    }
+
+    function updateEnemyIntent(enemyId) {
+
+        var enemyName = $("#" + enemyId).attr('class').split(' ')[1];
+
+        var enemy_turn = enemiesDict[enemyName].turns
+
+        var enemy_action = enemy_turn[combat_turn][0];
+        var enemy_action_value = enemy_turn[combat_turn][1];
+
+        if (enemy_action == "attack") {
+            if (enemies_stat[enemyId].status["weak"] > 0) {
+                enemy_action_value = Math.floor(enemy_action_value * .75);
+            }
+        }
+
+        $("#" + enemyId).find(".intent").html(enemy_action + " " + enemy_action_value);
+        
+    }
+
+
     function checkEnemyDeath(enemyId) {
         //Check if enemy is killed
         if (enemies_stat[enemyId].health <= 0) {
@@ -1039,6 +1574,7 @@ $(function () {
 
     //End Turn
     $(document).on("click", "#end_turn_button", function () {
+        //Remove hand
         $(".move_card").each(function (i) {
             var classArr = $(this).attr('class').split(' ');
             combatDiscardPile.push(classArr[1]);
@@ -1048,25 +1584,23 @@ $(function () {
             $(this).remove();
         });
 
-        //$(".move_card").remove();
-
+        //Conduct enemy turn
         enemyArray = $(".enemy");
         enemy_index = 0;
 
         conductEnemyTurn();
-        
-
-        
-
         
     });
 
     function newTurn() {
         curr_action_points = max_action_points;
         hpStat.currArmor = hpStat.defaultArmor;
+        $("#char_arm").html(hpStat.currArmor);
         updateActionPointUI();
 
         drawCard(5);
+
+        decrementEnemyStatus();
 
         //Display intenet for each enemy
         $(".enemy").each(function (i) {
@@ -1089,6 +1623,13 @@ $(function () {
 
         var enemy_action = enemy_turn[combat_turn][0];
         var enemy_action_value = enemy_turn[combat_turn][1];
+
+        if (enemy_action == "attack") {
+            if (enemies_stat[enemy_id].status["weak"] > 0) {
+                enemy_action_value = Math.floor(enemy_action_value * .75);
+            }
+        }
+
         $("#" + enemy_id).find(".intent").html(enemy_action + " " + enemy_action_value);
 
     }
@@ -1101,25 +1642,6 @@ $(function () {
         $("#" + enemy_id).find(".enemy_health").html(enemies_stat[enemy_id].max_health);
         $("#" + enemy_id).find(".enemy_armor").html(enemies_stat[enemy_id].armor);
     }
-
-    //function conductEnemyTurn() {
-    //    //alert("Starting enemy turn!");
-    //    $(".enemy").each(function (i) {
-    //        var classArr = $(this).attr('class').split(' ');
-    //        console.log(this.id);
-    //        if (enemies_stat[this.id].alive) {
-    //            $(this).animate({
-    //                opacity: '0.3'
-    //            }, 2000 , function () {
-    //                    conductEnemyAction(this.id, classArr[1], combat_turn);
-    //            });
-                
-    //        }
-    //        //Conduct enemy action
-    //    });
-    //}
-
-                    //  set your counter to 1
 
     function conductEnemyTurn() {         //  create a loop function
         setTimeout(function () {   //  call a 2s setTimeout when the loop is called
@@ -1141,16 +1663,12 @@ $(function () {
                 console.log("Ya should only see this once!");
                 combat_turn += 1;
                 newTurn();
+                
             }
         }, 1200)
     }
         
     function conductEnemyAction(enemy_id, enemy_name, combat_turn) {
-        //console.log("Enemy name: " + enemy_name);
-        //console.log("Combat turn: " + combat_turn);
-        //console.log("Turn actions: " + enemies[enemy_name].turns[combat_turn][0]);
-        //console.log("Turn action value: " + enemies[enemy_name].turns[combat_turn][1]);
-
         //Reset enemy armor
         enemies_stat[enemy_id].armor = 0;
         $("#" + enemy_id).find(".enemy_armor").html(enemies_stat[enemy_id].armor);
@@ -1162,7 +1680,11 @@ $(function () {
         switch (enemy_turn[turn_index][0]) {
             case "attack":
                 console.log("monster is Attacking!");
-                var damage = enemy_turn[turn_index][1]
+                var damage = enemy_turn[turn_index][1];
+                if (enemies_stat[enemy_id].status["weak"] > 0) {
+                    damage = Math.floor(damage * .75);
+                }
+
 
                 //adjusting damage if player has armor
                 if (hpStat.currArmor != 0) {
@@ -1184,6 +1706,12 @@ $(function () {
                 var targetValue = hpStat.currHp - parseFloat(damage);
                 animateHpBar($("#hp_bar"), targetValue);
 
+                if (selectedCharacter == "Vera") {
+                    fear += parseFloat(damage);
+                    $("#fear_bar").html(fear);
+                }
+
+                
                 //Player lose combat
                 if (hpStat.currHp <= 0) {
                     endCombat("lose");
@@ -1239,7 +1767,7 @@ $(function () {
         //Display outcome screen w/rewards
         $(".outcome_screen").fadeIn(1000);
 
-        combatDrawPiel = [];
+        combatDrawPile = [];
         updateDrawPile();
         combatDiscardPile = [];
         emptyDiscardPile();
@@ -1330,9 +1858,18 @@ $(function () {
                 case "leave_dungeon":
                     changeGameSlide(arr[i + 1]);
                     dungeonFloor = 0;
+                    updateDeckUI();
                     break;
                 case "open_shop":
                     openShop(arr[i + 1]);
+                    break;
+                case "chec_shop":
+                    checShop();
+                    break;
+                case "check_strength":
+                    if (!checkStrength(arr[i + 1])) {
+                        return;
+                    }
                     break;
             }
         }
@@ -1387,8 +1924,8 @@ $(function () {
                             <p>Race: Human</p>
                             <p>Class: Fighter</p>
                             <p class='select_backstory'>
-                                One of the numerous offspring of the previous hero, Hall was raised in the house of Lightborn as
-                                a potential hero for the next generation, going through rigorous training. While he was chosen as the next hero, Hall claims he had
+                                One of the numerous offspring of the previous hero, Hall was raised in the house of Lightroot as
+                                a potential hero for the next generation and went through rigorous training. While he was chosen as the next hero, Hall claims he had
                                 a 'minor' dispute with the managerial members of the house, and escaped the house. Now he enjoys his carefree 
                                 life as a adventurer, but he can't seem to quite get rid of his habit of helping people in need as a former
                                 hero canadiate.
@@ -1424,7 +1961,9 @@ $(function () {
 
                         <div class="select_info_deck_container">
                             <h3>Deck/Combat style:</h3>
-                            <p>Hall fights through relentless attacks. His actions become stronger if they are performed in combos.</p>
+                            <p>Hall fights through relentless attacks. His actions become stronger if they are performed in combos.
+                               He is also a moody fighter, and prefers some actions over others in a given turn. 
+                            </p>
                         </div>
 
                         <div class="select_info_button_container">
@@ -1453,7 +1992,7 @@ $(function () {
                                 Studying a rather peculiar field of magic, Vera is an avid conoisseur of everything to do with fear.
                                 While she claims she is studying fear magic to help people get over their fears, she seems to find
                                 an awful amount of joy making a bandit or a monster run away crying. Due to the amount of scary stories
-                                she reads to research fear doesn't help her fall asleep, resulting in the bags under her eyes.
+                                she reads to further her understanding of fear, she has a hard time sleeping at night, resulting in the bags under her eyes.
                             </p>
                         
                         </div>
@@ -1486,7 +2025,7 @@ $(function () {
 
                         <div class="select_info_deck_container">
                             <h3>Deck/Combat Style:</h3>
-                            <p>Vera fights utilizing the enemy's and her own fear. She will generally get stronger as the fight goes on.</p>
+                            <p>Vera fights utilizing the enemy's and her own fear. She will generally get stronger as the fight goes on, as taking and dealing damage generates fear.</p>
                         </div>
 
                         <div class="select_info_button_container">
@@ -1565,6 +2104,34 @@ $(function () {
         
     }
 
+    function checkStrength(value) {
+        if (chrStat.str >= value) {
+            return true;
+        }
+        return false;
+    }
+
+    function checkDex(value) {
+        if (chrStat.dex >= value) {
+            return true;
+        }
+        return false;
+    }
+
+    function checkInt(value) {
+        if (chrStat.int >= value) {
+            return true;
+        }
+        return false;
+    }
+
+    function checkChr(value) {
+        if (chrStat.chr >= value) {
+            return true;
+        }
+        return false;
+    }
+
     function townSlide(town) {
         $('#main_display_container').append("<div id='content' class='town_screen'></div>");
         $('#content').append("<div class='town_choice_container'></div>");
@@ -1603,7 +2170,6 @@ $(function () {
 
             $('#main_display_container').append("<div id='content' class='shop_screen'></div>");
             $('#content').append("<div class='shop_name'> <p>" + shopDict[shopCode].name + "</p> </div>");
-            //$('#content').append("<img class='shop_owner_image src='images/shop/Chec.png>");
             $('#content').append("<div id ='shop_item_container'></div>");
 
             //Append each choice
@@ -1626,6 +2192,13 @@ $(function () {
 
     function dungeonSlide(dungeonCode) {
         $(".transition_effect").fadeIn(function () {
+
+            //Initialize dungeon move deck if its the first floor
+            if (dungeonFloor == 0) {
+                dungeonMoveDeck = moveDeck.slice();
+                updateDungeonDeckUI();
+            }
+
             dungeonFloor += 1;
             console.log("dungeon Floor: " + dungeonFloor);
 
@@ -1643,7 +2216,15 @@ $(function () {
             //Depends on the premonition
             $("#dungeon_choice_container").append("<button id='proceed_button' class='choice'> Proceed </button>");
 
-            if (dungeonFloor == 4) {
+            if (dungeonFloor == 1) {
+                //var combatRand = getRandomInt(0, 10);
+                //$("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to fight" + "</p>");
+                //$("#proceed_button").addClass('combat_encounter');
+                //$("#proceed_button").addClass('caves_' + combatRand);
+                $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to fight" + "</p>");
+                $("#proceed_button").addClass('combat_encounter');
+                $("#proceed_button").addClass('caves_1');
+            }else if (dungeonFloor == 4) {
                 //Campfire
                 console.log("Campfire should be encountered");
                 $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to rest soon" + "</p>");
@@ -1673,10 +2254,10 @@ $(function () {
                 }
             }
 
-            
+            //Roll the chec's item shop and store it, so the user can't just refresh the store
 
             //Always lead to map
-            $("#dungeon_choice_container").append("<button class='choice leave_dungeon map'> Channel Chec </button>");
+            $("#dungeon_choice_container").append("<button class='choice chec_shop 0'> Channel Chec </button>");
             $("#dungeon_choice_container").append("<button class='choice leave_dungeon map'> Leave </button>");
             $('#content').append("<div><p id='dungeon_description'>" + dungeonDict[dungeonCode].description + "</p></div>");
             //$('#content').append("<img id='chec_shop' src='images/icon/chec.png' alt='chec'/>")
@@ -1686,6 +2267,97 @@ $(function () {
         
 
     }
+
+    function checShop() {
+
+        $(".transition_effect").fadeIn(function () {
+            previous_slide = $('#content').detach();
+
+            $('#main_display_container').append("<div id='content' class='chec_shop_screen'></div>");
+            $('#content').append("<div class='chec_shop_title'>Are you experienced?</div>");
+            $('#content').append("<div id='three_random_card'></div>");
+
+            $('#three_random_card').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            $('#three_random_card').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            $('#three_random_card').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+
+            $('#content').append("<div>Special bargain! Choose one.</div>");
+
+            $('#content').append("<div id='card_shop'></div>");
+
+            $('#card_shop').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            $('#card_shop').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            $('#card_shop').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            $('#card_shop').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            $('#card_shop').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            $('#card_shop').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+
+            $('#content').append("<div>Experience for skill, a simple trade.</div>");
+
+            $('#content').append("<button id='chec_shop_leave_button' class='choice change_slide 0'>Leave</button>");
+            $(".transition_effect").fadeOut();
+        });
+
+        //<div id="content" class="chec_shop_screen">
+        //    <div id="chec_shop_title">Are you experienced?</div>
+        //    <div id="three_random_card">
+        //        <img id="ball_o_fear" class="three_card" src="images/card/ball_o_fear.png" alt="card" />
+        //        <img id="ball_o_fear" class="three_card" src="images/card/ball_o_fear.png" alt="card" />
+        //        <img id="ball_o_fear" class="three_card" src="images/card/ball_o_fear.png" alt="card" />
+        //    </div>
+        //    <div>Special bargain! Choose one.</div>
+        //    <div id="card_shop">
+        //        <img id="ball_o_fear" class="shop_card" src="images/card/ball_o_fear.png" alt="card" />
+        //        <img id="ball_o_fear" class="shop_card" src="images/card/ball_o_fear.png" alt="card" />
+        //        <img id="ball_o_fear" class="shop_card" src="images/card/ball_o_fear.png" alt="card" />
+        //        <img id="ball_o_fear" class="shop_card" src="images/card/ball_o_fear.png" alt="card" />
+        //        <img id="ball_o_fear" class="shop_card" src="images/card/ball_o_fear.png" alt="card" />
+        //        <img id="ball_o_fear" class="shop_card" src="images/card/ball_o_fear.png" alt="card" />
+        //    </div>
+        //    <div>Spend your experience!</div>
+
+        //    <button id="chec_shop_leave_button" class="choice change_slide 0">Leave</button>
+        //</div>
+    }
+
+    //Set up chec shop
+    $(document).on("click", ".three_card", function () {
+        //Check Xp cost
+        if (expStat.currExp >= 5) {
+            var cardName = $(this).attr('class').split(' ')[1];
+            addCard(cardName);
+            $("#three_random_card").empty();
+            $("#three_random_card").animate({
+                height: "0vh"
+            });
+            expStat.currExp -= 5;
+            animateExpBar($("exp_bar"), expStat.currExp)
+        } else {
+            alert("Not enough exp to buy it");
+        }
+        
+    })
+
+    $(document).on("click", ".shop_card", function () {
+        //Chexk xp cost
+        if (expStat.currExp >= 10) {
+            var cardName = $(this).attr('class').split(' ')[1];
+            addCard(cardName);
+            this.remove();
+        } else {
+            alert("Not enough exp to buy it");
+        }
+
+
+        
+    })
+
+    function addCard(card_name) {
+        console.log("Adding card");
+        dungeonMoveDeck.push(card_name);
+        updateDungeonDeckUI();
+    }
+
 
     function getRandomInt(min, max) {
         min = Math.ceil(min);
@@ -1701,6 +2373,12 @@ $(function () {
             //$('#content').append("<div id='area_name'> <p>" + combatDict[combatCode].area + "</p> </div>");
             $('#content').append("<div id='enemy_container'></div>");
 
+            //Set up fear bar
+            if (selectedCharacter == "Vera") {
+                console.log("hello!");
+                $('#content').append("<div id='fear_bar'>0</div>");
+            }
+
             //Append each enemy
             for (var i = 1; i < combatDict[combatCode].enemies.length + 1; i++) {
                 $('#enemy_container').append("<div id=\x22enemy_" + i + "\x22 class=\x22enemy " + combatDict[combatCode].enemies[i-1] + "\x22></div>");
@@ -1711,17 +2389,25 @@ $(function () {
                 //Enemy image
                 $('#enemy_' + i).append("<img src=\x22images/enemy/" + combatDict[combatCode].enemies[i - 1] + ".png\x22 alt='enemy1'/>");
 
+                $('#enemy_' + i).append("<div>"+ enemiesDict[combatDict[combatCode].enemies[i-1]].name +"</div>");
+
+                $('#enemy_' + i).append("<div id=\x22esc_" + i + "\x22 class='enemy_stat_container'></div>");
+
                 //Health
-                $('#enemy_' + i).append("<div id=\x22enemy_health_" + i + "\x22 class=\x22enemy_health\x22></div>");
+                $('#esc_' + i).append("<div id=\x22enemy_health_" + i + "\x22 class=\x22enemy_health\x22></div>");
 
                 //Armor
-                $('#enemy_' + i).append("<div id=\x22enemy_armor_" + i + "\x22 class=\x22enemy_armor\x22></div>");
+                $('#esc_' + i).append("<div id=\x22enemy_armor_" + i + "\x22 class=\x22enemy_armor\x22></div>");
+
+                //Status container
+                $('#enemy_' + i).append("<div id=\x22estc_" + i + "\x22 class='enemy_status_container'></div>");
 
             }
 
             $('#content').append(`
                 <div class="player_hand">
                     <div id="action_points"></div>
+                    <img id="action_points_icon" src="images/icon/vera_ap.png" alt="ap_icon" />
                     <button id="end_turn_button">End turn</button>
                 </div>
             `);
@@ -1828,9 +2514,11 @@ $(function () {
         switch (className) {
             case "Hall":
                 lassTemplate = hallStartTemplate;
+                selectedCharacter = "Hall";
                 break;
             case "Vera":
                 classTemplate = veraStartTemplate;
+                selectedCharacter = "Vera";
         }
 
         $("#char_portrait_img").attr("src", classTemplate.portrait);
@@ -1845,6 +2533,11 @@ $(function () {
         $("#exp").html("0/" + classTemplate.exp); 
         expStat.currExp = 0;
         expStat.maxExp = classTemplate.exp;
+
+        chrStat.str = classTemplate.str;
+        chrStat.dex = classTemplate.dex;
+        chrStat.int = classTemplate.int;
+        chrStat.chr = classTemplate.chr;
 
         $("#char_str").html(classTemplate.str); 
         $("#char_dex").html(classTemplate.dex); 

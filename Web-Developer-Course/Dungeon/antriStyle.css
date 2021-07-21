@@ -101,8 +101,7 @@
 .jumbotron-image {
     /*max-height: 70vh;*/
     /*object-fit: cover;*/
-    width: 60%;
-    height: auto;
+    width: 70vw;
     margin-left: auto;
     margin-right: auto;
 }
@@ -115,6 +114,18 @@
 
 #welcome_message{
     margin-top: 30%;
+}
+
+.card {
+    background-color: #798777;
+    color: white;
+    width: 40vh;
+}
+
+.card:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0px 0px 20px rgba(189,170,140,1);
 }
 
 /*antri race*/
@@ -137,7 +148,7 @@
 
 /*antri creatures*/
 .creature-container {
-    margin-top: 10vh;
+    margin-top: 5em;
     font-family: 'DM Serif Display', serif;
 }
 
@@ -155,12 +166,15 @@
     margin-top: 7vh;
 }
 
-.card {
-    background-color: #798777;
+.deity-card {
     color: white;
 }
 
-.card:hover{
+.deity-card img{
+    width: 27vh;
+}
+
+.deity-card img:hover{
     cursor: pointer;
     transform: scale(1.05);
     box-shadow: 0px 0px 20px rgba(189,170,140,1);
@@ -191,7 +205,7 @@
 
 /*antri map*/
 .map-title {
-    margin-top: 9vh;
+    margin-top: 5em;
     font-family: 'DM Serif Display', serif;
 }
 

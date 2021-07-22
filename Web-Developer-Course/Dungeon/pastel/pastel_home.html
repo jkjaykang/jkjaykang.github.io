@@ -8,13 +8,145 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="images/soup_item.png" />
 
+    <link rel="stylesheet" type="text/css" href="pastelStyle.css">
+
     <!-- Bootstrap and Jquery -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
 <body>
 
-    Hello world!
+    <!-- navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">PASTEL</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto me-4">
+                    <li class="nav-item me-5">
+                        <a class="nav-link" aria-current="page" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item me-5">
+                        <a class="nav-link" href="#mission">Mission</a>
+                    </li>
+                    <li class="nav-item me-5">
+                        <a class="nav-link" href="#product_start">Products</a>
+                    </li>
+                    <li class="nav-item me-5">
+                        <a class="nav-link" href="#review">Reviews</a>
+                    </li>
+                    <li class="nav-item me-5">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="home" class="jumbotron rounded-3 bg-light">
+        <div class="container-fluid jumbotron-container text-center">
+            <div id="jumbotron_text">
+                <h1 class="fw-bold">Equipment. Reimagined</h1>
+                <h3>No longer be an adventurer without style</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div id="mission" class="row mt-4">
+            <div class="col d-flex justify-content-center">
+                <div class="me-4">
+                    <div class="mission-image"></div>
+                </div>
+
+                <div>
+                    <h2>Pastel's mission</h2>
+                    <h3>Style and efficiency has never been more in tune</h3>
+                    <p>Pastel works to bring innovative and stylish gear for adventurers.</p>
+                    <p><i>Read an exclusive interview with the brand founder, Craya Pastel</i></p>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="product_container">
+            <div class="row mt-4">
+                <div id="product_start" class="col d-flex justify-content-center">
+                    <div class="card m-2">
+                        <div class="card-body">
+                            <img class="img-fluid" src="images/test_card_1.png" alt="card_1" />
+                        </div>
+                    </div>
+
+                    <div class="card m-2">
+                        <div class="card-body">
+                            <img class="img-fluid" src="images/test_card_2.png" alt="card_2" />
+                        </div>
+                    </div>
+
+                    <div class="card m-2">
+                        <div class="card-body">
+                            <img class="img-fluid" src="images/test_card_3.png" alt="card_3" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mt-2">
+                <div class="col d-flex justify-content-center">
+                    <div class="card m-2">
+                        <div class="card-body">
+                            <img class="img-fluid" src="images/test_card_1.png" alt="card_1" />
+                        </div>
+                    </div>
+
+                    <div class="card m-2">
+                        <div class="card-body">
+                            <img class="img-fluid" src="images/test_card_2.png" alt="card_2" />
+                        </div>
+                    </div>
+
+                    <div class="card m-2">
+                        <div class="card-body">
+                            <img class="img-fluid" src="images/test_card_3.png" alt="card_3" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        
+
+        <div class="row mt-4 mb-5 justify-content-center">
+            <div id="review" class="col-10 d-flex justify-content-center">
+                <div class="me-4">
+                    <div class="review-image"></div>
+                </div>
+
+                <div>
+                    <h3><i>Great brand</i></h3>
+                    <p>I was always worried that even as I am saving a village from a bloodthirsty monster they would poke fun at my outfit, now I worry no longer.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div id="contact" class="container">
+            <span class="text-muted">Contact us at: !</span>
+        </div>
+    </footer>
+
+
+
+
+
 
     <!-- Bootstrap scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

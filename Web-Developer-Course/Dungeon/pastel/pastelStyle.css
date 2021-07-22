@@ -1,0 +1,70 @@
+﻿body {
+    background-color: #F9F9F9;
+}
+
+.navbar-brand{
+    margin-left: 5vw;
+}
+
+.jumbotron {
+    height: 70vw;
+    background-image: url("images/banner.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center bottom;
+
+
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (min-width: 576px) {
+    .jumbotron {
+        height: 40vw;
+    }
+
+    #jumbotron_text {
+        margin-bottom: 12vw;
+    }
+}
+
+
+#jumbotron_text {
+    
+}
+
+.jumbotron-container
+{
+    padding: 6vh;
+    
+}
+
+.mission-image {
+    width: 40vw;
+    height: 30vw;
+    background-color: #CDF0EA;
+}
+
+#mission_statement {
+    
+}
+
+#product_container {
+    background-color: #BEAEE2;
+}
+
+.card {
+    width: 18rem;
+    height: 18rem;
+}
+
+.card img{
+    /*width: 18rem;*/
+}
+
+.review-image {
+    width: 20vw;
+    height: 15vw;
+    background-color: #F7DBF0;
+}
+

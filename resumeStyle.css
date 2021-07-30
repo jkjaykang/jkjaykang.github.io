@@ -130,6 +130,8 @@ h1{
     background-color: var(--bg-primary);
 
     height: 70vh;
+    width: 100vw;
+    max-width: 100%;
 
     color: var(--text-primary);
 }
@@ -141,7 +143,7 @@ h1{
 }
 
 .portrait{
-    height: 30vh;
+    height: 40vw;
 
     border: solid 0.5rem;
     border-color: var(--text-primary);
@@ -162,6 +164,10 @@ h1{
 #education {
     display: flex;
     justify-content: center;
+
+    width: 100vw;
+    max-width: 100%;
+
     background-color: var(--bg-secondary);
     background-image: url("resumeImages/background_education.png");
     background-size: 100vw;
@@ -225,6 +231,9 @@ h1{
     display: flex;
     justify-content: center;
 
+    width: 100vw;
+    max-width: 100%;
+
     background-color: var(--bg-primary);
     background-image: url("resumeImages/background_work.png");
     background-size: 100vw;
@@ -241,6 +250,10 @@ h1{
 #projects {
     display: flex;
     justify-content: center;
+
+    width: 100vw;
+    max-width: 100%;
+
     background-color: var(--bg-secondary);
     background-image: url("resumeImages/background_project.png");
     background-size: 100vw;
@@ -451,6 +464,10 @@ h1{
 #skills {
     display: flex;
     justify-content: center;
+
+    width: 100vw;
+    max-width: 100%;
+
     background-color: var(--bg-primary);
     background-image: url("resumeImages/background_skill.png");
     background-size: 100vw;
@@ -487,12 +504,15 @@ h1{
 
 .skill-entry {
     text-align: center;
-    margin: 1rem;
+    margin: 0.5rem;
 }
 
 #end {
     display: flex;
     justify-content: center;
+
+    width: 100vw;
+    max-width: 100%;
 
     background-color: var(--bg-third);
     color: var(--text-primary);

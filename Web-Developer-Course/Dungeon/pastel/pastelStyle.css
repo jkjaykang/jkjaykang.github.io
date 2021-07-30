@@ -40,8 +40,8 @@
 }
 
 .mission-image {
-    width: 40vw;
-    height: 30vw;
+    width: 30vw;
+    height: 20vw;
     background-color: #CDF0EA;
 }
 
@@ -53,18 +53,31 @@
     background-color: #BEAEE2;
 }
 
-.card {
-    width: 18rem;
-    height: 18rem;
+
+.product-1 {
+    width: 39vw;
+    height: 39vw;
+
+    background-color: aqua;
 }
 
-.card img{
-    /*width: 18rem;*/
+.product-2 {
+    width: 19.5vw;
+    height: 13vw;
+    background-color: peachpuff;
+}
+
+
+.product-3 {
+    width: 19.5vw;
+    height: 26vw;
+
+    background-color: azure;
 }
 
 .review-image {
-    width: 20vw;
-    height: 15vw;
+    width: 26vw;
+    height: 19.5vw;
     background-color: #F7DBF0;
 }
 

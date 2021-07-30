@@ -144,6 +144,7 @@ h1{
 
 .portrait{
     height: 40vw;
+    max-height: 25rem;
 
     border: solid 0.5rem;
     border-color: var(--text-primary);
@@ -260,7 +261,7 @@ h1{
     background-position: center bottom;
     background-repeat: no-repeat;
 
-    height: 60rem;
+    /*height: 60rem;*/
 
     color: var(--text-primary);
 }
@@ -279,13 +280,13 @@ h1{
 .carousel figcaption{
     background-color: green;
 
-    display: none;
+    /*display: none;*/
     background: rgba(5, 102, 118, 0.7);
 
-    position: absolute;
-    top: 0%;
+    margin-top: -1.2rem;
+    /*position: absolute;*/
+    /*top: 0%;*/
     width: var(--proj-mobile-width);
-    height: var(--proj-mobile-height);
 
     color: white;
 }
@@ -298,13 +299,19 @@ h1{
     margin-left: 1rem;
 }
 
+.carousel-content {
+    width: var(--proj-mobile-width);
+}
+
+.carousel-content img{
+}
+
 .carousel-1 {
     margin: 0;
-    margin-bottom: 1rem;
 
     position: relative;
-    width: var(--proj-mobile-width);
-    height: var(--proj-mobile-height);
+    /*width: var(--proj-mobile-width);
+    height: var(--proj-mobile-height);*/
     /*opacity: 0.5;
 
 
@@ -326,11 +333,10 @@ h1{
 
 .carousel-2 {
     margin: 0;
-    margin-bottom: 1rem;
 
     position: relative;
-    width: var(--proj-mobile-width);
-    height: var(--proj-mobile-height);
+    /*width: var(--proj-mobile-width);
+    height: var(--proj-mobile-height);*/
     /*opacity: 1.0;
  
     position:absolute;
@@ -351,11 +357,10 @@ h1{
 
 .carousel-3 {
     margin: 0;
-    margin-bottom: 1rem;
 
     position: relative;
-    width: var(--proj-mobile-width);
-    height: var(--proj-mobile-height);
+    /*width: var(--proj-mobile-width);
+    height: var(--proj-mobile-height);*/
     /*opacity: 0.5;
 
     position:absolute;
@@ -376,13 +381,24 @@ h1{
 */}
 
 @media screen and (min-width: 700px) {
+    #projects {
+        height: 60rem;
+    }
+
+    .carousel-content {
+        margin-bottom: 1rem;
+    }
+
     .carousel {
         flex-direction: row;
     }
 
     .carousel figcaption {
+        position: absolute;
+        top: 0%;
         width: var(--proj-main-width);
         height: var(--proj-main-height);
+        margin-top: 0;
     }
 
     .carousel-1 {

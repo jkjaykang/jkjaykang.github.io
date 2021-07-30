@@ -59,15 +59,6 @@ $(function () {
     }
 
     if ($(window).width() <= 700) {
-        $(document).on({
-            "mouseenter.namespace": function () {
-                $(this).find("figcaption").css("display", "block");
-            },
-            "mouseleave.namespace": function () {
-                $(this).find("figcaption").css("display", "none");
-            }
-        }, ".carousel-content");
-
         
     } else {
         //Carousel hover description effect
@@ -140,15 +131,22 @@ $(function () {
 
     $(window).resize(function () {
         if ($(window).width() <= 700) {
+            console.log("whello");
+            $(document).off('mouseenter.namespace mouseleave.namespace');
+
+        } else {
+            console.log("window is desktop mode")
             $(document).on({
-                mouseenter: function () {
+                "mouseenter.namespace": function () {
                     $(this).find("figcaption").css("display", "block");
                 },
-                mouseleave: function () {
+                "mouseleave.namespace": function () {
                     $(this).find("figcaption").css("display", "none");
                 }
 
             }, ".active-carousel");
+
+            $(document).off("mouseenter.namespace mouseleave.namespace");
 
             $(document).on("click", ".right-carousel", function () {
                 $("#project_" + counter).toggleClass("active-carousel");
@@ -203,10 +201,6 @@ $(function () {
                 $("#project_" + counter).toggleClass("left-carousel");
                 carouselCenterMove(counter);
             });
-
-        } else {
-            console.log("window is desktop mode")
-            $(document).off("mouseenter.namespace mouseleave.namespace");
         }
     });
 

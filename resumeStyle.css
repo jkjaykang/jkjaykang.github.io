@@ -509,8 +509,8 @@ h1{
 }
 
 .skill-image {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 10vw;
+    height: 10vw;
     transition: 0.3s ease-in-out;
 }
 
@@ -521,6 +521,13 @@ h1{
 .skill-entry {
     text-align: center;
     margin: 0.5rem;
+}
+
+@media screen and (min-width: 700px) {
+    .skill-image {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
 }
 
 #end {

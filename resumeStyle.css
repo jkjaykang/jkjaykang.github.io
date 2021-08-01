@@ -59,6 +59,8 @@ a {
     transition: width 400ms ease;
 
     z-index: 3;
+
+    font-size: 12px;
 }
 
 .navbar-nav {
@@ -73,16 +75,32 @@ a {
 }
 
 .logo img{
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
 }
 
 .nav-item {
+    width: 4rem;
+    display: flex;
+    justify-content: center;
 }
 
-.nav-item:last-child{
-    margin-top: auto;
+@media screen and (min-width: 700px) {
+    .navbar {
+        font-size: 16px;
+    }
+
+    .logo img {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .nav-item {
+        width: 7rem;
+    }
 }
+
+
 
 .nav-link{
     display: flex;
@@ -139,11 +157,12 @@ h1{
 .intro-content {
     display: flex;
     flex-direction: column;
-    margin-top: 12rem;
+    margin-top: 6rem;
 }
 
 .portrait{
-    height: 40vw;
+    height: 50vw;
+    object-fit: cover;
     max-height: 25rem;
 
     border: solid 0.5rem;
@@ -158,9 +177,11 @@ h1{
 @media screen and (min-width: 700px) {
     .intro-content{
         flex-direction: row;
+        margin-top: 11rem;
     }
 
     .portrait {
+        height: 40vw;
         margin-bottom: 6rem;
     }
 
@@ -199,6 +220,34 @@ h1{
     margin-bottom: 1.5rem;
 }
 
+.experience-row p{
+    margin: 0.1rem;
+    padding: 0;
+}
+
+.experience-role{
+}
+
+.experience-role p{
+    margin-bottom: 0.5rem;
+}
+
+.experience-description {
+    width: 70vw;
+    margin-left: 0;
+    color: #135353;
+}
+
+.experience-description p{
+    margin-bottom: 0.3rem;
+
+}
+
+.content {
+    width: 50vw;
+    margin-bottom: 10rem;
+}
+
 @media screen and (min-width: 700px) {
     .experience-row {
         display: flex;
@@ -213,34 +262,6 @@ h1{
         margin-left: 4rem;
         width: 50rem;
     }
-}
-
-.experience-row p{
-    margin: 0.1rem;
-    padding: 0;
-}
-
-.experience-role{
-}
-
-.experience-role p{
-    margin-bottom: 0.5rem;
-}
-
-.experience-description {
-    
-    margin-left: 0;
-    color: #135353;
-}
-
-.experience-description p{
-    margin-bottom: 0.3rem;
-
-}
-
-.content {
-    width: 50vw;
-    margin-bottom: 10rem;
 }
 
 

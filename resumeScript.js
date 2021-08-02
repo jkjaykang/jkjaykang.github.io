@@ -6,6 +6,7 @@ $(function () {
     //0 for mobile size initailly, 1 for desktop initially
     var initialMode = 0;
     var addedClickEvent = false;
+    var changedWindowMode = false;
     
 
     function carouselLeftMove(counter) {
@@ -15,8 +16,8 @@ $(function () {
             left: "20%",
             marginTop: "9.75vw",
             marginLeft: "-13vw",
-            width: "26vw",
-            height: "19.5vw",
+            //width: "26vw",
+            //height: "19.5vw",
         });
         $("#project_" + counter).find("img").animate({
             width: "26vw",
@@ -32,8 +33,8 @@ $(function () {
             left: "80%",
             marginTop: "9.75vw",
             marginLeft: "-13vw",
-            width: "26vw",
-            height: "19.5vw",
+            //width: "26vw",
+            //height: "19.5vw",
         });
         $("#project_" + counter).find("img").animate({
             width: "26vw",
@@ -49,8 +50,8 @@ $(function () {
 
             marginTop: "6.5vw",
             marginLeft: "-16.25vw",
-            width: "32.5vw",
-            height: "26vw",
+            //width: "32.5vw",
+            //height: "26vw",
         }, function () {
             $(this).find("figcaption").css("display", "block");
         });
@@ -71,6 +72,16 @@ $(function () {
             window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/Adventure%20In%20Antri/antri_adventure.html');
         });
         $(document).on('click', '#project_3', function () {
+            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/blacksmith_store.html');
+        });
+
+        $("#project_1_caption").click(function () {
+            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/antri_home.html');
+        });
+        $("#project_2_caption").click(function () {
+            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/Adventure%20In%20Antri/antri_adventure.html');
+        });
+        $("#project_3_caption").click(function () {
             window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/blacksmith_store.html');
         });
 
@@ -159,13 +170,76 @@ $(function () {
 
     $(window).resize(function () {
         if ($(window).width() <= 700) {
-            console.log("whello");
-            $(".active-carousel").find("figcaption").css("display", "block");
-            $(document).off('mouseenter.namespace mouseleave.namespace');
-            $(document).off('click.namespace');
+            //Change project slides back to their mobile position
+            if (changedWindowMode) {
+                
+            }
+
+            if (changedWindowMode) {
+                $(document).off('mouseenter.namespace mouseleave.namespace');
+                $(document).off('click.namespace');
+                for (var i = 1; i <= max; i++) {
+                    //$("#project_" + i).find("figcaption").css("display", "none");
+                    $(".carousel-" + i).find("figcaption").css("display", "block");
+                    $(".carousel-" + i).css("opacity", 1);
+                    $(".carousel-" + i).css("margin-left", "0");
+                    $(".carousel-" + i).css("margin-top", "0");
+                    $(".carousel-" + i).find("img").css("width", "48.75vw");
+                    $(".carousel-" + i).find("img").css("height", "39vw");
+                    $(".carousel-" + i).css("position", "relative");
+                    $(".carousel-" + i).css("left", "0%");
+                }
+
+                $(document).on('click', '#project_1', function () {
+                    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/antri_home.html');
+                });
+                $(document).on('click', '#project_2', function () {
+                    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/Adventure%20In%20Antri/antri_adventure.html');
+                });
+                $(document).on('click', '#project_3', function () {
+                    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/blacksmith_store.html');
+                });
+
+                addedClickEvent = false;
+                changedWindowMode = false;
+            }
+
+            
 
         } else {
             console.log("window is desktop mode")
+
+            //Change project slides back to their desktop position
+            $(".left-carousel").find("figcaption").css("display", "none");
+            $(".left-carousel").css("opacity", 0.5);
+            $(".left-carousel").css("position", "absolute");
+            $(".left-carousel").css("left", "20%");
+            $(".left-carousel").css("marginTop", "9.75vw");
+            $(".left-carousel").css("marginLeft", "-13vw");
+            $(".left-carousel").find("img").css("width", "26vw");
+            $(".left-carousel").find("img").css("height", "19.5vw");
+
+            $(".right-carousel").find("figcaption").css("display", "none");
+            $(".right-carousel").css("opacity", 0.5);
+            $(".right-carousel").css("position", "absolute");
+            $(".right-carousel").css("left", "80%");
+            $(".right-carousel").css("marginTop", "9.75vw");
+            $(".right-carousel").css("marginLeft", "-13vw");
+            $(".right-carousel").find("img").css("width", "26vw");
+            $(".right-carousel").find("img").css("height", "19.5vw");
+
+            $(".active-carousel").find("figcaption").css("display", "none");
+            $(".active-carousel").css("opacity", 1.0);
+            $(".active-carousel").css("position", "absolute");
+            $(".active-carousel").css("left", "50%");
+            $(".active-carousel").css("marginTop", "6.5vw");
+            $(".active-carousel").css("marginLeft", "-16.25vw");
+            $(".active-carousel").find("img").css("width", "32.5vw");
+            $(".active-carousel").find("img").css("height", "26vw");
+
+
+
+
             $(document).on({
                 "mouseenter.namespace": function () {
                     $(this).find("figcaption").css("display", "block");
@@ -180,7 +254,8 @@ $(function () {
             $(document).off('click', '#project_2');
             $(document).off('click', '#project_3');
 
-            if (initialMode == 0 && addedClickEvent == false) {
+            if (addedClickEvent == false) {
+                console.log("initial Mode was mobile, the click event is added.");
                 $(document).on("click.namespace", ".right-carousel", function () {
                     $("#project_" + counter).toggleClass("active-carousel");
                     $("#project_" + counter).toggleClass("left-carousel");
@@ -235,20 +310,34 @@ $(function () {
                     carouselCenterMove(counter);
                 });
 
-                $("#project_1_caption").click(function () {
-                    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/antri_home.html');
-                });
-                $("#project_2_caption").click(function () {
-                    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/Adventure%20In%20Antri/antri_adventure.html');
-                });
-                $("#project_3_caption").click(function () {
-                    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/blacksmith_store.html');
-                });
+                //$(document).on("click.namespace", "#project_1_caption", function () {
+                //    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/antri_home.html');
+                //});
+
+                //$(document).on("click.namespace", "#project_2_caption", function () {
+                //    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/Adventure%20In%20Antri/antri_adventure.html');
+                //});
+
+                //$(document).on("click.namespace", "#project_3_caption", function () {
+                //    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/blacksmith_store.html');
+                //});
+
+                //$("#project_1_caption").click(function () {
+                //    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/antri_home.html');
+                //});
+                //$("#project_2_caption").click(function () {
+                //    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/Adventure%20In%20Antri/antri_adventure.html');
+                //});
+                //$("#project_3_caption").click(function () {
+                //    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/blacksmith_store.html');
+                //});
 
                 addedClickEvent = true;
             } else {
                 $(document).on('click.namespace');
             }
+
+            changedWindowMode = true;
 
             
         }

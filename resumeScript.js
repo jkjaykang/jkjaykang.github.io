@@ -61,6 +61,61 @@ $(function () {
         });
     }
 
+    $(document).on("click", "#right_arrow", function () {
+        $("#project_" + counter).toggleClass("active-carousel");
+        $("#project_" + counter).toggleClass("left-carousel");
+        $("#project_" + counter).css("zIndex", 1);
+        carouselLeftMove(counter);
+
+        var left_carousel = counter - 1;
+        if (left_carousel < 1) {
+            left_carousel = max;
+        }
+
+        //Move the leftmost carousel to rightmost position (cycle)
+        $("#project_" + left_carousel).css("zIndex", 0);
+        carouselRightMove(left_carousel);
+        $("#project_" + left_carousel).toggleClass("left-carousel");
+        $("#project_" + left_carousel).toggleClass("right-carousel");
+
+        counter += 1;
+        if (counter > max) {
+            console.log("Counter reset");
+            counter = 1;
+        }
+        $("#project_" + counter).toggleClass("right-carousel");
+        $("#project_" + counter).toggleClass("active-carousel");
+        carouselCenterMove(counter);
+        $("#project_" + counter).css("zIndex", 2);
+    });
+
+    $(document).on("click", "#left_arrow", function () {
+        $("#project_" + counter).toggleClass("active-carousel");
+        $("#project_" + counter).toggleClass("right-carousel");
+        $("#project_" + counter).css("zIndex", 1);
+        carouselRightMove(counter);
+
+        var right_carousel = counter + 1;
+        if (right_carousel > max) {
+            right_carousel = 1;
+        }
+
+        $("#project_" + right_carousel).css("zIndex", 0);
+        carouselLeftMove(right_carousel);
+        $("#project_" + right_carousel).toggleClass("right-carousel");
+        $("#project_" + right_carousel).toggleClass("left-carousel");
+
+        counter -= 1;
+        if (counter < 1) {
+            counter = max;
+        }
+        $("#project_" + counter).css("zIndex", 2);
+        $("#project_" + counter).toggleClass("active-carousel");
+        $("#project_" + counter).toggleClass("left-carousel");
+        carouselCenterMove(counter);
+    });
+
+
     if ($(window).width() <= 700) {
         initialMode = 0;
 

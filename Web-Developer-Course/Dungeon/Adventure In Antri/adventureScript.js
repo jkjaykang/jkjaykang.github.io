@@ -102,6 +102,7 @@ var playerSkills = []
 
 //Variables for dungeon
 var dungeonFloor = 0;
+var visitedFloorShop = false;
 
 //Variables for combat 
 var currentCombat = "intro";
@@ -196,20 +197,44 @@ var traitsDict = {
 }
 
 var itemDict = {
-    sword: {
-        name: 'Sword',
-        description: 'Standard sword. Sharp!',
+    rusted_sword: {
+        name: 'Rusty sword',
+        description: 'A rusted sword. Attack: slash',
         cost: 20,
         type: "weapon",
-        card: "strike",
+        card: "slash",
     },
 
     dagger: {
         name: 'Dagger',
-        description: 'Small, concealable weapon. Sharp!',
+        description: 'Small, concealable weapon. Sharp! Attack: quick slash',
         cost: 15,
         type: "weapon",
-        card: "strike"
+        card: "quick_slash"
+    },
+
+    steel_sword: {
+        name: 'Steel sword',
+        description: 'Small, concealable weapon. Sharp! Attack: quick slash',
+        cost: 15,
+        type: "weapon",
+        card: "quick_slash"
+    },
+
+    sharp_sword: {
+        name: 'Sharp sword',
+        description: 'Small, concealable weapon. Sharp! Attack: quick slash',
+        cost: 15,
+        type: "weapon",
+        card: "quick_slash"
+    },
+
+    dragon_sword: {
+        name: 'Dragon sword',
+        description: 'Small, concealable weapon. Sharp! Attack: quick slash',
+        cost: 15,
+        type: "weapon",
+        card: "quick_slash"
     },
 
     wooden_staff: {
@@ -421,7 +446,7 @@ var movesDict = {
 }
 
 var veraCommonPool = ["fearbolt", "ball_o_fear", "fade", "multitask", "look_ahead", "purple_haze", "weaken", "wisps"];
-var veraUncommonPool = ["expose", "fearppuccinho", "preparation_seal", "quick_planning", "weave"];
+var veraUncommonPool = ["expose", "fearppuccino", "preparation_seal", "quick_planning", "weave"];
 var veraRarePool = ["fear_beast", "fear_death", "fear_disease", "spreading_scare"];
 
 
@@ -440,34 +465,38 @@ var enemiesDict = {
     slime_1: {
         name: "Slime",
         turns: [["attack", 5], ["attack", 6], ["defend", 5], ["defend", 5], ["attack", 7]],
-        health: 10,
+        health: 15,
         armor: 0
     },
     slime_2: {
         name: "Slime",
         turns: [["defend", 4], ["attack", 5], ["defend", 4], ["attack", 6], ["defend", 5]],
-        health: 10,
+        health: 18,
         armor: 0
     },
     slime_3: {
         name: "Slime",
         turns: [["attack", 5], ["attack", 5], ["defend", 5], ["defend", 5], ["attack", 5]],
-        health: 10,
+        health: 12,
         armor: 0
     },
     slime_boss: {
         name: "Grime",
-        turns: [["attack", 100], ["attack", 200]],
-        health: 200,
+        turns: [["attack", 10], ["attack", 15]],
+        health: 80,
         armor: 0
     },
     fruitbat: {
         name: "Fruitbat",
-        turns: [["attack", 5], ["attack", 6], ["defend", 5], ["attack", 10]]
+        turns: [["attack", 5], ["attack", 6], ["defend", 5], ["attack", 10]],
+        health: 20,
+        armor: 0
     },
     shade: {
         name: "Shade",
-        turns: [["defend", 5], ["defend", 5], ["defend", 5], ["defend", 5]]
+        turns: [["defend", 5], ["defend", 5], ["defend", 5], ["defend", 5]],
+        health: 30,
+        armor: 3
     }
 }
 
@@ -475,65 +504,80 @@ var combatDict = {
     caves_1: {
         area: "Caves",
         enemies: ["slime_1", "slime_1"],
-        reward: [["xp", 4], ["gold", 40]],
+        reward: [["xp", 5], ["gold", 40]],
         next: ["dungeon_slide", "caves"]
     },
 
     caves_2: {
-
+        area: "Caves",
+        enemies: ["slime_1", "slime_2"],
+        reward: [["xp", 5], ["gold", 40]],
+        next: ["dungeon_slide", "caves"]
     },
 
     caves_3: {
-
+        area: "Caves",
+        enemies: ["slime_1", "fruitbat"],
+        reward: [["xp", 5], ["gold", 40]],
+        next: ["dungeon_slide", "caves"]
     },
 
     caves_4: {
-
+        area: "Caves",
+        enemies: ["shade", "fruitbat"],
+        reward: [["xp", 5], ["gold", 40]],
+        next: ["dungeon_slide", "caves"]
     },
 
     caves_5: {
-
+        area: "Caves",
+        enemies: ["slime_1", "shade", "slime_2"],
+        reward: [["xp", 5], ["gold", 40]],
+        next: ["dungeon_slide", "caves"]
     },
 
-    caves_6: {
-
-    },
-
-    caves_7: {
-
-    },
-
-    caves_8: {
-
-    },
-
-    caves_9: {
-
-    },
-
-    caves_10: {
-
-    },
-
-    caves_boss_1: {
-
-    },
-
-    caves_boss_2: {
-
+    caves_boss: {
+        area: "Caves",
+        enemies: ["slime_boss"],
+        reward: [["xp", 30], ["gold", 200]],
+        next: ["dungeon_slide", "caves"]
     },
 
     deep_caves_1: {
 
     },
 
-    deep_caves_boss_1: {
+    deep_caves_2: {
 
     },
 
-    twisted_catacombs: {
+    deep_caves_3: {
 
-    }
+    },
+
+    deep_caves_4: {
+
+    },
+
+    deep_caves_5: {
+
+    },
+
+    deep_caves_boss: {
+
+    },
+
+    twisted_catacombs_1: {
+
+    },
+
+    twisted_catacombs_2: {
+
+    },
+
+    twisted_catacombs_boss: {
+
+    },
 
 }
 
@@ -581,7 +625,7 @@ var eventDict = {
         description: `As you are exploring the dungeon, you see a particular rat. The rat seems to be cooking a meal with its rat sized paws and its rat sized tools.
                      Although it notices you, it does not scurry away, instead pushes a small bowl filled with its cooking towards you.`,
         choices: ["Eat", "Improve the recipe [int 10]", "Give the rat a grand compliment [chr 10]", "Leave"],
-        choicesEffects: [["change_slide", "caves_1_1"], ["change_slide", "caves_1_2"], ["change_slide", "caves_1_3"], ["change_slide", "caves_1_4"]]
+        choicesEffects: [["change_slide", "caves_1_1"], ["check_int", "10", "change_slide", "caves_1_2"], ["check_chr", "10", "change_slide", "caves_1_3"], ["change_slide", "caves_1_4"]]
     },
 
     caves_1_1: {
@@ -623,7 +667,7 @@ var eventDict = {
         image: "intro_encounter",
         description: "It's a large rock. Its strange color make it seem out of place.",
         choices: ["Lift the rock. [str 7]", "Leave"],
-        choicesEffects: [["change_slide", "caves_2_1"], ["change_slide", "caves_2_2"]]
+        choicesEffects: [["check_str", "7","change_slide", "caves_2_1"], ["change_slide", "caves_2_2"]]
     },
 
     caves_2_1: {
@@ -647,7 +691,7 @@ var eventDict = {
         image: "intro_encounter",
         description: "You encounter a shade. It seems out of energy and having a hard time even maintaining its shape. Shades like eating light, right?",
         choices: ["Feed it a lit torch. [torch -1]", "Light a fire [dex 10]", "Leave"],
-        choicesEffects: [["change_slide", "caves_3_1"], ["change_slide", "caves_3_2"], ["change_slide", "caves_3_3"]]
+        choicesEffects: [["change_slide", "caves_3_1"], ["check_dex", "10", "change_slide", "caves_3_2"], ["change_slide", "caves_3_3"]]
     },
 
     caves_3_1: {
@@ -679,7 +723,7 @@ var eventDict = {
         image: "intro_encounter",
         description: "You encounter a blockage. Only way through is by digging it out.",
         choices: ["Use a shovel [shovel -1]", "SMASH! [str 12]", "Use your hands"],
-        choicesEffects: [["change_slide", "caves_4_1"], ["change_slide", "caves_4_2"], ["change_slide", "caves_4_3"]],
+        choicesEffects: [["change_slide", "caves_4_1"], ["check_str", "12", "change_slide", "caves_4_2"], ["change_slide", "caves_4_3"]],
     },
 
     caves_4_1: {
@@ -1762,6 +1806,7 @@ $(function () {
             $("#outcome_proceed_button").addClass("choice");
             $("#outcome_proceed_button").addClass("change_slide");
             $("#outcome_proceed_button").addClass("map");
+            animateHpBar($("#hp_bar"), targetValue);
         }
 
         //Display outcome screen w/rewards
@@ -1826,6 +1871,7 @@ $(function () {
     //}, ".csp_ita");
 
     function changeGameState(arr) {
+        console.log("changeGameState arr: " + arr);
         if (arr.length % 2 == 0) {
             alert("Error with array to change character stats, not odd number of items!");
         }
@@ -1864,10 +1910,29 @@ $(function () {
                     openShop(arr[i + 1]);
                     break;
                 case "chec_shop":
-                    checShop();
+                    if (visitedFloorShop) {
+                        changeGameSlide(0);
+                    } else {
+                        checShop();
+                    }
                     break;
-                case "check_strength":
-                    if (!checkStrength(arr[i + 1])) {
+                case "check_str":
+                    if (!checkStr(arr[i + 1])) {
+                        return;
+                    }
+                    break;
+                case "check_dex":
+                    if (!checkDex(arr[i + 1])) {
+                        return;
+                    }
+                    break;
+                case "check_int":
+                    if (!checkInt(arr[i + 1])) {
+                        return;
+                    }
+                    break;
+                case "check_chr":
+                    if (!checkChr(arr[i + 1])) {
                         return;
                     }
                     break;
@@ -1883,12 +1948,13 @@ $(function () {
 
         $(".transition_effect").fadeIn(function () {
             if (contentStr == 0) {
-                $('#content').detach();
+                var previous_slide_temp = $('#content').detach();
                 if (previous_slide == null) {
                     alert("ERROR THERE IS NO PREVIOUS SLIDE");
                 } else {
                     $('#main_display_container').append(previous_slide);
                 }
+                previous_slide = previous_slide_temp;
 
             } else {
                 previous_slide = $('#content').detach();
@@ -2066,6 +2132,51 @@ $(function () {
                     case "caves_1": //Rat chef
                         eventEncounter("caves_1");
                         break;
+                    case "caves_1_1": //Rat chef
+                        eventEncounter("caves_1_1");
+                        break;
+                    case "caves_1_2": //Rat chef
+                        eventEncounter("caves_1_2");
+                        break;
+                    case "caves_1_3": //Rat chef
+                        eventEncounter("caves_1_3");
+                        break;
+                    case "caves_1_4": //Rat chef
+                        eventEncounter("caves_1_4");
+                        break;
+                    case "caves_2": //Rock
+                        eventEncounter("caves_2");
+                        break;
+                    case "caves_2_1": //Rock
+                        eventEncounter("caves_2_1");
+                        break;
+                    case "caves_2_2": //Rock
+                        eventEncounter("caves_2_2");
+                        break;
+                    case "caves_3": //Shade
+                        eventEncounter("caves_3");
+                        break;
+                    case "caves_3_1": //Shade
+                        eventEncounter("caves_3_1");
+                        break;
+                    case "caves_3_2": //Shade
+                        eventEncounter("caves_3_2");
+                        break;
+                    case "caves_3_3": //Shade
+                        eventEncounter("caves_3_3");
+                        break;
+                    case "caves_4": //Blockage
+                        eventEncounter("caves_4");
+                        break;
+                    case "caves_4_1": //Blockage
+                        eventEncounter("caves_4_1");
+                        break;
+                    case "caves_4_2": //Blockage
+                        eventEncounter("caves_4_2");
+                        break;
+                    case "caves_4_3": //Blockage
+                        eventEncounter("caves_4_3");
+                        break;
                     case "cambria_potion_seller":
                         eventEncounter("cambria_potion_seller");
                         break;
@@ -2104,7 +2215,7 @@ $(function () {
         
     }
 
-    function checkStrength(value) {
+    function checkStr(value) {
         if (chrStat.str >= value) {
             return true;
         }
@@ -2217,13 +2328,14 @@ $(function () {
             $("#dungeon_choice_container").append("<button id='proceed_button' class='choice'> Proceed </button>");
 
             if (dungeonFloor == 1) {
-                //var combatRand = getRandomInt(0, 10);
+                var combatRand = getRandomInt(1, 6);
                 //$("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to fight" + "</p>");
                 //$("#proceed_button").addClass('combat_encounter');
                 //$("#proceed_button").addClass('caves_' + combatRand);
                 $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to fight" + "</p>");
                 $("#proceed_button").addClass('combat_encounter');
-                $("#proceed_button").addClass('caves_1');
+                $("#proceed_button").addClass('caves_' + combatRand);
+
             }else if (dungeonFloor == 4) {
                 //Campfire
                 console.log("Campfire should be encountered");
@@ -2236,7 +2348,7 @@ $(function () {
                 console.log("This should be a bossfight");
                 $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to have a boss fight" + "</p>");
                 $("#proceed_button").addClass('combat_encounter');
-                $("#proceed_button").addClass('test_boss');
+                $("#proceed_button").addClass('caves_boss');
             } else {
                 var rand = getRandomInt(0, 10);
                 if (rand < 7) {
@@ -2248,9 +2360,11 @@ $(function () {
                 } else {
                     //Event
                     console.log("This should have triggered an event");
+                    var eventRand = getRandomInt(1, 5);
                     $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to encounter an event" + "</p>");
                     $("#proceed_button").addClass('change_slide');
-                    $("#proceed_button").addClass('caves_1');
+                    $("#proceed_button").addClass('caves_' + eventRand);
+                    
                 }
             }
 
@@ -2272,85 +2386,145 @@ $(function () {
 
         $(".transition_effect").fadeIn(function () {
             previous_slide = $('#content').detach();
+            visitedFloorShop = true;
 
             $('#main_display_container').append("<div id='content' class='chec_shop_screen'></div>");
             $('#content').append("<div class='chec_shop_title'>Are you experienced?</div>");
             $('#content').append("<div id='three_random_card'></div>");
 
-            $('#three_random_card').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            $('#three_random_card').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            $('#three_random_card').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            $('#three_random_card').append("<div id='bargain_card_1' class='card_container bargain_container'></div>");
+            $('#three_random_card').append("<div id='bargain_card_2' class='card_container bargain_container'></div>");
+            $('#three_random_card').append("<div id='bargain_card_3' class='card_container bargain_container'></div>");
+
+            for (var i = 1; i <= 3; i++) {
+                var randomInt = getRandomInt(0, 10);
+                var card;
+                var cost = 5;
+                if (randomInt < 6) {
+                    //common card
+                    card = veraCommonPool[getRandomInt(0, veraCommonPool.length)];
+                } else if (randomInt == 9) {
+                    //rare card
+                    card = veraRarePool[getRandomInt(0, veraRarePool.length)];
+                } else {
+                    //uncommon card
+                    card = veraUncommonPool[getRandomInt(0, veraUncommonPool.length)];
+                }
+
+                $('#bargain_card_' + i).append("<img class=\x22shop_card " + card + "\x22 src=\x22images/card/" + card + ".png\x22 alt='card'/>");
+                $('#bargain_card_' + i).append("<p>" + cost + "xp</p>");
+            }
+
+            //$('#bargain_card_1').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            //$('#bargain_card_1').append("<p>5xp</p>");
+            //$('#bargain_card_2').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            //$('#bargain_card_2').append("<p>5xp</p>");
+            //$('#bargain_card_3').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            //$('#bargain_card_3').append("<p>5xp</p>");
 
             $('#content').append("<div>Special bargain! Choose one.</div>");
 
             $('#content').append("<div id='card_shop'></div>");
 
-            $('#card_shop').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            $('#card_shop').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            $('#card_shop').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            $('#card_shop').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            $('#card_shop').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            $('#card_shop').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            $('#card_shop').append("<div id='shop_card_1' class='card_container'></div>");
+            $('#card_shop').append("<div id='shop_card_2' class='card_container'></div>");
+            $('#card_shop').append("<div id='shop_card_3' class='card_container'></div>");
+            $('#card_shop').append("<div id='shop_card_4' class='card_container'></div>");
+            $('#card_shop').append("<div id='shop_card_5' class='card_container'></div>");
+            $('#card_shop').append("<div id='shop_card_6' class='card_container'></div>");
+
+            for (var i = 1; i <= 6; i++) {
+                var randomInt = getRandomInt(0, 10);
+                var card;
+                var cost;
+                if (randomInt < 6) {
+                    //common card
+                    card = veraCommonPool[getRandomInt(0, veraCommonPool.length)];
+                    cost = 10;
+                } else if (randomInt == 9) {
+                    //rare card
+                    card = veraRarePool[getRandomInt(0, veraRarePool.length)];
+                    cost = 15;
+                } else {
+                    //uncommon card
+                    card = veraUncommonPool[getRandomInt(0, veraUncommonPool.length)];
+                    cost = 25;
+                }
+
+                $('#shop_card_' + i).append("<img class=\x22shop_card " + card + "\x22 src=\x22images/card/" + card + ".png\x22 alt='card'/>");
+                $('#shop_card_' + i).append("<p>"+ cost + "xp</p>");
+            }
+
+           
+
+            //$('#shop_card_1').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            //$('#shop_card_1').append("<p>10xp</p>");
+            //$('#shop_card_2').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            //$('#shop_card_2').append("<p>10xp</p>");
+            //$('#shop_card_3').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            //$('#shop_card_3').append("<p>10xp</p>");
+            //$('#shop_card_4').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            //$('#shop_card_4').append("<p>10xp</p>");
+            //$('#shop_card_5').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            //$('#shop_card_5').append("<p>10xp</p>");
+            //$('#shop_card_6').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+            //$('#shop_card_6').append("<p>10xp</p>");
 
             $('#content').append("<div>Experience for skill, a simple trade.</div>");
 
             $('#content').append("<button id='chec_shop_leave_button' class='choice change_slide 0'>Leave</button>");
             $(".transition_effect").fadeOut();
         });
-
-        //<div id="content" class="chec_shop_screen">
-        //    <div id="chec_shop_title">Are you experienced?</div>
-        //    <div id="three_random_card">
-        //        <img id="ball_o_fear" class="three_card" src="images/card/ball_o_fear.png" alt="card" />
-        //        <img id="ball_o_fear" class="three_card" src="images/card/ball_o_fear.png" alt="card" />
-        //        <img id="ball_o_fear" class="three_card" src="images/card/ball_o_fear.png" alt="card" />
-        //    </div>
-        //    <div>Special bargain! Choose one.</div>
-        //    <div id="card_shop">
-        //        <img id="ball_o_fear" class="shop_card" src="images/card/ball_o_fear.png" alt="card" />
-        //        <img id="ball_o_fear" class="shop_card" src="images/card/ball_o_fear.png" alt="card" />
-        //        <img id="ball_o_fear" class="shop_card" src="images/card/ball_o_fear.png" alt="card" />
-        //        <img id="ball_o_fear" class="shop_card" src="images/card/ball_o_fear.png" alt="card" />
-        //        <img id="ball_o_fear" class="shop_card" src="images/card/ball_o_fear.png" alt="card" />
-        //        <img id="ball_o_fear" class="shop_card" src="images/card/ball_o_fear.png" alt="card" />
-        //    </div>
-        //    <div>Spend your experience!</div>
-
-        //    <button id="chec_shop_leave_button" class="choice change_slide 0">Leave</button>
-        //</div>
     }
 
     //Set up chec shop
-    $(document).on("click", ".three_card", function () {
-        //Check Xp cost
-        if (expStat.currExp >= 5) {
-            var cardName = $(this).attr('class').split(' ')[1];
-            addCard(cardName);
-            $("#three_random_card").empty();
-            $("#three_random_card").animate({
-                height: "0vh"
-            });
-            expStat.currExp -= 5;
-            animateExpBar($("exp_bar"), expStat.currExp)
-        } else {
-            alert("Not enough exp to buy it");
-        }
-        
-    })
+    //$(document).on("click", ".three_card", function () {
+    //    //Check Xp cost
+    //    if (expStat.currExp >= 5) {
+    //        var cardName = $(this).attr('class').split(' ')[1];
+    //        addCard(cardName);
+    //        $("#three_random_card").empty();
+    //        $("#three_random_card").animate({
+    //            height: "0vh"
+    //        });
+    //        expStat.currExp -= 5;
+    //        animateExpBar($("exp_bar"), expStat.currExp)
+    //    } else {
+    //        alert("Not enough exp to buy it");
+    //    }
 
-    $(document).on("click", ".shop_card", function () {
-        //Chexk xp cost
-        if (expStat.currExp >= 10) {
-            var cardName = $(this).attr('class').split(' ')[1];
+    //});
+
+    $(document).on("click", ".card_container", function () {
+        var cost = parseInt($(this).find("p").text());
+        
+        if (expStat.currExp >= cost) {
+            var cardName = $(this).find("img").attr('class').split(' ')[1];
             addCard(cardName);
             this.remove();
+            expStat.currExp = expStat.currExp - cost;
+            animateExpBar($("exp_bar"), expStat.currExp);
+            if ($(this).hasClass("bargain_container")) {
+                $("#three_random_card").empty();
+            }
         } else {
-            alert("Not enough exp to buy it");
+            alert("Cost is " + cost);
         }
+    });
+
+    //$(document).on("click", ".shop_card", function () {
+    //    //Chexk xp cost
+    //    if (expStat.currExp >= 10) {
+    //        var cardName = $(this).attr('class').split(' ')[1];
+    //        addCard(cardName);
+    //        this.remove();
+    //    } else {
+    //        alert("Not enough exp to buy it");
+    //    }
 
 
-        
-    })
+
+    //});
 
     function addCard(card_name) {
         console.log("Adding card");
@@ -2460,7 +2634,7 @@ $(function () {
             bar_width = 100;
         }
         targetBar.animate({ width: bar_width + "%" }, 1000, function () {
-
+            console.log("Exp bar is being animated");
         });
         $("#exp").html(expStat.currExp + "/" + expStat.maxExp);
             
@@ -2586,7 +2760,7 @@ $(function () {
     $("#exp_test_button").click(function () {
         var expBar = $("#exp_bar");
 
-        expStat.currExp = expStat.currExp += 20;
+        expStat.currExp = expStat.currExp + 20;
         animateExpBar(expBar, expStat.currExp);
     });
 

@@ -1220,8 +1220,8 @@ ul{
 #action_points{
     position: absolute;
 
-    top: 55%;
-    right: 90%;
+    top: -90%;
+    right: -3%;
 
     z-index: 2;
 
@@ -1236,13 +1236,13 @@ ul{
 #action_points_icon {
     position: absolute;
 
-    top: 42%;
-    right: 89%;
+    top: -105%;
+    right: -5%;
 
     z-index: 1;
 
-    width: 6vh;
-    height: 6vh;
+    width: 7vh;
+    height: 7vh;
 }
 
 #end_turn_button {
@@ -1260,7 +1260,7 @@ ul{
 .move_card{
     font-size: 0.8vh;
 
-    width: 12vh;
+    width: 14vh;
 
     margin-left: 0.5vh;
     margin-right: 0.5vh;
@@ -1270,13 +1270,13 @@ ul{
 }
 
 .move_card:hover p{
-    font-size: 1.2vh;
-    width: 10vh;
-    right: 11%;
+    font-size: 1.1vh;
+    width: 12vh;
+    margin-left: -6vh;
 }
 
 .move_card img{
-    width: 12vh;
+    width: 14vh;
     /*cursor: pointer;*/
 
     
@@ -1290,10 +1290,10 @@ ul{
 
 .move_card p{
     position: absolute;
-    top: 65%;
-    right: 13%;
-
-    width: 8vh;
+    top: 75%;
+    left: 50%;
+    margin-left: -5vh;
+    width: 10vh;
 
     
 }

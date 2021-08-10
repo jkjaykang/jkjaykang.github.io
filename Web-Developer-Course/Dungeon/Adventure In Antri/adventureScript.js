@@ -19,7 +19,7 @@ var hallStartTemplate = {
 var veraStartTemplate = {
     name: "Vera Daran",
     portrait: "images/char_portrait/Vera_idle.png",
-    hp: 35,
+    hp: 45,
     exp: 10,
     str: 4,
     dex: 5,
@@ -103,6 +103,7 @@ var playerSkills = []
 //Variables for dungeon
 var dungeonFloor = 0;
 var visitedFloorShop = false;
+var currentFloorShop;
 
 //Variables for combat 
 var currentCombat = "intro";
@@ -266,6 +267,11 @@ var shopDict = {
         name: "Potion Shop",
         items: ["health_potion_small", "health_potion_small", "health_potion_small", "health_potion_small", "health_potion_small",],
         leave: "cambria"
+    },
+    cambria_blacksmith: {
+        name: "Blacksmith",
+        items: ["wooden_staff"],
+        leave: "cambria"
     }
 }
 
@@ -275,7 +281,7 @@ var movesDict = {
         type: ["attack"],
         value: [5],
         cost: 1,
-        description: "Vera strikes with her staff dealing damage"
+        description: "Deal 5 damage"
         },
     block: {
         name: "block",
@@ -292,7 +298,7 @@ var movesDict = {
         fear_value: ["10"],
         cost: 2,
         fear_cost: 10,
-        description: "Vera lobs a solidified ball of fear, dealing damage to all enemies"
+        description: "Deal 5 damage to all enemies. Fear: Deal 10 damage to all enemies"
     },
     quick_planning: {
         name: "Quick Planning",
@@ -465,39 +471,82 @@ var enemiesDict = {
     slime_1: {
         name: "Slime",
         turns: [["attack", 5], ["attack", 6], ["defend", 5], ["defend", 5], ["attack", 7]],
-        health: 15,
+        health: 1,
         armor: 0
     },
     slime_2: {
         name: "Slime",
         turns: [["defend", 4], ["attack", 5], ["defend", 4], ["attack", 6], ["defend", 5]],
-        health: 18,
+        health: 1,
         armor: 0
     },
     slime_3: {
         name: "Slime",
         turns: [["attack", 5], ["attack", 5], ["defend", 5], ["defend", 5], ["attack", 5]],
-        health: 12,
+        health: 1,
         armor: 0
     },
     slime_boss: {
         name: "Grime",
         turns: [["attack", 10], ["attack", 15]],
-        health: 80,
+        health: 1,
         armor: 0
     },
     fruitbat: {
         name: "Fruitbat",
         turns: [["attack", 5], ["attack", 6], ["defend", 5], ["attack", 10]],
-        health: 20,
+        health: 1,
         armor: 0
     },
     shade: {
         name: "Shade",
         turns: [["defend", 5], ["defend", 5], ["defend", 5], ["defend", 5]],
-        health: 30,
+        health: 1,
         armor: 3
-    }
+    },
+    angler_slime: {
+        name: "Angler slime",
+        turns: [["defend", 5], ["defend", 5], ["defend", 5], ["defend", 5]],
+        health: 1,
+        armor: 3
+    },
+    cave_snake: {
+        name: "Cave snake",
+        turns: [["defend", 5], ["defend", 5], ["defend", 5], ["defend", 5]],
+        health: 1,
+        armor: 3
+    },
+    eyeball_spider: {
+        name: "Eyeball spider",
+        turns: [["defend", 5], ["defend", 5], ["defend", 5], ["defend", 5]],
+        health: 1,
+        armor: 3
+    },
+    crab_boss: {
+        name: "Crab",
+        turns: [["defend", 5], ["defend", 5], ["defend", 5], ["defend", 5]],
+        health: 1,
+        armor: 3
+    },
+    wall_eye: {
+        name: "Wall eyes",
+        turns: [["defend", 5], ["defend", 5], ["defend", 5], ["defend", 5]],
+        health: 1,
+        armor: 3
+    },
+    wall_mouth: {
+        name: "Wall mouths",
+        turns: [["defend", 5], ["defend", 5], ["defend", 5], ["defend", 5]],
+        health: 1,
+        armor: 3
+    },
+    oros_chunk: {
+        name: "Chunk of Oros",
+        turns: [["defend", 5], ["defend", 5], ["defend", 5], ["defend", 5]],
+        health: 1,
+        armor: 3
+    },
+
 }
 
 var combatDict = {
@@ -540,43 +589,63 @@ var combatDict = {
         area: "Caves",
         enemies: ["slime_boss"],
         reward: [["xp", 30], ["gold", 200]],
-        next: ["dungeon_slide", "caves"]
+        next: ["dungeon_slide", "deep_caves"]
     },
 
     deep_caves_1: {
-
+        area: "Deep caves",
+        enemies: ["crab_boss"],
+        reward: [["xp", 30], ["gold", 200]],
+        next: ["dungeon_slide", "deep_caves"]
     },
 
     deep_caves_2: {
-
+        area: "Deep caves",
+        enemies: ["crab_boss"],
+        reward: [["xp", 30], ["gold", 200]],
+        next: ["dungeon_slide", "deep_caves"]
     },
 
     deep_caves_3: {
-
+        area: "Deep caves",
+        enemies: ["crab_boss"],
+        reward: [["xp", 30], ["gold", 200]],
+        next: ["dungeon_slide", "deep_caves"]
     },
 
     deep_caves_4: {
-
+        area: "Deep caves",
+        enemies: ["crab_boss"],
+        reward: [["xp", 30], ["gold", 200]],
+        next: ["dungeon_slide", "deep_caves"]
     },
 
     deep_caves_5: {
-
+        area: "Deep caves",
+        enemies: ["crab_boss"],
+        reward: [["xp", 30], ["gold", 200]],
+        next: ["dungeon_slide", "deep_caves"]
     },
 
     deep_caves_boss: {
-
+        area: "Deep caves",
+        enemies: ["crab_boss"],
+        reward: [["xp", 30], ["gold", 200]],
+        next: ["dungeon_slide", "twisted_catacombs"]
     },
 
     twisted_catacombs_1: {
-
-    },
-
-    twisted_catacombs_2: {
-
+        area: "Deep caves",
+        enemies: ["wall_eye"],
+        reward: [["xp", 30], ["gold", 200]],
+        next: ["dungeon_slide", "twisted_catacombs"]
     },
 
     twisted_catacombs_boss: {
-
+        area: "Deep caves",
+        enemies: ["oros_chunk"],
+        reward: [["xp", 30], ["gold", 200]],
+        next: ["change_slide", "victory"]
     },
 
 }
@@ -601,6 +670,17 @@ var eventDict = {
         choicesEffects : [["change_slide", "map", "dialogue", "intro_dialogue_vera"]]
     },
 
+    cambria_tavern: {
+        title: "Tavern",
+        image: "cambria_potion_seller",
+        description: `You walk into the tavern, a famouse little spot known for its great food. The owner greets you. 
+                     "Ah, back from an adventure? What will it be? The usual?" That's right, the owner knows your "usual".
+                     Unlike the rest of the plebians, you do not even have to speak out your lengthy order, just simply say the "usual".
+                     `,
+        choices: ["The usual [Heal to max]", "Leave"],
+        choicesEffects: [["max_health", "0", "change_slide", "cambria"], ["change_slide", "cambria"]]
+    },
+
     cambria_potion_seller: {
         title: "Potion shop",
         image: "cambria_potion_seller",
@@ -610,13 +690,29 @@ var eventDict = {
         choicesEffects : [["open_shop", "cambria_potion_shop"], ["change_slide","cambria"]]
     },
 
-    campfire: {
+    cambria_blacksmith: {
+        title: "Blacksmith",
+        image: "cambria_potion_seller",
+        description: `You walk into the blacksmith. A thundering hammering is heard. You yell at the blacksmith to grab her attention. "What?!" The blacksmith yells back
+                     "Uh oh, I hope this hearing loss isn't permanent! I'm gonna guess you want to buy something?!" She asks, still shouting.`,
+        choices: ["Shop", "Leave"],
+        choicesEffects: [["open_shop", "cambria_blacksmith"], ["change_slide", "cambria"]]
+    },
+
+    campfire_caves: {
         title: "Campfire",
         image: "intro_encounter",
-        description: `You light a campfire to take a breather. This is a great time to swap out equipment, eat some food,
-                      and just rest.`,
-        choices: ["Rest"],
-        choicesEffects: [["dungeon_slide", "caves"]]
+        description: `You light a campfire to take a breather. You can rest or plan your journey.`,
+        choices: ["Rest [Heal 20 hp]", "Plan [Gain 10 xp]"],
+        choicesEffects: [["add_health", "20", "dungeon_slide", "caves"], ["add_exp", "10", "dungeon_slide", "caves"]]
+    },
+
+    campfire_deep_caves: {
+        title: "Campfire",
+        image: "intro_encounter",
+        description: `You light a campfire to take a breather, but the caves seem as dark as ever. You can rest or plan your journey.`,
+        choices: ["Rest [Heal 20 hp]", "Plan [Gain 10 xp]"],
+        choicesEffects: [["add_health", "20", "dungeon_slide", "deep_caves"], ["add_exp", "10", "dungeon_slide", "deep_caves"]]
     },
 
     caves_1: {
@@ -625,7 +721,8 @@ var eventDict = {
         description: `As you are exploring the dungeon, you see a particular rat. The rat seems to be cooking a meal with its rat sized paws and its rat sized tools.
                      Although it notices you, it does not scurry away, instead pushes a small bowl filled with its cooking towards you.`,
         choices: ["Eat", "Improve the recipe [int 10]", "Give the rat a grand compliment [chr 10]", "Leave"],
-        choicesEffects: [["change_slide", "caves_1_1"], ["check_int", "10", "change_slide", "caves_1_2"], ["check_chr", "10", "change_slide", "caves_1_3"], ["change_slide", "caves_1_4"]]
+        choicesEffects: [["add_health", "10", "change_slide", "caves_1_1"], ["check_int", "10", "add_health", "15", "change_slide", "caves_1_2"],
+        ["check_chr", "10", "add_health", "10", "change_slide", "caves_1_3"], ["change_slide", "caves_1_4"]]
     },
 
     caves_1_1: {
@@ -750,6 +847,14 @@ var eventDict = {
         choicesEffects: [["dungeon_slide", "caves"]]
     },
 
+    deep_caves_1: {
+        title: "Testing Deep Caves",
+        image: "intro_encounter",
+        description: "This is a test event!",
+        choices: ["Proceed"],
+        choicesEffects: [["dungeon_slide", "deep_caves"]]
+    }
+
     
 
 }
@@ -760,13 +865,24 @@ var dungeonDict = {
         description: `Dark and rocky, caves are a home to many creatures who prefer the darkness to the morning sun. Despite it's uninviting environment, creatures living in caves
                       are not too dangerous, making it a great place for a new monster murderer to train. However, caves are hard to navigate and home to many blockages, so bring torches, 
                       shovels, and maybe even bombs.`
+    },
+    deep_caves: {
+        area: "Deep caves",
+        description: `Creatures tend to get more twisted looking as they grow up with less sunlight. Maybe looks don't matter too much when no one can really see you. In the deeper part of the
+                      caves you will find more unsavory creatures, creatures worthy of being called monsters. Watch you steps, as the floor can be slippery, and the inhabitants have quite a 
+                      sharp hearing.`
+    },
+    twisted_catacombs: {
+        area: "Twisted Catacombs",
+        description: `Was this area supposed to be here? This place seems all wrong. The walls are twisted in a wrong way, and nothing seems to align too well. Who would venture this deep into the
+                      caves to build this? But, for whatever reason, it feels like you were meant to be here.`
     }
 }
 
 var townDict = {
     cambria: {
-        choices: ["Tavern", "Potion Shop", "Blackmsith", "Train", "Leave"],
-        choicesEffects: [[], ["change_slide", "cambria_potion_seller"], [], [], ["change_slide", "map"]]
+        choices: ["Tavern", "Potion Shop", "Blackmsith", "Leave"],
+        choicesEffects: [["change_slide", "cambria_tavern"], ["change_slide", "cambria_potion_seller"], ["change_slide", "cambria_blacksmith"], ["change_slide", "map"]]
     }
 }
 
@@ -1172,7 +1288,17 @@ $(function () {
 
     //Set up usable items button
     $(document).on("click", ".item_use_button", function () {
-        alert("usebutton clicked");
+        //alert("usebutton clicked");
+        //alert($(this).parent().attr("class"));
+        var itemClass = $(this).parent().attr("class").split(' ')[0];
+        switch (itemClass) {
+            case "health_potion_small":
+                animateHpBar($("#hp_bar"), hpStat.currHp + 20);
+                break;
+
+        }
+
+        $(this).parent().remove();
         //var equipSlot = $(this).parent().attr("class").split(' ')[1];
         //var itemClass = $(this).parent().attr("class").split(' ')[0];
         //var equipBox = equipSlot + "_box";
@@ -1298,28 +1424,28 @@ $(function () {
     }
 
     function cardDescription(card) {
-        //Get value, adjust based on status, update!
-        var returnString = "" 
-        for (var i = 0; i < movesDict[card].type.length; i++) {
-            switch (movesDict[card].type[i]) {
-                case "attack":
-                    returnString += "Deal " + movesDict[card].value[i] + " damage."
-                    break;
-                case "defend":
-                    returnString += "Gain " + movesDict[card].value[i] + " armor."
-                    break;
-                case "aoe":
-                    returnString += "Deal " + movesDict[card].value[i] + " damage to all enemies."
-                    break;
-                case "draw":
-                    returnString += "Draw " + movesDict[card].value[i] + " card(s)."
-                    break;
-                case "status":
-                    returnString += "Apply " + movesDict[card].duration[i] + "turn(s) of weak" + movesDict[card].value[i] + "."
-                    break;
-            }
-        }
-        return returnString;
+        return movesDict[card].description;
+        //var returnString = "" 
+        //for (var i = 0; i < movesDict[card].type.length; i++) {
+        //    switch (movesDict[card].type[i]) {
+        //        case "attack":
+        //            returnString += "Deal " + movesDict[card].value[i] + " damage."
+        //            break;
+        //        case "defend":
+        //            returnString += "Gain " + movesDict[card].value[i] + " armor."
+        //            break;
+        //        case "aoe":
+        //            returnString += "Deal " + movesDict[card].value[i] + " damage to all enemies."
+        //            break;
+        //        case "draw":
+        //            returnString += "Draw " + movesDict[card].value[i] + " card(s)."
+        //            break;
+        //        case "status":
+        //            returnString += "Apply " + movesDict[card].duration[i] + "turn(s) of weak" + movesDict[card].value[i] + "."
+        //            break;
+        //    }
+        //}
+        //return returnString;
     }
 
     function updateDrawPile() {
@@ -1881,12 +2007,17 @@ $(function () {
                 case "subtract_health":
                     var targetValue = hpStat.currHp - parseFloat(arr[i + 1]);
                     animateHpBar($("#hp_bar"), targetValue);
-                    //var id = setInterval(function () {  }, 50);
+                    break;
+                case "add_health":
+                    var targetValue = hpStat.currHp + parseFloat(arr[i + 1]);
+                    animateHpBar($("#hp_bar"), targetValue);
+                    break;
+                case "max_health":
+                    var targetValue = hpStat.maxHp;
+                    animateHpBar($("#hp_bar"), targetValue);
                     break;
                 case "add_exp":
                     var targetValue = expStat.currExp + parseFloat(arr[i + 1]);
-                    //console.log(expStat.currExp);
-                    //console.log(arr[i + 1]);
                     animateExpBar($("#exp_bar"), targetValue);
                     break;
                 case "change_slide":
@@ -1910,11 +2041,12 @@ $(function () {
                     openShop(arr[i + 1]);
                     break;
                 case "chec_shop":
-                    if (visitedFloorShop) {
-                        changeGameSlide(0);
-                    } else {
-                        checShop();
-                    }
+                    //if (visitedFloorShop) {
+                    //    changeGameSlide(0);
+                    //} else {
+                    //    checShop();
+                    //}
+                    checShop();
                     break;
                 case "check_str":
                     if (!checkStr(arr[i + 1])) {
@@ -2126,8 +2258,11 @@ $(function () {
                     case "intro_slide_2":
                         eventEncounter("intro_slide_2");
                         break;
-                    case "campfire":
-                        eventEncounter("campfire");
+                    case "campfire_caves":
+                        eventEncounter("campfire_caves");
+                        break;
+                    case "campfire_deep_caves":
+                        eventEncounter("campfire_deep_caves");
                         break;
                     case "caves_1": //Rat chef
                         eventEncounter("caves_1");
@@ -2177,8 +2312,17 @@ $(function () {
                     case "caves_4_3": //Blockage
                         eventEncounter("caves_4_3");
                         break;
+                    case "deep_caves_1": //Test event(for now)
+                        eventEncounter("deep_caves_1");
+                        break;
+                    case "cambria_tavern":
+                        eventEncounter("cambria_tavern");
+                        break;
                     case "cambria_potion_seller":
                         eventEncounter("cambria_potion_seller");
+                        break;
+                    case "cambria_blacksmith":
+                        eventEncounter("cambria_blacksmith");
                         break;
                     case "test_slide":
                         $('#main_display_container').append(`
@@ -2207,6 +2351,15 @@ $(function () {
                         townSlide("cambria");
                         //startDialogue("intro_cambria_vera");
                         break;
+                    case "victory":
+                        $('#main_display_container').append(`
+                            <div id="content" >
+                                <div>You Win yay!</div>
+                            </div>
+                        
+                        `);
+                        break;
+
                 }
             }
             $(".transition_effect").fadeOut();
@@ -2311,6 +2464,7 @@ $(function () {
             }
 
             dungeonFloor += 1;
+            visitedFloorShop = false;
             console.log("dungeon Floor: " + dungeonFloor);
 
             previous_slide = $('#content').detach();
@@ -2318,56 +2472,73 @@ $(function () {
             $('#main_display_container').append("<div id='content' class='dungeon_screen'></div>");
             $('#content').append("<div> <p class='dungeon_title'>" + dungeonDict[dungeonCode].area +": " + dungeonFloor + "</p> </div>");
             $('#content').append("<div id='dungeon_content_container' class='flex_container'></div>");
-            $('#dungeon_content_container').append("<div id='dungeon_image_container'><img src=\x22images/dungeon/" + dungeonDict[dungeonCode].area + ".png\x22 alt='dungeon_image'/></div>");
-            $('#dungeon_content_container').append("<div id='dungeon_choice_container'></div>");
-
-            //Premonition... Random number generator
-            
+            $('#dungeon_content_container').append("<div id='dungeon_image_container'><img src=\x22images/dungeon/" + dungeonCode + ".png\x22 alt='dungeon_image'/></div>");
+            $('#dungeon_content_container').append("<div id='dungeon_choice_container'></div>");            
 
             //Depends on the premonition
             $("#dungeon_choice_container").append("<button id='proceed_button' class='choice'> Proceed </button>");
 
-            if (dungeonFloor == 1) {
-                var combatRand = getRandomInt(1, 6);
-                //$("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to fight" + "</p>");
-                //$("#proceed_button").addClass('combat_encounter');
-                //$("#proceed_button").addClass('caves_' + combatRand);
-                $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to fight" + "</p>");
-                $("#proceed_button").addClass('combat_encounter');
-                $("#proceed_button").addClass('caves_' + combatRand);
-
-            }else if (dungeonFloor == 4) {
-                //Campfire
-                console.log("Campfire should be encountered");
-                $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to rest soon" + "</p>");
-                $("#proceed_button").addClass('change_slide');
-                $("#proceed_button").addClass('campfire');
-
-            } else if (dungeonFloor == 7) {
-                //Boss Fight!!
-                console.log("This should be a bossfight");
-                $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to have a boss fight" + "</p>");
-                $("#proceed_button").addClass('combat_encounter');
-                $("#proceed_button").addClass('caves_boss');
-            } else {
-                var rand = getRandomInt(0, 10);
-                if (rand < 7) {
-                    //Combat!!!!
+            if (dungeonCode == "twisted_catacombs") {
+                if (dungeonFloor == 15) {
+                    //walleye
                     console.log("This should have triggered combat");
                     $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to fight" + "</p>");
                     $("#proceed_button").addClass('combat_encounter');
-                    $("#proceed_button").addClass('caves_1');
-                } else {
-                    //Event
-                    console.log("This should have triggered an event");
-                    var eventRand = getRandomInt(1, 5);
-                    $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to encounter an event" + "</p>");
+                    $("#proceed_button").addClass("twisted_catacombs_1");
+                } else if (dungeonFloor == 16) {
+                    //boss
+                    $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to have a boss fight" + "</p>");
+                    $("#proceed_button").addClass('combat_encounter');
+                    $("#proceed_button").addClass("twisted_catacombs_boss");
+                }
+            } else {
+                if (dungeonFloor == 1) {
+                    var combatRand = getRandomInt(1, 6);
+                    //$("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to fight" + "</p>");
+                    //$("#proceed_button").addClass('combat_encounter');
+                    //$("#proceed_button").addClass('caves_' + combatRand);
+                    $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to fight" + "</p>");
+                    $("#proceed_button").addClass('combat_encounter');
+                    $("#proceed_button").addClass(dungeonCode + '_' + combatRand);
+
+                } else if (dungeonFloor == 4 || dungeonFloor == 11) {
+                    //Campfire
+                    console.log("Campfire should be encountered");
+                    $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to rest soon" + "</p>");
                     $("#proceed_button").addClass('change_slide');
-                    $("#proceed_button").addClass('caves_' + eventRand);
-                    
+                    $("#proceed_button").addClass('campfire_' + dungeonCode);
+
+                } else if (dungeonFloor % 7 == 0) {
+                    //Boss Fight!!
+                    console.log("This should be a bossfight");
+                    $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to have a boss fight" + "</p>");
+                    $("#proceed_button").addClass('combat_encounter');
+                    $("#proceed_button").addClass(dungeonCode + '_' + 'boss');
+                } else {
+                    var rand = getRandomInt(0, 10);
+                    if (rand < 7) {
+                        //Combat!!!!
+                        var combatRand = getRandomInt(1, 6);
+                        console.log("this is the dungeon code:" + dungeonCode);
+                        console.log("This should have triggered combat");
+                        $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to fight" + "</p>");
+                        $("#proceed_button").addClass('combat_encounter');
+                        $("#proceed_button").addClass(dungeonCode + '_' + combatRand);
+                    } else {
+                        //Event
+                        console.log("This should have triggered an event");
+                        var eventRand = getRandomInt(1, 5);
+                        $("#dungeon_choice_container").prepend("<p>" + "You have a feeling you are going to encounter an event" + "</p>");
+                        $("#proceed_button").addClass('change_slide');
+
+                        if (eventDict[dungeonCode + '_' + eventRand]) {
+                            $("#proceed_button").addClass(dungeonCode + '_' + eventRand);
+                        } else {
+                            $("#proceed_button").addClass(dungeonCode + '_1');
+                        }
+                    }
                 }
             }
-
             //Roll the chec's item shop and store it, so the user can't just refresh the store
 
             //Always lead to map
@@ -2386,114 +2557,89 @@ $(function () {
 
         $(".transition_effect").fadeIn(function () {
             previous_slide = $('#content').detach();
+            
+            if (!visitedFloorShop) {
+                $('#main_display_container').append("<div id='content' class='chec_shop_screen'></div>");
+                $('#content').append("<div class='chec_shop_title'>Are you experienced?</div>");
+                $('#content').append("<div id='three_random_card'></div>");
+
+                $('#three_random_card').append("<div id='bargain_card_1' class='card_container bargain_container'></div>");
+                $('#three_random_card').append("<div id='bargain_card_2' class='card_container bargain_container'></div>");
+                $('#three_random_card').append("<div id='bargain_card_3' class='card_container bargain_container'></div>");
+
+                for (var i = 1; i <= 3; i++) {
+                    var randomInt = getRandomInt(0, 10);
+                    var card;
+                    var cost = 5;
+                    if (randomInt < 6) {
+                        //common card
+                        card = veraCommonPool[getRandomInt(0, veraCommonPool.length)];
+                    } else if (randomInt == 9) {
+                        //rare card
+                        card = veraRarePool[getRandomInt(0, veraRarePool.length)];
+                    } else {
+                        //uncommon card
+                        card = veraUncommonPool[getRandomInt(0, veraUncommonPool.length)];
+                    }
+
+                    $('#bargain_card_' + i).append("<img class=\x22shop_card " + card + "\x22 src=\x22images/card/" + card + ".png\x22 alt='card'/>");
+                    $('#bargain_card_' + i).append("<p>" + cost + "xp</p>");
+                }
+
+                //$('#bargain_card_1').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+                //$('#bargain_card_1').append("<p>5xp</p>");
+                //$('#bargain_card_2').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+                //$('#bargain_card_2').append("<p>5xp</p>");
+                //$('#bargain_card_3').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
+                //$('#bargain_card_3').append("<p>5xp</p>");
+
+                $('#content').append("<div>Special bargain! Choose one.</div>");
+
+                $('#content').append("<div id='card_shop'></div>");
+
+                $('#card_shop').append("<div id='shop_card_1' class='card_container'></div>");
+                $('#card_shop').append("<div id='shop_card_2' class='card_container'></div>");
+                $('#card_shop').append("<div id='shop_card_3' class='card_container'></div>");
+                $('#card_shop').append("<div id='shop_card_4' class='card_container'></div>");
+                $('#card_shop').append("<div id='shop_card_5' class='card_container'></div>");
+                $('#card_shop').append("<div id='shop_card_6' class='card_container'></div>");
+
+                for (var i = 1; i <= 6; i++) {
+                    var randomInt = getRandomInt(0, 10);
+                    var card;
+                    var cost;
+                    if (randomInt < 6) {
+                        //common card
+                        card = veraCommonPool[getRandomInt(0, veraCommonPool.length)];
+                        cost = 10;
+                    } else if (randomInt == 9) {
+                        //rare card
+                        card = veraRarePool[getRandomInt(0, veraRarePool.length)];
+                        cost = 15;
+                    } else {
+                        //uncommon card
+                        card = veraUncommonPool[getRandomInt(0, veraUncommonPool.length)];
+                        cost = 25;
+                    }
+
+                    $('#shop_card_' + i).append("<img class=\x22shop_card " + card + "\x22 src=\x22images/card/" + card + ".png\x22 alt='card'/>");
+                    $('#shop_card_' + i).append("<p>" + cost + "xp</p>");
+                }
+
+                $('#content').append("<div>Experience for skill, a simple trade.</div>");
+
+                $('#content').append("<button id='chec_shop_leave_button' class='choice change_slide 0'>Leave</button>");
+
+                currentFloorShop = $("#content").clone();
+            } else {
+                $('#main_display_container').append(currentFloorShop);
+            }
+
             visitedFloorShop = true;
-
-            $('#main_display_container').append("<div id='content' class='chec_shop_screen'></div>");
-            $('#content').append("<div class='chec_shop_title'>Are you experienced?</div>");
-            $('#content').append("<div id='three_random_card'></div>");
-
-            $('#three_random_card').append("<div id='bargain_card_1' class='card_container bargain_container'></div>");
-            $('#three_random_card').append("<div id='bargain_card_2' class='card_container bargain_container'></div>");
-            $('#three_random_card').append("<div id='bargain_card_3' class='card_container bargain_container'></div>");
-
-            for (var i = 1; i <= 3; i++) {
-                var randomInt = getRandomInt(0, 10);
-                var card;
-                var cost = 5;
-                if (randomInt < 6) {
-                    //common card
-                    card = veraCommonPool[getRandomInt(0, veraCommonPool.length)];
-                } else if (randomInt == 9) {
-                    //rare card
-                    card = veraRarePool[getRandomInt(0, veraRarePool.length)];
-                } else {
-                    //uncommon card
-                    card = veraUncommonPool[getRandomInt(0, veraUncommonPool.length)];
-                }
-
-                $('#bargain_card_' + i).append("<img class=\x22shop_card " + card + "\x22 src=\x22images/card/" + card + ".png\x22 alt='card'/>");
-                $('#bargain_card_' + i).append("<p>" + cost + "xp</p>");
-            }
-
-            //$('#bargain_card_1').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            //$('#bargain_card_1').append("<p>5xp</p>");
-            //$('#bargain_card_2').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            //$('#bargain_card_2').append("<p>5xp</p>");
-            //$('#bargain_card_3').append("<img class='three_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            //$('#bargain_card_3').append("<p>5xp</p>");
-
-            $('#content').append("<div>Special bargain! Choose one.</div>");
-
-            $('#content').append("<div id='card_shop'></div>");
-
-            $('#card_shop').append("<div id='shop_card_1' class='card_container'></div>");
-            $('#card_shop').append("<div id='shop_card_2' class='card_container'></div>");
-            $('#card_shop').append("<div id='shop_card_3' class='card_container'></div>");
-            $('#card_shop').append("<div id='shop_card_4' class='card_container'></div>");
-            $('#card_shop').append("<div id='shop_card_5' class='card_container'></div>");
-            $('#card_shop').append("<div id='shop_card_6' class='card_container'></div>");
-
-            for (var i = 1; i <= 6; i++) {
-                var randomInt = getRandomInt(0, 10);
-                var card;
-                var cost;
-                if (randomInt < 6) {
-                    //common card
-                    card = veraCommonPool[getRandomInt(0, veraCommonPool.length)];
-                    cost = 10;
-                } else if (randomInt == 9) {
-                    //rare card
-                    card = veraRarePool[getRandomInt(0, veraRarePool.length)];
-                    cost = 15;
-                } else {
-                    //uncommon card
-                    card = veraUncommonPool[getRandomInt(0, veraUncommonPool.length)];
-                    cost = 25;
-                }
-
-                $('#shop_card_' + i).append("<img class=\x22shop_card " + card + "\x22 src=\x22images/card/" + card + ".png\x22 alt='card'/>");
-                $('#shop_card_' + i).append("<p>"+ cost + "xp</p>");
-            }
-
-           
-
-            //$('#shop_card_1').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            //$('#shop_card_1').append("<p>10xp</p>");
-            //$('#shop_card_2').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            //$('#shop_card_2').append("<p>10xp</p>");
-            //$('#shop_card_3').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            //$('#shop_card_3').append("<p>10xp</p>");
-            //$('#shop_card_4').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            //$('#shop_card_4').append("<p>10xp</p>");
-            //$('#shop_card_5').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            //$('#shop_card_5').append("<p>10xp</p>");
-            //$('#shop_card_6').append("<img class='shop_card ball_o_fear' src='images/card/ball_o_fear.png' alt='card'/>");
-            //$('#shop_card_6').append("<p>10xp</p>");
-
-            $('#content').append("<div>Experience for skill, a simple trade.</div>");
-
-            $('#content').append("<button id='chec_shop_leave_button' class='choice change_slide 0'>Leave</button>");
             $(".transition_effect").fadeOut();
+            
         });
     }
-
-    //Set up chec shop
-    //$(document).on("click", ".three_card", function () {
-    //    //Check Xp cost
-    //    if (expStat.currExp >= 5) {
-    //        var cardName = $(this).attr('class').split(' ')[1];
-    //        addCard(cardName);
-    //        $("#three_random_card").empty();
-    //        $("#three_random_card").animate({
-    //            height: "0vh"
-    //        });
-    //        expStat.currExp -= 5;
-    //        animateExpBar($("exp_bar"), expStat.currExp)
-    //    } else {
-    //        alert("Not enough exp to buy it");
-    //    }
-
-    //});
 
     $(document).on("click", ".card_container", function () {
         var cost = parseInt($(this).find("p").text());
@@ -2611,6 +2757,9 @@ $(function () {
         if (hpStat.currHp < 0) {
             hpStat.currHp = 0;
         }
+        if (hpStat.currHp > hpStat.maxHp) {
+            hpStat.currHp = hpStat.maxHp;
+        }
         targetBar.animate({width: hpStat.currHp/hpStat.maxHp * 100 + "%"}, 1000, function () {
 
         });
@@ -2624,7 +2773,7 @@ $(function () {
         if (targetValue >= expStat.maxExp) {
             console.log("Level up button should appear");
             $("#level_up_button").fadeIn();
-        } else {
+        } else if (targetValue > expStat.maxExp){
             console.log("Level up button should disappear");
             $("#level_up_button").css("display", "none");
         }

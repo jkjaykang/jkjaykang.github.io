@@ -121,20 +121,22 @@ $(function () {
 
         //Make project slides into links
         $(document).on('click', '#project_1', function () {
-            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/antri_home.html');
+            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/Adventure%20In%20Antri/antri_adventure.html');
+            
         });
         $(document).on('click', '#project_2', function () {
-            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/Adventure%20In%20Antri/antri_adventure.html');
+            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/antri_home.html');
         });
         $(document).on('click', '#project_3', function () {
             window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/blacksmith_store.html');
         });
 
         $("#project_1_caption").click(function () {
-            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/antri_home.html');
+            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/Adventure%20In%20Antri/antri_adventure.html');
+            
         });
         $("#project_2_caption").click(function () {
-            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/Adventure%20In%20Antri/antri_adventure.html');
+            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/antri_home.html');
         });
         $("#project_3_caption").click(function () {
             window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/blacksmith_store.html');
@@ -211,10 +213,11 @@ $(function () {
 
         //Make project slides into links
         $("#project_1_caption").click(function () {
-            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/antri_home.html');
+            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/Adventure%20In%20Antri/antri_adventure.html');
+            
         });
         $("#project_2_caption").click(function () {
-            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/Adventure%20In%20Antri/antri_adventure.html');
+            window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/antri_home.html');
         });
         $("#project_3_caption").click(function () {
             window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/blacksmith_store.html');
@@ -246,10 +249,11 @@ $(function () {
                 }
 
                 $(document).on('click', '#project_1', function () {
-                    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/antri_home.html');
+                    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/Adventure%20In%20Antri/antri_adventure.html');
+                    
                 });
                 $(document).on('click', '#project_2', function () {
-                    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/Adventure%20In%20Antri/antri_adventure.html');
+                    window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/antri_home.html');
                 });
                 $(document).on('click', '#project_3', function () {
                     window.open('https://jkjaykang.github.io/Web-Developer-Course/Dungeon/blacksmith_store.html');

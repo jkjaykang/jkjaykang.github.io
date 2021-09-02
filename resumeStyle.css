@@ -211,7 +211,7 @@ h1{
     background-position: center bottom;
     background-repeat: no-repeat;
 
-    color: var(--text-secondary);
+    color: var(--text-primary);
 }
 
 .experience-row{

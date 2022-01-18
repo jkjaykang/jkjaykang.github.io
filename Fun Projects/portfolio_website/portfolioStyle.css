@@ -1,0 +1,183 @@
+﻿:root {
+    font-family: 'Arimo', sans-serif;
+
+    --text-primary: #74B2E3;
+    --text-secondary: #E8991F;
+    --text-primary-d: #135353;
+    --bg-primary: #F9F3DF;
+    --bg-secondary: #F4D19B;
+    --bg-third: #056676;
+    --transition-speed: 600ms;
+    --proj-main-height: 26vw;
+    --proj-main-width: 32.5vw;
+    --proj-side-height: 19.5vw;
+    --proj-side-width: 26vw;
+    --proj-mobile-height: 39vw;
+    --proj-mobile-width: 48.75vw;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    max-height: 100vh;
+}
+
+/*Remove scrollbar*/
+::-webkit-scrollbar {
+    /*display: none;*/
+}
+
+#wholeContainer{
+    display: flex;
+    width: 100vw;
+}
+
+.border{
+    width: 15vw;
+    height: 100vh;
+    background-color: black;
+}
+
+.content {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-primary);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.content p{
+    margin: 0;
+}
+
+/*TITLECARD*/
+#titleCard{
+    display: flex;
+}
+
+#mural{
+    width: 45vw;
+    background-color: var(--bg-secondary);
+}
+
+#mural img{
+    object-fit: cover;
+    width: 45vw;
+    max-height: 98vh;
+}
+
+#intro{
+    width: 55vw;
+    height: 100vh;
+
+    text-align: center;
+}
+
+#introContent{
+    margin-top: 20vh;
+}
+
+.title {
+    font-size: 15vh;
+    color: var(--text-primary);
+}
+
+.subtext{
+    font-size: 4vh;
+    color: var(--text-secondary);
+}
+
+/*ABOUT ME*/
+#aboutMe{
+    width: 0;
+
+    display: flex;
+    display: none;
+    justify-content: center;
+}
+
+#anatomyContent{
+    display: flex;
+}
+
+#anatomyIntro{
+    width: 20vw;
+    height: 20vh;
+
+    margin-top: 4em;
+
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#anatomyIntro p{
+    font-size: 1vw;
+    margin-top: 0.5em;
+}
+
+.anatomyHeader {
+    font-size: 2.5vw;
+    font-family: 'Playfair Display SC', serif;
+}
+
+#anatomyPicture {
+    height: 80vh;
+    -webkit-filter: grayscale(1);
+}
+
+#anatomyPicture:hover{
+    -webkit-filter: grayscale(0);
+    cursor: pointer;
+}
+
+#anatomyDescription {
+    width: 20vw;
+    height: 30vh;
+    background-color: white;
+    border: solid 1em;
+
+    margin-top: 10vh;
+    padding-top: 1vh;
+    padding-left: 0.5vw;
+
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#anatomyDescription p{
+    width: 18vw;
+}
+
+/*NAVBAR*/
+.tabContainer {
+    display: flex;
+   
+    position: absolute;
+    left: 56vw;
+    top: 76%;
+
+    
+}
+
+.navItem {
+    
+}
+
+.tab{
+    width: 8vw;
+    
+
+    transition: all .2s ease-in-out; 
+}
+
+.tab:hover{
+    transform: scale(1.1); 
+}
+
+/*GENERAL CLASSES*/
+.inactive{
+    display: none;
+}
+
+.header {
+    font-family: 'Playfair Display SC', serif;
+}

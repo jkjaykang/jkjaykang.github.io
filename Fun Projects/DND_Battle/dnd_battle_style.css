@@ -1,0 +1,105 @@
+﻿body
+{
+}
+
+button{
+    border:none;
+    background-color: white;
+}
+
+button:hover{
+    transform: scale(1.25) perspective(1px);
+    background-color: lightgray;
+}
+
+#wholeContainer{
+    display: flex;
+}
+
+#boardContainer{
+    width: 105vh;
+    height: 80vh;
+    background-color: cornsilk;
+
+    margin-left: 10vh;
+
+}
+
+#board{
+    width: 100vh;
+    height: 70vh;
+    background-color: gray;
+
+}
+
+.row{
+    display: flex;
+    height: 6vh;
+}
+
+.square{
+    height: 6vh;
+    width: 6vh;
+    border: solid 1px;
+    background-color: aliceblue;
+}
+
+#endTurnButton{
+    float:right;
+    margin-right: 5vh;
+}
+
+#terrainPalette{
+    width:60vh;
+    height: 12vh;
+    background-color: lightblue;
+
+    display:flex;
+}
+
+.terrain{
+    height:6vh;
+    width:6vh;
+    background-color:floralwhite;
+
+    border: solid 1px;
+
+    margin: 5px;
+}
+
+#characterContainer{
+    width: 60vh;
+    height: 60vh;
+    background-color:lightcyan;
+}
+
+.character{
+    width: 50vh;
+    height: 12vh;
+
+    display: flex;
+    margin: 1vh;
+}
+
+.portrait{
+    width: 12vh;
+    height: 12vh;
+    background-color: yellow;    
+}
+
+.portrait img{
+    width:12vh;
+    height:12vh;
+}
+
+.stats{
+    width: 35vh;
+    height: 12vh;
+    background-color: forestgreen;
+}
+
+#choiceContainer{
+    width: 60vh;
+    height: 20vh;
+    background-color:lightskyblue;
+}

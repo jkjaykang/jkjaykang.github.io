@@ -1,0 +1,10 @@
+Create a new node js project
+
+touch index.html
+touch app.js
+
+npm init
+npm i express body-parser
+
+running nodemon
+nodemon app.js

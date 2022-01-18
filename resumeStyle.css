@@ -185,6 +185,7 @@ h1{
     }
 
     .intro-description {
+        margin-top: 3rem;
         margin-left: 2rem;
         width: 35vw;
     }

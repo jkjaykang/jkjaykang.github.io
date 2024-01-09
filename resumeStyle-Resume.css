@@ -1,0 +1,19 @@
+﻿.resumePage-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.resumeContainer{
+    background-color: #FBFBFB;
+    height: 718px;
+    width: 40vw;
+    border: solid #000000 1px;
+
+    margin: 5rem 3rem 0 3rem;
+}
+
+.resumeInfo {
+    padding-top: 1rem;
+    padding-left: 2rem;
+}

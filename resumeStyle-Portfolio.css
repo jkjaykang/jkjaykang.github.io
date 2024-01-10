@@ -1,0 +1,61 @@
+﻿.portfolioPage-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 4rem;
+}
+
+.portfolioContainer{
+    background-color: #FBFBFB;
+    height: 56.73vh;
+    width: 80vw;
+
+    margin: 1rem 0rem 0 0rem;
+
+    filter: drop-shadow(0px 4px 2px #c2c2c2);
+}
+
+.portfolioCaseStudyHeader{
+    margin-left: 3rem;
+}
+
+.portfolioCaseStudyContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.caseStudySVG{
+    height: 50vh;
+    width: 20vw;
+    background-color: beige;
+    margin: 0 3rem 0 3rem;
+}
+
+.sideProjectContainer{
+    background-color: #919191;
+    height: 20vh;
+    width: 80vw;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.sideProjectHeader{
+    margin-left: 3rem;
+}
+
+.sideProjectSVGContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.sideProjectSVG{
+    height: 20vh;
+    width: 30vw;
+    background-color: rgb(199, 199, 57);
+    margin: 0 3rem 0 3rem;
+}
+

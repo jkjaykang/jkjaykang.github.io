@@ -40,15 +40,13 @@ body
 }
 
 body::-webkit-scrollbar{
-    width: 0.5rem;
+    width: 0.1rem;
 }
 
 body::-webkit-scrollbar-track{
-    background: #1e1e24;
 }
 
 body::-webkit-scrollbar-thumb {
-    background: #6649b8;
 }
 
 a {
@@ -657,8 +655,10 @@ h1{
 
     height: 2rem;
 
+    position: fixed;
 
-    margin-bottom: auto;
+
+    bottom: 0;
 
     background-color: var(--main-two);
     color: var(--text-primary);

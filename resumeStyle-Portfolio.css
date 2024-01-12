@@ -9,10 +9,12 @@
 
 .portfolioContainer{
     background-color: #FBFBFB;
-    height: 56.73vh;
-    width: 80vw;
+    height: 75vh;
+    width: 75vw;
 
     margin: 1rem 0rem 0 0rem;
+
+    border-radius: 4px;
 
     filter: drop-shadow(0px 4px 2px #c2c2c2);
 }
@@ -27,20 +29,25 @@
     justify-content: center;
 }
 
+.caseStudyCard p{
+    margin: 0 3rem 0 3rem;
+}
+
 .caseStudySVG{
-    height: 50vh;
+    height: 60vh;
     width: 20vw;
     background-color: beige;
     margin: 0 3rem 0 3rem;
 }
 
 .sideProjectContainer{
-    background-color: #919191;
     height: 20vh;
-    width: 80vw;
+    width: 75vw;
 
     display: flex;
     flex-direction: column;
+
+    margin-bottom: 5rem;
 }
 
 .sideProjectHeader{
@@ -50,12 +57,18 @@
 .sideProjectSVGContainer{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    margin: 0 0 5rem 0;
+}
+
+.sideProjectCard p {
+    margin: 0 3rem 0 3rem 3rem;
 }
 
 .sideProjectSVG{
-    height: 20vh;
-    width: 30vw;
+    height: 30vh;
+    width: 20vw;
     background-color: rgb(199, 199, 57);
-    margin: 0 3rem 0 3rem;
+    margin: 0 3rem 0rem 3rem;
 }
 

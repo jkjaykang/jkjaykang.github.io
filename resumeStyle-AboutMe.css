@@ -1,0 +1,68 @@
+﻿.aboutMePage-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 4rem 0 0 0;
+}
+
+.aboutMeHeader{
+    width: 80vw;
+    background-color: #a53939;
+    margin: 2rem 0 0 0;
+}
+
+.aboutMeHeader h4{
+
+}
+
+.aboutMeContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    background-color: #FBFBFB;
+    width: 80vw;
+
+}
+
+.aboutMeImage{
+    width: 30vw;
+    height: 30vw;
+
+    background-color: gray;
+}
+
+.aboutMeInfo {
+    height: 30vw;
+    width: 40vw;
+
+    margin: 0 0 0 3rem;
+}
+
+.aboutMeHobbyContainer {
+    background-color: #a53939;
+
+    height: 15vw;
+    width: 25vw;
+
+    display: flex;
+
+}
+
+.hobbyContainerImage{
+    background-color: gray;
+
+    height: 20vw;
+    width: 11vw;
+}
+
+.hobbyContainerInfo {
+    background-color: aliceblue;
+    height: 20vw;
+    width: 14vw;
+}
+
+.bottomContainer{
+    margin: 0 0 10rem 0;
+}
